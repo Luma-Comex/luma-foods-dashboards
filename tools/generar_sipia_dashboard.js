@@ -37,18 +37,36 @@ function runSOQL(query) {
   return parsed.result.records;
 }
 
+const ESTADOS_ACTIVOS = "'In Approval Process','Waiting for sign','Parcial Loaded'";
+// "Finalizados" = todo lo que ya no esta en curso. Incluye Loaded por decision del usuario.
+const ESTADOS_HISTORICOS = "'Completed','Loaded'";
+
 function fetchContracts() {
   return runSOQL(`
     SELECT ContractNumber, Nro_Proforma__c, Status, StartDate, EndDate, Incoterm__c,
      Puerto_origen__c, Puerto_Destino__c, Total_Value__c,
+     Packing_Material_Status__c, Approved_Packing_Materials__c, Packing_Material_Records__c,
      (SELECT Name, Principal_Product__c, Unit_Price__c, Quantity__c, Loaded__c, Unloaded__c, Subtotal__c FROM Contratct_Products__r),
+     (SELECT Name, Confirmed__c, Approval_Date__c, Draft_Files_Sent__c, Days_From_Draft_Sent__c FROM Packing_Materials__r),
      (SELECT Name, Nro_Booking__c, Barco__c, ETD__c, ETD_Updated__c, ETA__c, Destination_Port__c, Status__c,
        Link_BL__c, Tracking_Page__c, Container_N__c, Nro_BL__c, Date_of_approval__c, Deliver__c, Delivery_Date__c,
        Paid__c, Amount_to_be_paid__c, Invoice_payment_date__c
       FROM Shippings__r)
     FROM Contract
-    WHERE Account.Id = '${ACCOUNT_ID}' AND Status IN ('In Approval Process','Waiting for sign','Parcial Loaded')
+    WHERE Account.Id = '${ACCOUNT_ID}' AND Status IN (${ESTADOS_ACTIVOS})
     ORDER BY Total_Value__c DESC
+  `);
+}
+
+function fetchHistoricos() {
+  return runSOQL(`
+    SELECT ContractNumber, Nro_Proforma__c, Status, StartDate, EndDate, Incoterm__c,
+     Puerto_origen__c, Puerto_Destino__c, Total_Value__c,
+     (SELECT Principal_Product__c, Quantity__c, Loaded__c FROM Contratct_Products__r),
+     (SELECT Name, ETD_Updated__c FROM Shippings__r)
+    FROM Contract
+    WHERE Account.Id = '${ACCOUNT_ID}' AND Status IN (${ESTADOS_HISTORICOS})
+    ORDER BY EndDate DESC NULLS LAST
   `);
 }
 
@@ -256,16 +274,26 @@ function shipDomId(s) {
   return 'ship-' + s.Name.replace(/[^A-Za-z0-9]/g, '');
 }
 
+// Bloque de fechas: SIEMPRE muestra ETD y ETA explicitos, en todos los embarques.
+function renderFechas(s) {
+  const delay = delayInfo(s.ETD__c, s.ETD_Updated__c);
+  const etd = s.ETD_Updated__c ? fmtDate(s.ETD_Updated__c, REF_YEAR) : 'por confirmar';
+  const eta = s.ETA__c ? fmtDate(s.ETA__c, REF_YEAR) : 'por confirmar';
+  const req = delay && delay.delayed
+    ? `<div class="etd-required">ETD original ${fmtDate(s.ETD__c, REF_YEAR)}</div>${renderDelayFlag(delay)}`
+    : '';
+  return `<div class="ship-dates">
+                <div class="fecha-linea"><span class="fecha-tag">ETD</span><span class="fecha-val${s.ETD_Updated__c ? '' : ' pendiente'}">${etd}</span></div>
+                <div class="fecha-linea"><span class="fecha-tag">ETA</span><span class="fecha-val${s.ETA__c ? '' : ' pendiente'}">${eta}</span></div>
+                ${req}
+              </div>`;
+}
+
+// Barra de ruta con el barquito. Solo para embarques ya cargados y con ETA.
 function routeProgressHtml(s, today, origin, dest) {
   const eta = parseDate(s.ETA__c);
   const etdUpd = parseDate(s.ETD_Updated__c);
-  const delay = delayInfo(s.ETD__c, s.ETD_Updated__c);
-  const delayFlagHtml = renderDelayFlag(delay);
-
-  if (!eta || !etdUpd) {
-    // no ETA on file - fall back to plain dates block
-    return renderPlainDates(s, delay);
-  }
+  if (!eta || !etdUpd) return '';
 
   if (today.getTime() >= eta.getTime()) {
     const daysSince = daysBetween(eta, today);
@@ -273,7 +301,7 @@ function routeProgressHtml(s, today, origin, dest) {
               <div class="route-progress" style="--p:100%">
                 <div class="ports"><span class="reached">${esc(origin)}</span><span class="reached">${esc(dest)}</span></div>
                 <div class="track"><div class="fill"></div><span class="ship">🚢</span></div>
-                <div class="caption"><span class="etd-tag">ETD Actualizado</span>${fmtDate(s.ETD_Updated__c, REF_YEAR)} · arribó <b>hace ${daysSince} días</b></div>
+                <div class="caption">Arribó <b>hace ${daysSince} días</b></div>
               </div>`;
   }
   if (today.getTime() < etdUpd.getTime()) {
@@ -281,9 +309,7 @@ function routeProgressHtml(s, today, origin, dest) {
               <div class="route-progress not-departed" style="--p:0%">
                 <div class="ports"><span>${esc(origin)}</span><span>${esc(dest)}</span></div>
                 <div class="track"><div class="fill"></div><span class="ship">🚢</span></div>
-                <div class="caption"><span class="etd-tag">ETD Actualizado</span>${fmtDate(s.ETD_Updated__c, REF_YEAR)} · <b>aún no zarpa</b> (estimado)</div>
-                ${delay && delay.delayed ? `<div class="etd-required">ETD requerido ${fmtDate(s.ETD__c, REF_YEAR)}</div>` : ''}
-                ${delayFlagHtml}
+                <div class="caption"><b>Aún no zarpa</b> (estimado)</div>
               </div>`;
   }
   const total = daysBetween(etdUpd, eta) || 1;
@@ -293,22 +319,7 @@ function routeProgressHtml(s, today, origin, dest) {
               <div class="route-progress in-transit" style="--p:${p}%">
                 <div class="ports"><span class="reached">${esc(origin)}</span><span>${esc(dest)}</span></div>
                 <div class="track"><div class="fill"></div><span class="ship">🚢</span></div>
-                <div class="caption"><span class="etd-tag">ETD Actualizado</span>${fmtDate(s.ETD_Updated__c, REF_YEAR)} · <b>~${p}% del trayecto</b> (estimado, ETA ${fmtDate(s.ETA__c, REF_YEAR)})</div>
-                ${delay && delay.delayed ? `<div class="etd-required">ETD requerido ${fmtDate(s.ETD__c, REF_YEAR)}</div>` : ''}
-                ${delayFlagHtml}
-              </div>`;
-}
-
-function renderPlainDates(s, delay) {
-  if (!s.ETD_Updated__c) {
-    return `<div class="ship-dates">ETD por confirmar</div>`;
-  }
-  const req = delay && delay.delayed
-    ? `<div class="etd-required">ETD requerido ${fmtDate(s.ETD__c, REF_YEAR)}</div>${renderDelayFlag(delay)}`
-    : '';
-  return `<div class="ship-dates">
-                <div class="etd-updated"><span class="etd-tag">ETD Actualizado</span>${fmtDate(s.ETD_Updated__c, REF_YEAR)}</div>
-                ${req}
+                <div class="caption">En tránsito · <b>~${p}% del trayecto</b> (estimado)</div>
               </div>`;
 }
 
@@ -324,7 +335,8 @@ function toTitleCase(s) {
   return s.replace(/\w\S*/g, t => t.charAt(0).toUpperCase() + t.slice(1).toLowerCase());
 }
 
-function renderShipmentRow(s, origin, dest) {
+// seq / totalSeq: posicion del embarque dentro del contrato, calculada por orden de ETD.
+function renderShipmentRow(s, origin, dest, seq, totalSeq) {
   const st = statusPillClass(s.Status__c);
   const id = s.Status__c === 'Loaded' ? ` id="${shipDomId(s)}"` : '';
   const alerts = shipAlert(s);
@@ -332,29 +344,65 @@ function renderShipmentRow(s, origin, dest) {
   const toggleAria = alerts.length ? 'Documentación y pagos — atención' : 'Documentación y pagos';
 
   const placeholderMatch = s.Name.match(/^S(\d+)\/(\d+)\/(\d+)/);
-  const label = placeholderMatch ? `Embarque ${placeholderMatch[2]} de ${placeholderMatch[3]}` : s.Name;
+  const label = placeholderMatch ? 'Embarque sin booking' : s.Name;
   const note = (s.Nro_BL__c || s.Container_N__c)
     ? [s.Nro_BL__c ? 'BL ' + s.Nro_BL__c : null, s.Container_N__c ? 'Cont. ' + s.Container_N__c : null].filter(Boolean).join(' · ')
     : (placeholderMatch ? cleanShipNote(s.Name) : '');
 
-  const dateOrRoute = (s.Status__c === 'Loaded')
-    ? routeProgressHtml(s, TODAY, origin, dest)
-    : renderPlainDates(s, delayInfo(s.ETD__c, s.ETD_Updated__c));
-
+  const ruta = (s.Status__c === 'Loaded') ? routeProgressHtml(s, TODAY, origin, dest) : '';
   const trackingCell = s.Status__c === 'Loaded' ? renderTrackingCell(s.Link_BL__c) : renderTrackingCell(null);
 
   return `
             <div class="shipment-row" data-status="${filterKey(s.Status__c)}"${id}>
               <div class="ship-id-block">
-                <span class="ship-id">${esc(label)}</span>
+                <span class="ship-id"><span class="seq-badge" title="Embarque ${seq} de ${totalSeq} del contrato">${seq}/${totalSeq}</span>${esc(label)}</span>
                 ${note ? `<span class="ship-note">${esc(note)}</span>` : ''}
               </div>
               ${renderVesselCell(s)}
               <span class="status-pill ${st.cls}"><span class="dot"></span>${st.label}</span>
-              ${dateOrRoute}
+              <div class="ship-fechas">${renderFechas(s)}${ruta}</div>
               ${trackingCell}
               <button class="ship-docs-toggle${toggleClass}" type="button" aria-expanded="false" aria-label="${toggleAria}" title="${toggleAria}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
             </div>${renderDocsPanel(s)}`;
+}
+
+// Materiales de empaque: seccion desplegable, cerrada por defecto.
+function renderPackingPanel(c) {
+  const pms = c.Packing_Materials__r ? c.Packing_Materials__r.records : [];
+  const aprobados = c.Approved_Packing_Materials__c || 0;
+  const totalPM = c.Packing_Material_Records__c || pms.length;
+  const estado = c.Packing_Material_Status__c || 'Sin datos';
+  const todoOk = totalPM > 0 && aprobados >= totalPM;
+  const estadoEs = estado === 'All Confirmed' ? 'Todos confirmados'
+    : estado === 'In process' ? 'En proceso'
+    : estado;
+
+  const filas = pms.length ? pms.map(p => {
+    const ok = p.Confirmed__c === 'Yes';
+    return `                <tr>
+                  <td>${esc(cleanProductName(p.Name))}</td>
+                  <td><span class="pm-estado ${ok ? 'ok' : 'pend'}">${ok ? '✓ Confirmado' : '○ Pendiente'}</span></td>
+                  <td class="num">${p.Draft_Files_Sent__c ? fmtDate(p.Draft_Files_Sent__c, REF_YEAR) : '—'}</td>
+                  <td class="num">${p.Approval_Date__c ? fmtDate(p.Approval_Date__c, REF_YEAR) : '—'}</td>
+                </tr>`;
+  }).join('\n') : `                <tr><td colspan="4" class="pm-vacio">Todavía no hay materiales de empaque cargados para este contrato.</td></tr>`;
+
+  return `
+        <div class="docs-toggle-wrap">
+          <button class="pack-toggle${todoOk ? '' : ' pendiente'}" type="button" aria-expanded="false">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+            <span>Materiales de empaque</span>
+            <span class="pack-resumen">${esc(estadoEs)} · ${aprobados} de ${totalPM}</span>
+          </button>
+          <div class="pack-panel">
+            <table class="pack-table">
+              <thead><tr><th>Material</th><th>Estado</th><th class="num">Draft enviado</th><th class="num">Aprobado</th></tr></thead>
+              <tbody>
+${filas}
+              </tbody>
+            </table>
+          </div>
+        </div>`;
 }
 
 function renderContract(c, idx) {
@@ -373,7 +421,17 @@ function renderContract(c, idx) {
 
   const origin = toTitleCase(c.Puerto_origen__c);
   const dest = toTitleCase(c.Puerto_Destino__c);
-  const shipmentsHtml = shipments.map(s => renderShipmentRow(s, origin, dest)).join('\n');
+  // Numeracion 1/N: la posicion real del embarque sale de ordenarlos por ETD actualizado.
+  const porEtd = shipments.slice().sort((a, b) => {
+    const da = a.ETD_Updated__c || a.ETD__c || '9999-12-31';
+    const db = b.ETD_Updated__c || b.ETD__c || '9999-12-31';
+    return da < db ? -1 : da > db ? 1 : 0;
+  });
+  const seqPorId = new Map(porEtd.map((s, i) => [s.Name, i + 1]));
+
+  const shipmentsHtml = shipments
+    .map(s => renderShipmentRow(s, origin, dest, seqPorId.get(s.Name), shipments.length))
+    .join('\n');
 
   const productsHtml = products.map(renderProductRow).join('');
 
@@ -393,7 +451,8 @@ function renderContract(c, idx) {
           <div class="route">${esc(origin)} <span class="arrow">→</span> ${esc(dest)}</div>
           <div class="contract-tags">
             <span class="tag incoterm">${esc(c.Incoterm__c)}</span>
-            <span class="tag">${fmtDateFull(c.StartDate)} – ${fmtDateFull(c.EndDate)}</span>
+            <span class="tag"><b>Inicio:</b> ${fmtDateFull(c.StartDate)}</span>
+            <span class="tag"><b>Cierre estimado:</b> ${fmtDateFull(c.EndDate)}</span>
           </div>
         </div>
         <div class="contract-right">
@@ -432,6 +491,7 @@ function renderContract(c, idx) {
           <div class="shipments">${shipmentsHtml}
           </div>
         </div>
+${renderPackingPanel(c)}
       </div>
     </article>`,
     totalValue: c.Total_Value__c,
@@ -497,7 +557,113 @@ ${alertGroup(`Facturas pendientes de pago (${invoiceAlerts.length}) · ${money(i
   </div>
 </div>` : '';
 
-const updatedStr = `${String(TODAY.getUTCDate()).padStart(2, '0')} ${MESES[TODAY.getUTCMonth()]} ${REF_YEAR}`;
+// Fecha Y HORA de la ultima corrida, en hora local de la maquina que genera.
+const AHORA = new Date();
+const updatedStr = `${String(AHORA.getDate()).padStart(2, '0')} ${MESES[AHORA.getMonth()]} ${AHORA.getFullYear()}, ${String(AHORA.getHours()).padStart(2, '0')}:${String(AHORA.getMinutes()).padStart(2, '0')} hs`;
+
+// ---------- historico de contratos finalizados ----------
+
+const historicos = fetchHistoricos();
+
+const HIST_LABEL = { 'Completed': 'Completado', 'Loaded': 'Cargado' };
+
+const historicoRows = historicos.map(c => {
+  const prods = c.Contratct_Products__r ? c.Contratct_Products__r.records : [];
+  const nEmb = c.Shippings__r ? c.Shippings__r.records.length : 0;
+  const productos = [...new Set(prods.map(p => p.Principal_Product__c).filter(Boolean))];
+  const icono = productIcon(productos[0] || '');
+  return {
+    valor: c.Total_Value__c || 0,
+    fin: c.EndDate || '',
+    html: `                <tr data-valor="${c.Total_Value__c || 0}" data-fin="${c.EndDate || ''}">
+                  <td class="mono">${esc(c.Nro_Proforma__c || c.ContractNumber)}</td>
+                  <td><span class="cat-icon" aria-hidden="true">${icono}</span>${esc(productos.join(', ') || '—')}</td>
+                  <td>${esc(toTitleCase(c.Puerto_origen__c || '—'))} → ${esc(toTitleCase(c.Puerto_Destino__c || '—'))}</td>
+                  <td class="num">${nEmb}</td>
+                  <td class="num">${money(c.Total_Value__c || 0)}</td>
+                  <td class="num">${c.EndDate ? fmtDateFull(c.EndDate) : '—'}</td>
+                  <td><span class="status-pill ${c.Status === 'Completed' ? 'st-good' : 'st-info'}"><span class="dot"></span>${HIST_LABEL[c.Status] || c.Status}</span></td>
+                </tr>`,
+  };
+});
+
+const histTotalFOB = historicos.reduce((a, c) => a + (c.Total_Value__c || 0), 0);
+const historicoHtml = historicoRows.length ? historicoRows.map(r => r.html).join('\n')
+  : '                <tr><td colspan="7" class="pm-vacio">Todavía no hay contratos finalizados.</td></tr>';
+
+// ---------- datos para exportar a Excel ----------
+// Se embeben como JSON en la pagina; el boton de descarga los arma en el navegador.
+const exportEmbarques = [];
+contracts.forEach(c => {
+  const ships = (c.Shippings__r ? c.Shippings__r.records : []).slice();
+  const porEtd = ships.slice().sort((a, b) => {
+    const da = a.ETD_Updated__c || a.ETD__c || '9999-12-31';
+    const db = b.ETD_Updated__c || b.ETD__c || '9999-12-31';
+    return da < db ? -1 : da > db ? 1 : 0;
+  });
+  const seqMap = new Map(porEtd.map((s, i) => [s.Name, i + 1]));
+  ships.forEach(s => {
+    const d = delayInfo(s.ETD__c, s.ETD_Updated__c);
+    exportEmbarques.push({
+      Proforma: c.Nro_Proforma__c || c.ContractNumber,
+      Ruta: `${toTitleCase(c.Puerto_origen__c || '')} - ${toTitleCase(c.Puerto_Destino__c || '')}`,
+      Incoterm: c.Incoterm__c || '',
+      Embarque: `${seqMap.get(s.Name)}/${ships.length}`,
+      Factura: /^S\d+\/\d+\/\d+/.test(s.Name) ? '' : s.Name,
+      Estado: statusPillClass(s.Status__c).label,
+      Buque: s.Barco__c || '',
+      Contenedor: s.Container_N__c || '',
+      BL: s.Nro_BL__c || '',
+      'ETD original': s.ETD__c || '',
+      'ETD actualizado': s.ETD_Updated__c || '',
+      ETA: s.ETA__c || '',
+      'Atraso (dias)': d ? d.days : '',
+      'Delayed Shipping': d && d.delayed ? 'Si' : 'No',
+      Aprobado: s.Date_of_approval__c ? 'Si' : 'No',
+      'Fecha aprobacion': s.Date_of_approval__c || '',
+      Deliver: s.Deliver__c === 'Yes' ? 'Si' : 'No',
+      'Fecha entrega': s.Delivery_Date__c || '',
+      'Factura pagada': s.Paid__c === 'Yes' ? 'Si' : 'No',
+      Monto: s.Amount_to_be_paid__c || '',
+      'Fecha de pago': s.Invoice_payment_date__c || '',
+    });
+  });
+});
+
+const exportProductos = [];
+contracts.forEach(c => {
+  (c.Contratct_Products__r ? c.Contratct_Products__r.records : []).forEach(p => {
+    exportProductos.push({
+      Proforma: c.Nro_Proforma__c || c.ContractNumber,
+      Producto: cleanProductName(p.Name),
+      Familia: p.Principal_Product__c || '',
+      'Precio unitario': p.Unit_Price__c || 0,
+      Unidades: p.Quantity__c || 0,
+      Cargado: p.Loaded__c || 0,
+      'Pendiente de cargar': p.Unloaded__c || 0,
+      Subtotal: p.Subtotal__c || 0,
+    });
+  });
+});
+
+const exportHistorico = historicos.map(c => ({
+  Proforma: c.Nro_Proforma__c || c.ContractNumber,
+  Estado: HIST_LABEL[c.Status] || c.Status,
+  Producto: [...new Set((c.Contratct_Products__r ? c.Contratct_Products__r.records : []).map(p => p.Principal_Product__c).filter(Boolean))].join(', '),
+  Ruta: `${toTitleCase(c.Puerto_origen__c || '')} - ${toTitleCase(c.Puerto_Destino__c || '')}`,
+  Embarques: c.Shippings__r ? c.Shippings__r.records.length : 0,
+  'Valor FOB': c.Total_Value__c || 0,
+  Inicio: c.StartDate || '',
+  Cierre: c.EndDate || '',
+}));
+
+const exportJson = JSON.stringify({
+  cliente: 'SIPIA',
+  actualizado: updatedStr,
+  embarques: exportEmbarques,
+  productos: exportProductos,
+  historico: exportHistorico,
+});
 
 const TEMPLATE = fs.readFileSync(path.join(__dirname, 'sipia_dashboard_template.html'), 'utf8');
 
@@ -513,6 +679,10 @@ const replacements = {
   '{{STAT_ONGOING_N}}': statusCounts.ongoing,
   '{{STAT_TBI_N}}': statusCounts.tbi,
   '{{STAT_FOB}}': money(totalFOB),
+  '{{EXPORT_DATA}}': exportJson,
+  '{{HISTORICO_ROWS}}': historicoHtml,
+  '{{HIST_COUNT}}': historicos.length,
+  '{{HIST_FOB}}': money(histTotalFOB),
   '{{STAT_DELAYED_N}}': delayed.length,
   '{{STAT_DELAYED_TOTAL}}': allShipments.length,
   '{{STAT_DELAYED_AVG}}': avgDelay,

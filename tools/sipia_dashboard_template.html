@@ -712,11 +712,226 @@
   }
   .alert-btn:hover { filter: brightness(1.15); }
 
+  /* ---------- Numero de embarque 1/7 ---------- */
+  .seq-badge {
+    display: inline-block;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font: 700 10.5px "IBM Plex Mono", monospace;
+    padding: 2px 7px;
+    border-radius: 6px;
+    margin-right: 7px;
+    vertical-align: middle;
+  }
+
+  /* ---------- ETD / ETA explicitos ---------- */
+  .ship-fechas { display: flex; flex-direction: column; gap: 8px; min-width: 150px; }
+  .fecha-linea { display: flex; align-items: baseline; gap: 7px; }
+  .fecha-tag {
+    font: 700 9.5px "Public Sans", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--ink-faint);
+    width: 26px;
+    flex: none;
+  }
+  .fecha-val { font: 700 13px "Public Sans", sans-serif; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .fecha-val.pendiente { font-weight: 500; font-style: italic; color: var(--ink-faint); }
+
+  /* ---------- Materiales de empaque ---------- */
+  .pack-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px 2px;
+    color: var(--ink-muted);
+    font: 600 12px "Public Sans", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+  }
+  .pack-toggle:hover { color: var(--ink); }
+  .pack-toggle svg { transition: transform .2s; flex: none; }
+  .pack-toggle[aria-expanded="true"] svg { transform: rotate(90deg); }
+  .pack-resumen {
+    margin-left: auto;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 12px;
+    color: var(--good);
+  }
+  .pack-toggle.pendiente .pack-resumen { color: var(--warning); }
+  .pack-panel { overflow: hidden; max-height: 0; transition: max-height .25s ease; }
+  .pack-panel.open { max-height: 800px; }
+  .pack-table { width: 100%; border-collapse: collapse; margin: 6px 0 4px; font-size: 12.5px; }
+  .pack-table th {
+    text-align: left;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: var(--ink-faint);
+    font-weight: 600;
+    padding: 0 8px 6px;
+  }
+  .pack-table th.num, .pack-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .pack-table td { padding: 7px 8px; border-top: 1px solid var(--border); color: var(--ink-muted); }
+  .pm-estado { font-weight: 700; white-space: nowrap; }
+  .pm-estado.ok { color: var(--good); }
+  .pm-estado.pend { color: var(--warning); }
+  .pm-vacio { color: var(--ink-faint); font-style: italic; text-align: center; padding: 16px 8px; }
+
+  /* ---------- Pestañas ---------- */
+  .tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border); }
+  .tab {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    padding: 10px 16px;
+    font: 700 13.5px "Public Sans", sans-serif;
+    color: var(--ink-faint);
+    cursor: pointer;
+  }
+  .tab:hover { color: var(--ink); }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-panel[hidden] { display: none; }
+
+  /* ---------- Histórico ---------- */
+  .hist-head { display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: baseline; margin-bottom: 4px; }
+  .hist-head .n { font: 800 22px "Archivo", sans-serif; }
+  .hist-head .sub { font-size: 13px; color: var(--ink-muted); }
+  .hist-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .hist-table th {
+    text-align: left;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: var(--ink-faint);
+    font-weight: 600;
+    padding: 0 10px 8px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  .hist-table td { padding: 10px; border-bottom: 1px solid var(--border); }
+  .hist-table th.num, .hist-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .hist-table td.mono { font: 600 12.5px "IBM Plex Mono", monospace; color: var(--ink); white-space: nowrap; }
+  .hist-table tbody tr:hover { background: var(--surface-2); }
+  .hist-table th.sortable { cursor: pointer; user-select: none; }
+  .hist-table th.sortable:hover { color: var(--ink); }
+
+  /* ---------- Descargas ---------- */
+  .dl-group { display: flex; gap: 8px; }
+  .dl-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--ink-muted);
+    border-radius: 999px;
+    padding: 7px 14px;
+    font: 600 13px "Public Sans", sans-serif;
+    cursor: pointer;
+  }
+  .dl-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ---------- Panel lateral de pendientes ---------- */
+  .side-alert {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 90;
+    display: flex;
+    align-items: stretch;
+  }
+  .side-alert[hidden] { display: none; }
+  .side-tab {
+    background: var(--critical);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 14px 9px;
+    border-radius: 10px 0 0 10px;
+    font: 700 12px "Public Sans", sans-serif;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    letter-spacing: .06em;
+    box-shadow: 0 6px 20px -6px rgba(0,0,0,.35);
+  }
+  .side-tab:hover { filter: brightness(1.1); }
+  .side-body {
+    width: 320px;
+    max-width: 78vw;
+    max-height: 70vh;
+    overflow-y: auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-right: none;
+    border-radius: 12px 0 0 12px;
+    padding: 16px;
+    box-shadow: 0 10px 40px -10px rgba(0,0,0,.35);
+  }
+  .side-body[hidden] { display: none; }
+  .side-body h3 { font: 800 15px "Archivo", sans-serif; margin: 0 0 4px; }
+  .side-body p.sub { font-size: 12px; color: var(--ink-muted); margin: 0 0 12px; }
+  .side-close {
+    float: right;
+    background: none;
+    border: none;
+    color: var(--ink-faint);
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    padding: 0 0 0 8px;
+  }
+  .side-close:hover { color: var(--ink); }
+
+  /* ---------- Redes sociales ---------- */
+  .social {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 10px;
+  }
+  .social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    color: var(--ink-muted);
+    transition: color .15s, border-color .15s, transform .15s;
+  }
+  .social a:hover { color: var(--accent); border-color: var(--accent); transform: translateY(-2px); }
+
   @media (max-width: 760px) {
     .stats { grid-template-columns: repeat(2, 1fr); }
     .shipment-row { grid-template-columns: 1fr; }
     .contract-right { align-items: flex-start; width: 100%; }
     .top-meta { text-align: left; }
+    .side-alert { top: auto; bottom: 0; transform: none; right: 0; left: 0; }
+    .side-tab { writing-mode: horizontal-tb; border-radius: 10px 10px 0 0; width: 100%; }
+    .side-body { width: 100%; max-width: 100%; border-radius: 12px 12px 0 0; border-right: 1px solid var(--border); }
+  }
+
+  /* ---------- Impresión / PDF ---------- */
+  @media print {
+    @page { margin: 12mm; }
+    body { background: #fff; }
+    .toolbar, .side-alert, .alert-overlay, .dl-group, .tabs,
+    .ship-docs-toggle, .collapse-btn, .track-btn { display: none !important; }
+    .contract-card.collapsed .contract-body { display: flex !important; }
+    .ship-docs-panel, .pack-panel { max-height: none !important; overflow: visible !important; }
+    .tab-panel[hidden] { display: block !important; }
+    .contract-card, .shipment-row, .stat-tile { break-inside: avoid; box-shadow: none; }
+    .shell { max-width: 100%; padding: 0; }
   }
 </style>
 
@@ -773,30 +988,96 @@
     </div>
   </section>
 
-  <div class="toolbar">
-    <div class="chips" role="group" aria-label="Filtrar embarques por estado">
-      <button class="chip active" data-filter="all">Todos los embarques</button>
-      <button class="chip" data-filter="loaded">Cargado</button>
-      <button class="chip" data-filter="ongoing">En curso</button>
-      <button class="chip" data-filter="tbi">Por definir</button>
+  <div class="tabs" role="tablist">
+    <button class="tab active" role="tab" data-tab="activos">Contratos activos</button>
+    <button class="tab" role="tab" data-tab="historico">Histórico ({{HIST_COUNT}})</button>
+  </div>
+
+  <div class="tab-panel" id="panel-activos">
+
+    <div class="toolbar">
+      <div class="chips" role="group" aria-label="Filtrar embarques por estado">
+        <button class="chip active" data-filter="all">Todos los embarques</button>
+        <button class="chip" data-filter="loaded">Cargado</button>
+        <button class="chip" data-filter="ongoing">En curso</button>
+        <button class="chip" data-filter="tbi">Por definir</button>
+      </div>
+      <div class="search-wrap">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" id="searchInput" placeholder="Buscar por producto…" autocomplete="off">
+      </div>
+      <div class="dl-group">
+        <button class="dl-btn" id="btnPdf" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v8H6z"/></svg>
+          PDF
+        </button>
+        <button class="dl-btn" id="btnExcel" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          Excel
+        </button>
+      </div>
     </div>
-    <div class="search-wrap">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-      <input type="text" id="searchInput" placeholder="Buscar por producto…" autocomplete="off">
+
+    <section class="contracts" id="contracts">
+{{CONTRACTS}}
+    </section>
+
+    <p id="emptyState" style="display:none; text-align:center; color:var(--ink-faint); padding:30px 0;">No hay embarques que coincidan con este filtro o búsqueda.</p>
+  </div>
+
+  <div class="tab-panel" id="panel-historico" hidden>
+    <div class="hist-head">
+      <div><span class="n">{{HIST_COUNT}}</span> <span class="sub">contratos finalizados</span></div>
+      <div><span class="n">{{HIST_FOB}}</span> <span class="sub">valor FOB acumulado</span></div>
+    </div>
+    <div class="overflow-x">
+      <table class="hist-table" id="histTable">
+        <thead>
+          <tr>
+            <th>Proforma</th>
+            <th>Producto</th>
+            <th>Ruta</th>
+            <th class="num">Embarques</th>
+            <th class="num sortable" data-hsort="valor">Valor FOB ↕</th>
+            <th class="num sortable" data-hsort="fin">Cierre ↕</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+{{HISTORICO_ROWS}}
+        </tbody>
+      </table>
     </div>
   </div>
 
-  <section class="contracts" id="contracts">
-{{CONTRACTS}}
-  </section>
-
-  <p id="emptyState" style="display:none; text-align:center; color:var(--ink-faint); padding:30px 0;">No hay embarques que coincidan con este filtro o búsqueda.</p>
-
   <footer class="page-foot">
+    <div class="social">
+      <a href="https://www.linkedin.com/company/lumagroup.la/" target="_blank" rel="noopener" aria-label="LinkedIn de Luma" title="LinkedIn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM2.4 21h5.16V9.5H2.4V21zM9.5 9.5H14v1.57h.07c.63-1.13 2.17-2.32 4.46-2.32 4.77 0 5.65 3.02 5.65 6.95V21h-5.16v-4.98c0-1.19-.02-2.72-1.75-2.72-1.75 0-2.02 1.3-2.02 2.64V21H9.5V9.5z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/lumagroupla/" target="_blank" rel="noopener" aria-label="Instagram de Luma" title="Instagram">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="https://lumagroup.la" target="_blank" rel="noopener" aria-label="Sitio web de Luma" title="lumagroup.la">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20 15.3 15.3 0 0 1 0-20z"/></svg>
+      </a>
+    </div>
     Luma Foods · Panel actualizado automáticamente. Ante cualquier duda sobre un embarque, escribinos a <a href="mailto:francys@lumagroup.la">francys@lumagroup.la</a> o <a href="mailto:support02@lumagroup.la">support02@lumagroup.la</a>
   </footer>
 
 </div>
+
+<div class="side-alert" id="sideAlert" hidden>
+  <button class="side-tab" id="sideTab" type="button">⚠ Puntos abiertos</button>
+  <div class="side-body" id="sideBody" hidden>
+    <button class="side-close" id="sideClose" type="button" aria-label="Cerrar">×</button>
+    <h3>Puntos abiertos</h3>
+    <p class="sub">Documentación y pagos de tus embarques ya cargados.</p>
+    <div class="alert-list" id="sideList"></div>
+  </div>
+</div>
+
+<script id="exportData" type="application/json">{{EXPORT_DATA}}</script>
 
 <script>
   const chips = document.querySelectorAll('.chip');
@@ -881,19 +1162,116 @@
     row.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
+  // El modal no desaparece al aceptar: se repliega en la solapa lateral, siempre accesible.
   const alertOverlay = document.getElementById('alertOverlay');
-  if (alertOverlay) {
-    const closeAlert = () => { alertOverlay.hidden = true; };
-    document.getElementById('alertDismiss')?.addEventListener('click', closeAlert);
-    alertOverlay.addEventListener('click', (e) => { if (e.target === alertOverlay) closeAlert(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAlert(); });
-    document.querySelectorAll('.alert-item[data-jump]').forEach(item => {
+  const sideAlert = document.getElementById('sideAlert');
+  const sideBody = document.getElementById('sideBody');
+
+  function wireJumps(scope) {
+    scope.querySelectorAll('.alert-item[data-jump]').forEach(item => {
       item.addEventListener('click', () => {
-        closeAlert();
+        if (alertOverlay) alertOverlay.hidden = true;
+        if (sideBody) sideBody.hidden = true;
         openShipDocs(item.dataset.jump);
       });
     });
   }
+
+  if (alertOverlay && sideAlert) {
+    // Clonar el contenido del modal dentro del panel lateral
+    const list = alertOverlay.querySelector('.alert-list');
+    const sideList = document.getElementById('sideList');
+    if (list && sideList) sideList.innerHTML = list.innerHTML;
+
+    const replegar = () => {
+      alertOverlay.hidden = true;
+      sideAlert.hidden = false;   // queda la solapa a la vista
+      sideBody.hidden = true;
+    };
+    document.getElementById('alertDismiss')?.addEventListener('click', replegar);
+    alertOverlay.addEventListener('click', (e) => { if (e.target === alertOverlay) replegar(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !alertOverlay.hidden) replegar(); });
+
+    document.getElementById('sideTab')?.addEventListener('click', () => {
+      sideBody.hidden = !sideBody.hidden;
+    });
+    document.getElementById('sideClose')?.addEventListener('click', () => { sideBody.hidden = true; });
+
+    wireJumps(alertOverlay);
+    wireJumps(sideAlert);
+  }
+
+  // Pestañas: activos / histórico
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      document.querySelectorAll('.tab-panel').forEach(p => { p.hidden = true; });
+      document.getElementById('panel-' + tab.dataset.tab).hidden = false;
+    });
+  });
+
+  // Materiales de empaque: desplegable por contrato
+  document.querySelectorAll('.pack-toggle').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const panel = btn.nextElementSibling;
+      const abierto = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!abierto));
+      panel.classList.toggle('open', !abierto);
+    });
+  });
+
+  // Ordenar el histórico por valor o fecha de cierre
+  document.querySelectorAll('.hist-table th.sortable').forEach(th => {
+    th.addEventListener('click', () => {
+      const tbody = document.querySelector('#histTable tbody');
+      const key = th.dataset.hsort;
+      const desc = th.dataset.dir !== 'desc';
+      th.dataset.dir = desc ? 'desc' : 'asc';
+      const filas = Array.from(tbody.querySelectorAll('tr')).filter(r => r.dataset[key] !== undefined);
+      filas.sort((a, b) => {
+        const va = a.dataset[key], vb = b.dataset[key];
+        const na = parseFloat(va), nb = parseFloat(vb);
+        const cmp = (!isNaN(na) && !isNaN(nb)) ? na - nb : String(va).localeCompare(String(vb));
+        return desc ? -cmp : cmp;
+      });
+      filas.forEach(f => tbody.appendChild(f));
+    });
+  });
+
+  // Descarga en PDF: usa el dialogo de impresion del navegador (hay CSS de impresion preparado)
+  document.getElementById('btnPdf')?.addEventListener('click', () => window.print());
+
+  // Descarga en Excel: arma el .xlsx en el navegador con SheetJS
+  document.getElementById('btnExcel')?.addEventListener('click', async () => {
+    const btn = document.getElementById('btnExcel');
+    const textoOriginal = btn.innerHTML;
+    btn.disabled = true;
+    btn.textContent = 'Generando…';
+    try {
+      if (!window.XLSX) {
+        await new Promise((ok, fail) => {
+          const s = document.createElement('script');
+          s.src = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+          s.onload = ok;
+          s.onerror = fail;
+          document.head.appendChild(s);
+        });
+      }
+      const datos = JSON.parse(document.getElementById('exportData').textContent);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(datos.embarques), 'Embarques');
+      XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(datos.productos), 'Productos');
+      XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(datos.historico), 'Historico');
+      XLSX.writeFile(wb, 'Embarques_' + datos.cliente + '.xlsx');
+    } catch (err) {
+      alert('No se pudo generar el Excel. Revisá tu conexión e intentá de nuevo.');
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = textoOriginal;
+    }
+  });
 
   // Sortable product tables: click "Subtotal" or "Cargado" to reorder rows
   document.querySelectorAll('.products-table th.sortable').forEach(th => {

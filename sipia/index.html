@@ -712,11 +712,226 @@
   }
   .alert-btn:hover { filter: brightness(1.15); }
 
+  /* ---------- Numero de embarque 1/7 ---------- */
+  .seq-badge {
+    display: inline-block;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font: 700 10.5px "IBM Plex Mono", monospace;
+    padding: 2px 7px;
+    border-radius: 6px;
+    margin-right: 7px;
+    vertical-align: middle;
+  }
+
+  /* ---------- ETD / ETA explicitos ---------- */
+  .ship-fechas { display: flex; flex-direction: column; gap: 8px; min-width: 150px; }
+  .fecha-linea { display: flex; align-items: baseline; gap: 7px; }
+  .fecha-tag {
+    font: 700 9.5px "Public Sans", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--ink-faint);
+    width: 26px;
+    flex: none;
+  }
+  .fecha-val { font: 700 13px "Public Sans", sans-serif; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .fecha-val.pendiente { font-weight: 500; font-style: italic; color: var(--ink-faint); }
+
+  /* ---------- Materiales de empaque ---------- */
+  .pack-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px 2px;
+    color: var(--ink-muted);
+    font: 600 12px "Public Sans", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+  }
+  .pack-toggle:hover { color: var(--ink); }
+  .pack-toggle svg { transition: transform .2s; flex: none; }
+  .pack-toggle[aria-expanded="true"] svg { transform: rotate(90deg); }
+  .pack-resumen {
+    margin-left: auto;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 12px;
+    color: var(--good);
+  }
+  .pack-toggle.pendiente .pack-resumen { color: var(--warning); }
+  .pack-panel { overflow: hidden; max-height: 0; transition: max-height .25s ease; }
+  .pack-panel.open { max-height: 800px; }
+  .pack-table { width: 100%; border-collapse: collapse; margin: 6px 0 4px; font-size: 12.5px; }
+  .pack-table th {
+    text-align: left;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: var(--ink-faint);
+    font-weight: 600;
+    padding: 0 8px 6px;
+  }
+  .pack-table th.num, .pack-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .pack-table td { padding: 7px 8px; border-top: 1px solid var(--border); color: var(--ink-muted); }
+  .pm-estado { font-weight: 700; white-space: nowrap; }
+  .pm-estado.ok { color: var(--good); }
+  .pm-estado.pend { color: var(--warning); }
+  .pm-vacio { color: var(--ink-faint); font-style: italic; text-align: center; padding: 16px 8px; }
+
+  /* ---------- Pestañas ---------- */
+  .tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border); }
+  .tab {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    padding: 10px 16px;
+    font: 700 13.5px "Public Sans", sans-serif;
+    color: var(--ink-faint);
+    cursor: pointer;
+  }
+  .tab:hover { color: var(--ink); }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-panel[hidden] { display: none; }
+
+  /* ---------- Histórico ---------- */
+  .hist-head { display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: baseline; margin-bottom: 4px; }
+  .hist-head .n { font: 800 22px "Archivo", sans-serif; }
+  .hist-head .sub { font-size: 13px; color: var(--ink-muted); }
+  .hist-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .hist-table th {
+    text-align: left;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: var(--ink-faint);
+    font-weight: 600;
+    padding: 0 10px 8px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  .hist-table td { padding: 10px; border-bottom: 1px solid var(--border); }
+  .hist-table th.num, .hist-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .hist-table td.mono { font: 600 12.5px "IBM Plex Mono", monospace; color: var(--ink); white-space: nowrap; }
+  .hist-table tbody tr:hover { background: var(--surface-2); }
+  .hist-table th.sortable { cursor: pointer; user-select: none; }
+  .hist-table th.sortable:hover { color: var(--ink); }
+
+  /* ---------- Descargas ---------- */
+  .dl-group { display: flex; gap: 8px; }
+  .dl-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--ink-muted);
+    border-radius: 999px;
+    padding: 7px 14px;
+    font: 600 13px "Public Sans", sans-serif;
+    cursor: pointer;
+  }
+  .dl-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ---------- Panel lateral de pendientes ---------- */
+  .side-alert {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 90;
+    display: flex;
+    align-items: stretch;
+  }
+  .side-alert[hidden] { display: none; }
+  .side-tab {
+    background: var(--critical);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 14px 9px;
+    border-radius: 10px 0 0 10px;
+    font: 700 12px "Public Sans", sans-serif;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    letter-spacing: .06em;
+    box-shadow: 0 6px 20px -6px rgba(0,0,0,.35);
+  }
+  .side-tab:hover { filter: brightness(1.1); }
+  .side-body {
+    width: 320px;
+    max-width: 78vw;
+    max-height: 70vh;
+    overflow-y: auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-right: none;
+    border-radius: 12px 0 0 12px;
+    padding: 16px;
+    box-shadow: 0 10px 40px -10px rgba(0,0,0,.35);
+  }
+  .side-body[hidden] { display: none; }
+  .side-body h3 { font: 800 15px "Archivo", sans-serif; margin: 0 0 4px; }
+  .side-body p.sub { font-size: 12px; color: var(--ink-muted); margin: 0 0 12px; }
+  .side-close {
+    float: right;
+    background: none;
+    border: none;
+    color: var(--ink-faint);
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    padding: 0 0 0 8px;
+  }
+  .side-close:hover { color: var(--ink); }
+
+  /* ---------- Redes sociales ---------- */
+  .social {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 10px;
+  }
+  .social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    color: var(--ink-muted);
+    transition: color .15s, border-color .15s, transform .15s;
+  }
+  .social a:hover { color: var(--accent); border-color: var(--accent); transform: translateY(-2px); }
+
   @media (max-width: 760px) {
     .stats { grid-template-columns: repeat(2, 1fr); }
     .shipment-row { grid-template-columns: 1fr; }
     .contract-right { align-items: flex-start; width: 100%; }
     .top-meta { text-align: left; }
+    .side-alert { top: auto; bottom: 0; transform: none; right: 0; left: 0; }
+    .side-tab { writing-mode: horizontal-tb; border-radius: 10px 10px 0 0; width: 100%; }
+    .side-body { width: 100%; max-width: 100%; border-radius: 12px 12px 0 0; border-right: 1px solid var(--border); }
+  }
+
+  /* ---------- Impresión / PDF ---------- */
+  @media print {
+    @page { margin: 12mm; }
+    body { background: #fff; }
+    .toolbar, .side-alert, .alert-overlay, .dl-group, .tabs,
+    .ship-docs-toggle, .collapse-btn, .track-btn { display: none !important; }
+    .contract-card.collapsed .contract-body { display: flex !important; }
+    .ship-docs-panel, .pack-panel { max-height: none !important; overflow: visible !important; }
+    .tab-panel[hidden] { display: block !important; }
+    .contract-card, .shipment-row, .stat-tile { break-inside: avoid; box-shadow: none; }
+    .shell { max-width: 100%; padding: 0; }
   }
 </style>
 
@@ -758,7 +973,7 @@
       <p class="client-full">Servicio Integral para la Industria Alimenticia — contratos y embarques activos</p>
     </div>
     <div class="top-meta">
-      Actualizado <strong>17 sep 2026</strong><br>
+      Actualizado <strong>17 sep 2026, 17:10 hs</strong><br>
       Los datos se actualizan solos varias veces al día
     </div>
   </header>
@@ -799,20 +1014,37 @@
     </div>
   </section>
 
-  <div class="toolbar">
-    <div class="chips" role="group" aria-label="Filtrar embarques por estado">
-      <button class="chip active" data-filter="all">Todos los embarques</button>
-      <button class="chip" data-filter="loaded">Cargado</button>
-      <button class="chip" data-filter="ongoing">En curso</button>
-      <button class="chip" data-filter="tbi">Por definir</button>
-    </div>
-    <div class="search-wrap">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-      <input type="text" id="searchInput" placeholder="Buscar por producto…" autocomplete="off">
-    </div>
+  <div class="tabs" role="tablist">
+    <button class="tab active" role="tab" data-tab="activos">Contratos activos</button>
+    <button class="tab" role="tab" data-tab="historico">Histórico (32)</button>
   </div>
 
-  <section class="contracts" id="contracts">
+  <div class="tab-panel" id="panel-activos">
+
+    <div class="toolbar">
+      <div class="chips" role="group" aria-label="Filtrar embarques por estado">
+        <button class="chip active" data-filter="all">Todos los embarques</button>
+        <button class="chip" data-filter="loaded">Cargado</button>
+        <button class="chip" data-filter="ongoing">En curso</button>
+        <button class="chip" data-filter="tbi">Por definir</button>
+      </div>
+      <div class="search-wrap">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" id="searchInput" placeholder="Buscar por producto…" autocomplete="off">
+      </div>
+      <div class="dl-group">
+        <button class="dl-btn" id="btnPdf" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v8H6z"/></svg>
+          PDF
+        </button>
+        <button class="dl-btn" id="btnExcel" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          Excel
+        </button>
+      </div>
+    </div>
+
+    <section class="contracts" id="contracts">
 
     <!-- Contract 00001638 -->
     <article class="contract-card collapsed" data-products="sweet corn" style="--card-accent: var(--warning);">
@@ -826,7 +1058,8 @@
           <div class="route">Bangkok <span class="arrow">→</span> Guayaquil</div>
           <div class="contract-tags">
             <span class="tag incoterm">FOB</span>
-            <span class="tag">19 dic 2025 – 18 oct 2026</span>
+            <span class="tag"><b>Inicio:</b> 19 dic 2025</span>
+            <span class="tag"><b>Cierre estimado:</b> 18 oct 2026</span>
           </div>
         </div>
         <div class="contract-right">
@@ -883,15 +1116,16 @@
           <div class="shipments">
             <div class="shipment-row" data-status="ongoing">
               <div class="ship-id-block">
-                <span class="ship-id">Embarque 4 de 7</span>
+                <span class="ship-id"><span class="seq-badge" title="Embarque 4 de 7 del contrato">4/7</span>Embarque sin booking</span>
                 <span class="ship-note">Producción 2026 · 12 oz · Datos Agente OK</span>
               </div>
               <div class="ship-vessel"><span class="v-none">Buque aún sin asignar</span></div>
               <span class="status-pill st-warning"><span class="dot"></span>En curso</span>
-              <div class="ship-dates">
-                <div class="etd-updated"><span class="etd-tag">ETD Actualizado</span>28 sep</div>
-                <div class="etd-required">ETD requerido 07 jul</div><span class="delay-flag">⚠ Delayed Shipping · +83 días</span>
-              </div>
+              <div class="ship-fechas"><div class="ship-dates">
+                <div class="fecha-linea"><span class="fecha-tag">ETD</span><span class="fecha-val">28 sep</span></div>
+                <div class="fecha-linea"><span class="fecha-tag">ETA</span><span class="fecha-val pendiente">por confirmar</span></div>
+                <div class="etd-required">ETD original 07 jul</div><span class="delay-flag">⚠ Delayed Shipping · +83 días</span>
+              </div></div>
               <span class="track-muted">Sin booking aún</span>
               <button class="ship-docs-toggle" type="button" aria-expanded="false" aria-label="Documentación y pagos" title="Documentación y pagos"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
             </div>
@@ -906,15 +1140,16 @@
 
             <div class="shipment-row" data-status="ongoing">
               <div class="ship-id-block">
-                <span class="ship-id">Embarque 5 de 7</span>
+                <span class="ship-id"><span class="seq-badge" title="Embarque 5 de 7 del contrato">5/7</span>Embarque sin booking</span>
                 <span class="ship-note">Producción 2026 · 15 oz · Datos agente OK</span>
               </div>
               <div class="ship-vessel"><span class="v-none">Buque aún sin asignar</span></div>
               <span class="status-pill st-warning"><span class="dot"></span>En curso</span>
-              <div class="ship-dates">
-                <div class="etd-updated"><span class="etd-tag">ETD Actualizado</span>28 sep</div>
-                <div class="etd-required">ETD requerido 07 jul</div><span class="delay-flag">⚠ Delayed Shipping · +83 días</span>
-              </div>
+              <div class="ship-fechas"><div class="ship-dates">
+                <div class="fecha-linea"><span class="fecha-tag">ETD</span><span class="fecha-val">28 sep</span></div>
+                <div class="fecha-linea"><span class="fecha-tag">ETA</span><span class="fecha-val pendiente">por confirmar</span></div>
+                <div class="etd-required">ETD original 07 jul</div><span class="delay-flag">⚠ Delayed Shipping · +83 días</span>
+              </div></div>
               <span class="track-muted">Sin booking aún</span>
               <button class="ship-docs-toggle" type="button" aria-expanded="false" aria-label="Documentación y pagos" title="Documentación y pagos"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
             </div>
@@ -929,15 +1164,16 @@
 
             <div class="shipment-row" data-status="ongoing">
               <div class="ship-id-block">
-                <span class="ship-id">Embarque 6 de 7</span>
+                <span class="ship-id"><span class="seq-badge" title="Embarque 6 de 7 del contrato">6/7</span>Embarque sin booking</span>
                 <span class="ship-note">Producción 2026 · 15 oz</span>
               </div>
               <div class="ship-vessel"><span class="v-none">Buque aún sin asignar</span></div>
               <span class="status-pill st-warning"><span class="dot"></span>En curso</span>
-              <div class="ship-dates">
-                <div class="etd-updated"><span class="etd-tag">ETD Actualizado</span>02 nov</div>
-                <div class="etd-required">ETD requerido 01 oct</div><span class="delay-flag">⚠ Delayed Shipping · +32 días</span>
-              </div>
+              <div class="ship-fechas"><div class="ship-dates">
+                <div class="fecha-linea"><span class="fecha-tag">ETD</span><span class="fecha-val">02 nov</span></div>
+                <div class="fecha-linea"><span class="fecha-tag">ETA</span><span class="fecha-val pendiente">por confirmar</span></div>
+                <div class="etd-required">ETD original 01 oct</div><span class="delay-flag">⚠ Delayed Shipping · +32 días</span>
+              </div></div>
               <span class="track-muted">Sin booking aún</span>
               <button class="ship-docs-toggle" type="button" aria-expanded="false" aria-label="Documentación y pagos" title="Documentación y pagos"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
             </div>
@@ -952,15 +1188,16 @@
 
             <div class="shipment-row" data-status="ongoing">
               <div class="ship-id-block">
-                <span class="ship-id">Embarque 7 de 7</span>
+                <span class="ship-id"><span class="seq-badge" title="Embarque 7 de 7 del contrato">7/7</span>Embarque sin booking</span>
                 <span class="ship-note">Producción 2026 · 15 oz</span>
               </div>
               <div class="ship-vessel"><span class="v-none">Buque aún sin asignar</span></div>
               <span class="status-pill st-warning"><span class="dot"></span>En curso</span>
-              <div class="ship-dates">
-                <div class="etd-updated"><span class="etd-tag">ETD Actualizado</span>02 feb 2027</div>
+              <div class="ship-fechas"><div class="ship-dates">
+                <div class="fecha-linea"><span class="fecha-tag">ETD</span><span class="fecha-val">02 feb 2027</span></div>
+                <div class="fecha-linea"><span class="fecha-tag">ETA</span><span class="fecha-val pendiente">por confirmar</span></div>
                 
-              </div>
+              </div></div>
               <span class="track-muted">Sin booking aún</span>
               <button class="ship-docs-toggle" type="button" aria-expanded="false" aria-label="Documentación y pagos" title="Documentación y pagos"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
             </div>
@@ -975,18 +1212,22 @@
 
             <div class="shipment-row" data-status="loaded" id="ship-CE260589">
               <div class="ship-id-block">
-                <span class="ship-id">CE260589</span>
+                <span class="ship-id"><span class="seq-badge" title="Embarque 1 de 7 del contrato">1/7</span>CE260589</span>
                 <span class="ship-note">BL BKKS005878 · Cont. CSNU1437124</span>
               </div>
               <div class="ship-vessel"><span class="v-name">Palawan</span></div>
               <span class="status-pill st-good"><span class="dot"></span>Cargado</span>
-              
+              <div class="ship-fechas"><div class="ship-dates">
+                <div class="fecha-linea"><span class="fecha-tag">ETD</span><span class="fecha-val">03 mar</span></div>
+                <div class="fecha-linea"><span class="fecha-tag">ETA</span><span class="fecha-val">26 may</span></div>
+                
+              </div>
               <div class="route-progress" style="--p:100%">
                 <div class="ports"><span class="reached">Bangkok</span><span class="reached">Guayaquil</span></div>
                 <div class="track"><div class="fill"></div><span class="ship">🚢</span></div>
-                <div class="caption"><span class="etd-tag">ETD Actualizado</span>03 mar · arribó <b>hace 114 días</b></div>
-              </div>
-              <span class="track-muted">Naviera: COSCO · sin link directo</span>
+                <div class="caption">Arribó <b>hace 114 días</b></div>
+              </div></div>
+              <a class="track-btn" href="https://elines.coscoshipping.com/ebusiness/cargotracking" target="_blank" rel="noopener">Ver tracking en vivo ↗</a>
               <button class="ship-docs-toggle" type="button" aria-expanded="false" aria-label="Documentación y pagos" title="Documentación y pagos"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
             </div>
             <div class="ship-docs-panel">
@@ -1000,20 +1241,22 @@
 
             <div class="shipment-row" data-status="loaded" id="ship-CE260990">
               <div class="ship-id-block">
-                <span class="ship-id">CE260990</span>
+                <span class="ship-id"><span class="seq-badge" title="Embarque 2 de 7 del contrato">2/7</span>CE260990</span>
                 <span class="ship-note">BL GOSZX26081186 · Cont. WHSU2410931</span>
               </div>
               <div class="ship-vessel"><span class="v-name">Wan Hai 272</span><span class="ship-note">Voy. N229</span></div>
               <span class="status-pill st-good"><span class="dot"></span>Cargado</span>
-              
+              <div class="ship-fechas"><div class="ship-dates">
+                <div class="fecha-linea"><span class="fecha-tag">ETD</span><span class="fecha-val">23 ago</span></div>
+                <div class="fecha-linea"><span class="fecha-tag">ETA</span><span class="fecha-val">13 oct</span></div>
+                <div class="etd-required">ETD original 05 may</div><span class="delay-flag">⚠ Delayed Shipping · +110 días</span>
+              </div>
               <div class="route-progress in-transit" style="--p:49%">
                 <div class="ports"><span class="reached">Bangkok</span><span>Guayaquil</span></div>
                 <div class="track"><div class="fill"></div><span class="ship">🚢</span></div>
-                <div class="caption"><span class="etd-tag">ETD Actualizado</span>23 ago · <b>~49% del trayecto</b> (estimado, ETA 13 oct)</div>
-                <div class="etd-required">ETD requerido 05 may</div>
-                <span class="delay-flag">⚠ Delayed Shipping · +110 días</span>
-              </div>
-              <a class="track-btn" href="https://www.wanhai.com/views/cargo_track_v2/tracking_data_page_by_booking.xhtml?file_num=65580&amp;top_file_num=64735&amp;parent_id=64738" target="_blank" rel="noopener">Ver tracking en vivo ↗</a>
+                <div class="caption">En tránsito · <b>~49% del trayecto</b> (estimado)</div>
+              </div></div>
+              <a class="track-btn" href="https://th.wanhai.com/views/cargo_track_v2/tracking_query.xhtml?file_num=65580&amp;parent_id=64738&amp;top_file_num=64735" target="_blank" rel="noopener">Ver tracking en vivo ↗</a>
               <button class="ship-docs-toggle has-alert" type="button" aria-expanded="false" aria-label="Documentación y pagos — atención" title="Documentación y pagos — atención"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
             </div>
             <div class="ship-docs-panel">
@@ -1027,20 +1270,22 @@
 
             <div class="shipment-row" data-status="loaded" id="ship-CE261566">
               <div class="ship-id-block">
-                <span class="ship-id">CE261566</span>
+                <span class="ship-id"><span class="seq-badge" title="Embarque 3 de 7 del contrato">3/7</span>CE261566</span>
                 <span class="ship-note">BL GOSZX26081325 · Cont. WHSU2792710</span>
               </div>
               <div class="ship-vessel"><span class="v-name">Wan Hai 177</span><span class="ship-note">Voy. N062</span></div>
               <span class="status-pill st-good"><span class="dot"></span>Cargado</span>
-              
+              <div class="ship-fechas"><div class="ship-dates">
+                <div class="fecha-linea"><span class="fecha-tag">ETD</span><span class="fecha-val">03 sep</span></div>
+                <div class="fecha-linea"><span class="fecha-tag">ETA</span><span class="fecha-val">27 oct</span></div>
+                <div class="etd-required">ETD original 02 jun</div><span class="delay-flag">⚠ Delayed Shipping · +93 días</span>
+              </div>
               <div class="route-progress in-transit" style="--p:26%">
                 <div class="ports"><span class="reached">Bangkok</span><span>Guayaquil</span></div>
                 <div class="track"><div class="fill"></div><span class="ship">🚢</span></div>
-                <div class="caption"><span class="etd-tag">ETD Actualizado</span>03 sep · <b>~26% del trayecto</b> (estimado, ETA 27 oct)</div>
-                <div class="etd-required">ETD requerido 02 jun</div>
-                <span class="delay-flag">⚠ Delayed Shipping · +93 días</span>
-              </div>
-              <a class="track-btn" href="https://www.wanhai.com/views/cargo_track_v2/tracking_ctnr_list.xhtml?file_num=65580&amp;top_file_num=64735&amp;parent_id=64738" target="_blank" rel="noopener">Ver tracking en vivo ↗</a>
+                <div class="caption">En tránsito · <b>~26% del trayecto</b> (estimado)</div>
+              </div></div>
+              <a class="track-btn" href="https://th.wanhai.com/views/cargo_track_v2/tracking_query.xhtml?file_num=65580&amp;parent_id=64738&amp;top_file_num=64735" target="_blank" rel="noopener">Ver tracking en vivo ↗</a>
               <button class="ship-docs-toggle has-alert" type="button" aria-expanded="false" aria-label="Documentación y pagos — atención" title="Documentación y pagos — atención"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
             </div>
             <div class="ship-docs-panel">
@@ -1051,6 +1296,45 @@
                 <span class="pay-line">Factura pagada: <b class="pay-pending">No</b> · US$ 17,721 pendiente</span>
               </div>
             </div>
+          </div>
+        </div>
+
+        <div class="docs-toggle-wrap">
+          <button class="pack-toggle" type="button" aria-expanded="false">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+            <span>Materiales de empaque</span>
+            <span class="pack-resumen">Todos confirmados · 4 de 4</span>
+          </button>
+          <div class="pack-panel">
+            <table class="pack-table">
+              <thead><tr><th>Material</th><th>Estado</th><th class="num">Draft enviado</th><th class="num">Aprobado</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>Carton Snob Sweet Corn 15 oz</td>
+                  <td><span class="pm-estado ok">✓ Confirmado</span></td>
+                  <td class="num">16 feb</td>
+                  <td class="num">19 feb</td>
+                </tr>
+                <tr>
+                  <td>Label Snob Sweet Corn 15 oz</td>
+                  <td><span class="pm-estado ok">✓ Confirmado</span></td>
+                  <td class="num">09 feb</td>
+                  <td class="num">09 feb</td>
+                </tr>
+                <tr>
+                  <td>Carton Snob Sweet Corn 12 oz</td>
+                  <td><span class="pm-estado ok">✓ Confirmado</span></td>
+                  <td class="num">26 may</td>
+                  <td class="num">27 may</td>
+                </tr>
+                <tr>
+                  <td>Label Snob Sweet Corn 12 oz</td>
+                  <td><span class="pm-estado ok">✓ Confirmado</span></td>
+                  <td class="num">26 may</td>
+                  <td class="num">27 may</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -1068,7 +1352,8 @@
           <div class="route">Bangkok <span class="arrow">→</span> Guayaquil</div>
           <div class="contract-tags">
             <span class="tag incoterm">FOB</span>
-            <span class="tag">10 feb 2026 – 09 nov 2026</span>
+            <span class="tag"><b>Inicio:</b> 10 feb 2026</span>
+            <span class="tag"><b>Cierre estimado:</b> 09 nov 2026</span>
           </div>
         </div>
         <div class="contract-right">
@@ -1116,15 +1401,16 @@
           <div class="shipments">
             <div class="shipment-row" data-status="ongoing">
               <div class="ship-id-block">
-                <span class="ship-id">Embarque 3 de 3</span>
+                <span class="ship-id"><span class="seq-badge" title="Embarque 3 de 3 del contrato">3/3</span>Embarque sin booking</span>
                 <span class="ship-note">Frozen Corn</span>
               </div>
               <div class="ship-vessel"><span class="v-none">Buque aún sin asignar</span></div>
               <span class="status-pill st-warning"><span class="dot"></span>En curso</span>
-              <div class="ship-dates">
-                <div class="etd-updated"><span class="etd-tag">ETD Actualizado</span>09 nov</div>
-                <div class="etd-required">ETD requerido 01 oct</div><span class="delay-flag">⚠ Delayed Shipping · +39 días</span>
-              </div>
+              <div class="ship-fechas"><div class="ship-dates">
+                <div class="fecha-linea"><span class="fecha-tag">ETD</span><span class="fecha-val">09 nov</span></div>
+                <div class="fecha-linea"><span class="fecha-tag">ETA</span><span class="fecha-val pendiente">por confirmar</span></div>
+                <div class="etd-required">ETD original 01 oct</div><span class="delay-flag">⚠ Delayed Shipping · +39 días</span>
+              </div></div>
               <span class="track-muted">Sin booking aún</span>
               <button class="ship-docs-toggle" type="button" aria-expanded="false" aria-label="Documentación y pagos" title="Documentación y pagos"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
             </div>
@@ -1139,17 +1425,21 @@
 
             <div class="shipment-row" data-status="loaded" id="ship-AZ260023">
               <div class="ship-id-block">
-                <span class="ship-id">AZ260023</span>
+                <span class="ship-id"><span class="seq-badge" title="Embarque 1 de 3 del contrato">1/3</span>AZ260023</span>
                 <span class="ship-note">BL 7621EC318424 · Cont. OTPU6764413</span>
               </div>
               <div class="ship-vessel"><span class="v-name">Ts Xiamen</span><span class="ship-note">Voy. 2609N</span></div>
               <span class="status-pill st-good"><span class="dot"></span>Cargado</span>
-              
+              <div class="ship-fechas"><div class="ship-dates">
+                <div class="fecha-linea"><span class="fecha-tag">ETD</span><span class="fecha-val">15 abr</span></div>
+                <div class="fecha-linea"><span class="fecha-tag">ETA</span><span class="fecha-val">01 jul</span></div>
+                
+              </div>
               <div class="route-progress" style="--p:100%">
                 <div class="ports"><span class="reached">Bangkok</span><span class="reached">Guayaquil</span></div>
                 <div class="track"><div class="fill"></div><span class="ship">🚢</span></div>
-                <div class="caption"><span class="etd-tag">ETD Actualizado</span>15 abr · arribó <b>hace 78 días</b></div>
-              </div>
+                <div class="caption">Arribó <b>hace 78 días</b></div>
+              </div></div>
               <a class="track-btn" href="https://www.pilship.com/digital-solutions/?tab=customer&amp;id=track-trace&amp;label=containerTandT&amp;module=TrackContStatus&amp;refNo=OTPU6764413" target="_blank" rel="noopener">Ver tracking en vivo ↗</a>
               <button class="ship-docs-toggle" type="button" aria-expanded="false" aria-label="Documentación y pagos" title="Documentación y pagos"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
             </div>
@@ -1164,20 +1454,22 @@
 
             <div class="shipment-row" data-status="loaded" id="ship-AZ260042">
               <div class="ship-id-block">
-                <span class="ship-id">AZ260042</span>
+                <span class="ship-id"><span class="seq-badge" title="Embarque 2 de 3 del contrato">2/3</span>AZ260042</span>
                 <span class="ship-note">BL THEF2609002A · Cont. FBIU5120265</span>
               </div>
               <div class="ship-vessel"><span class="v-name">Wan Hai 177</span><span class="ship-note">Voy. N062</span></div>
               <span class="status-pill st-good"><span class="dot"></span>Cargado</span>
-              
+              <div class="ship-fechas"><div class="ship-dates">
+                <div class="fecha-linea"><span class="fecha-tag">ETD</span><span class="fecha-val">02 sep</span></div>
+                <div class="fecha-linea"><span class="fecha-tag">ETA</span><span class="fecha-val">28 oct</span></div>
+                <div class="etd-required">ETD original 01 jul</div><span class="delay-flag">⚠ Delayed Shipping · +63 días</span>
+              </div>
               <div class="route-progress in-transit" style="--p:27%">
                 <div class="ports"><span class="reached">Bangkok</span><span>Guayaquil</span></div>
                 <div class="track"><div class="fill"></div><span class="ship">🚢</span></div>
-                <div class="caption"><span class="etd-tag">ETD Actualizado</span>02 sep · <b>~27% del trayecto</b> (estimado, ETA 28 oct)</div>
-                <div class="etd-required">ETD requerido 01 jul</div>
-                <span class="delay-flag">⚠ Delayed Shipping · +63 días</span>
-              </div>
-              <a class="track-btn" href="https://www.wanhai.com/views/cargo_track_v2/tracking_data_page_by_booking.xhtml?file_num=65580&amp;top_file_num=64735&amp;parent_id=64738" target="_blank" rel="noopener">Ver tracking en vivo ↗</a>
+                <div class="caption">En tránsito · <b>~27% del trayecto</b> (estimado)</div>
+              </div></div>
+              <a class="track-btn" href="https://th.wanhai.com/views/cargo_track_v2/tracking_query.xhtml?file_num=65580&amp;parent_id=64738&amp;top_file_num=64735" target="_blank" rel="noopener">Ver tracking en vivo ↗</a>
               <button class="ship-docs-toggle has-alert" type="button" aria-expanded="false" aria-label="Documentación y pagos — atención" title="Documentación y pagos — atención"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
             </div>
             <div class="ship-docs-panel">
@@ -1188,6 +1480,27 @@
                 <span class="pay-line">Factura pagada: <b class="pay-pending">No</b> · US$ 26,986 pendiente</span>
               </div>
             </div>
+          </div>
+        </div>
+
+        <div class="docs-toggle-wrap">
+          <button class="pack-toggle" type="button" aria-expanded="false">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+            <span>Materiales de empaque</span>
+            <span class="pack-resumen">Todos confirmados · 1 de 1</span>
+          </button>
+          <div class="pack-panel">
+            <table class="pack-table">
+              <thead><tr><th>Material</th><th>Estado</th><th class="num">Draft enviado</th><th class="num">Aprobado</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>Carton Unlabelled Frozen Sweet Corn 20 kg</td>
+                  <td><span class="pm-estado ok">✓ Confirmado</span></td>
+                  <td class="num">09 mar</td>
+                  <td class="num">10 mar</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -1205,7 +1518,8 @@
           <div class="route">Chennai <span class="arrow">→</span> Guayaquil</div>
           <div class="contract-tags">
             <span class="tag incoterm">FOB</span>
-            <span class="tag">24 mar 2026 – 23 jul 2026</span>
+            <span class="tag"><b>Inicio:</b> 24 mar 2026</span>
+            <span class="tag"><b>Cierre estimado:</b> 23 jul 2026</span>
           </div>
         </div>
         <div class="contract-right">
@@ -1262,15 +1576,16 @@
           <div class="shipments">
             <div class="shipment-row" data-status="tbi">
               <div class="ship-id-block">
-                <span class="ship-id">Embarque 1 de 1</span>
+                <span class="ship-id"><span class="seq-badge" title="Embarque 1 de 1 del contrato">1/1</span>Embarque sin booking</span>
                 <span class="ship-note">Baby Gherkins · Sujeto a muestras</span>
               </div>
               <div class="ship-vessel"><span class="v-none">Buque aún sin asignar</span></div>
               <span class="status-pill st-neutral"><span class="dot"></span>Por definir</span>
-              <div class="ship-dates">
-                <div class="etd-updated"><span class="etd-tag">ETD Actualizado</span>01 oct</div>
+              <div class="ship-fechas"><div class="ship-dates">
+                <div class="fecha-linea"><span class="fecha-tag">ETD</span><span class="fecha-val">01 oct</span></div>
+                <div class="fecha-linea"><span class="fecha-tag">ETA</span><span class="fecha-val pendiente">por confirmar</span></div>
                 
-              </div>
+              </div></div>
               <span class="track-muted">Sin booking aún</span>
               <button class="ship-docs-toggle" type="button" aria-expanded="false" aria-label="Documentación y pagos" title="Documentación y pagos"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
             </div>
@@ -1284,17 +1599,392 @@
             </div>
           </div>
         </div>
+
+        <div class="docs-toggle-wrap">
+          <button class="pack-toggle pendiente" type="button" aria-expanded="false">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+            <span>Materiales de empaque</span>
+            <span class="pack-resumen">En proceso · 0 de 4</span>
+          </button>
+          <div class="pack-panel">
+            <table class="pack-table">
+              <thead><tr><th>Material</th><th>Estado</th><th class="num">Draft enviado</th><th class="num">Aprobado</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>Carton Baby Gherkins 270 kg (260 LTS)</td>
+                  <td><span class="pm-estado pend">○ Pendiente</span></td>
+                  <td class="num">—</td>
+                  <td class="num">—</td>
+                </tr>
+                <tr>
+                  <td>Label Baby Gherkins 270 kg (260 LTS)</td>
+                  <td><span class="pm-estado pend">○ Pendiente</span></td>
+                  <td class="num">—</td>
+                  <td class="num">—</td>
+                </tr>
+                <tr>
+                  <td>Carton Unlabelled Baby Gherkins 270 kg (260 LTS)</td>
+                  <td><span class="pm-estado pend">○ Pendiente</span></td>
+                  <td class="num">—</td>
+                  <td class="num">—</td>
+                </tr>
+                <tr>
+                  <td>Label Unlabelled Baby Gherkins 270 kg (260 LTS)</td>
+                  <td><span class="pm-estado pend">○ Pendiente</span></td>
+                  <td class="num">—</td>
+                  <td class="num">—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </article>
-  </section>
+    </section>
 
-  <p id="emptyState" style="display:none; text-align:center; color:var(--ink-faint); padding:30px 0;">No hay embarques que coincidan con este filtro o búsqueda.</p>
+    <p id="emptyState" style="display:none; text-align:center; color:var(--ink-faint); padding:30px 0;">No hay embarques que coincidan con este filtro o búsqueda.</p>
+  </div>
+
+  <div class="tab-panel" id="panel-historico" hidden>
+    <div class="hist-head">
+      <div><span class="n">32</span> <span class="sub">contratos finalizados</span></div>
+      <div><span class="n">US$ 1,466,087</span> <span class="sub">valor FOB acumulado</span></div>
+    </div>
+    <div class="overflow-x">
+      <table class="hist-table" id="histTable">
+        <thead>
+          <tr>
+            <th>Proforma</th>
+            <th>Producto</th>
+            <th>Ruta</th>
+            <th class="num">Embarques</th>
+            <th class="num sortable" data-hsort="valor">Valor FOB ↕</th>
+            <th class="num sortable" data-hsort="fin">Cierre ↕</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+                <tr data-valor="18644.4" data-fin="2026-05-11">
+                  <td class="mono">CA25/121</td>
+                  <td><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn</td>
+                  <td>Bangkok → Guayaquil</td>
+                  <td class="num">1</td>
+                  <td class="num">US$ 18,644</td>
+                  <td class="num">11 may 2026</td>
+                  <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
+                </tr>
+                <tr data-valor="17721" data-fin="2026-03-31">
+                  <td class="mono">CA25/112</td>
+                  <td><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn</td>
+                  <td>Bangkok → Guayaquil</td>
+                  <td class="num">1</td>
+                  <td class="num">US$ 17,721</td>
+                  <td class="num">31 mar 2026</td>
+                  <td><span class="status-pill st-info"><span class="dot"></span>Cargado</span></td>
+                </tr>
+                <tr data-valor="28820" data-fin="2026-01-29">
+                  <td class="mono">FZ25/004</td>
+                  <td><span class="cat-icon" aria-hidden="true">🌽</span>Frozen Sweet Corn</td>
+                  <td>Bangkok → Guayaquil</td>
+                  <td class="num">1</td>
+                  <td class="num">US$ 28,820</td>
+                  <td class="num">29 ene 2026</td>
+                  <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
+                </tr>
+                <tr data-valor="18644.4" data-fin="2025-12-16">
+                  <td class="mono">CA25/090</td>
+                  <td><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn</td>
+                  <td>Bangkok → Guayaquil</td>
+                  <td class="num">1</td>
+                  <td class="num">US$ 18,644</td>
+                  <td class="num">16 dic 2025</td>
+                  <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
+                </tr>
+                <tr data-valor="108474" data-fin="2025-12-04">
+                  <td class="mono">CA25/019</td>
+                  <td><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn</td>
+                  <td>Bangkok → Guayaquil</td>
+                  <td class="num">5</td>
+                  <td class="num">US$ 108,474</td>
+                  <td class="num">04 dic 2025</td>
+                  <td><span class="status-pill st-info"><span class="dot"></span>Cargado</span></td>
+                </tr>
+                <tr data-valor="57640" data-fin="2025-10-08">
+                  <td class="mono">FZ25/002</td>
+                  <td><span class="cat-icon" aria-hidden="true">🌽</span>Frozen Sweet Corn</td>
+                  <td>Bangkok → —</td>
+                  <td class="num">2</td>
+                  <td class="num">US$ 57,640</td>
+                  <td class="num">08 oct 2025</td>
+                  <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
+                </tr>
+                <tr data-valor="4600" data-fin="2025-02-25">
+                  <td class="mono">00009510</td>
+                  <td><span class="cat-icon" aria-hidden="true">📦</span>Inserto Vertedor</td>
+                  <td>Buenos Aires → Guayaquil</td>
+                  <td class="num">2</td>
+                  <td class="num">US$ 4,600</td>
+                  <td class="num">25 feb 2025</td>
+                  <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
+                </tr>
+                <tr data-valor="28820" data-fin="2025-02-06">
+                  <td class="mono">FZ25/001</td>
+                  <td><span class="cat-icon" aria-hidden="true">🌽</span>Frozen Sweet Corn</td>
+                  <td>Bangkok → —</td>
+                  <td class="num">1</td>
+                  <td class="num">US$ 28,820</td>
+                  <td class="num">06 feb 2025</td>
+                  <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
+                </tr>
+                <tr data-valor="41070" data-fin="2024-12-19">
+                  <td class="mono">CA23/120</td>
+                  <td><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn</td>
+                  <td>Bangkok → Guayaquil</td>
+                  <td class="num">2</td>
+                  <td class="num">US$ 41,070</td>
+                  <td class="num">19 dic 2024</td>
+                  <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
+                </tr>
+                <tr data-valor="158952" data-fin="2024-12-19">
+                  <td class="mono">CA23/121</td>
+                  <td><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn</td>
+                  <td>Bangkok → Guayaquil</td>
+                  <td class="num">6</td>
+                  <td class="num">US$ 158,952</td>
+                  <td class="num">19 dic 2024</td>
+                  <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
+                </tr>
+                <tr data-valor="35370" data-fin="2024-02-14">
+                  <td class="mono">FZ23/001</td>
+                  <td><span class="cat-icon" aria-hidden="true">🌽</span>Frozen Sweet Corn</td>
+                  <td>Bangkok → Guayaquil</td>
+                  <td class="num">1</td>
+                  <td class="num">US$ 35,370</td>
+                  <td class="num">14 feb 2024</td>
+                  <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
+                </tr>
+                <tr data-valor="34650" data-fin="2024-01-31">
+                  <td class="mono">23_025-MR</td>
+                  <td><span class="cat-icon" aria-hidden="true">📦</span>Peach</td>
+                  <td>Thessaloniki → Guayaquil</td>
+                  <td class="num">1</td>
+                  <td class="num">US$ 34,650</td>
+                  <td class="num">31 ene 2024</td>
+                  <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
+                </tr>
+                <tr data-valor="84488" data-fin="2023-12-06">
+                  <td class="mono">CA23/010</td>
+                  <td><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn</td>
+                  <td>Bangkok → Guayaquil</td>
+                  <td class="num">4</td>
+                  <td class="num">US$ 84,488</td>
+                  <td class="num">06 dic 2023</td>
+                  <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
+                </tr>
+                <tr data-valor="43660" data-fin="2023-09-05">
+                  <td class="mono">CA23/009</td>
+                  <td><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn</td>
+                  <td>Bangkok → Guayaquil</td>
+                  <td class="num">2</td>
+                  <td class="num">US$ 43,660</td>
+                  <td class="num">05 sep 2023</td>
+                  <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
+                </tr>
+                <tr data-valor="143010" data-fin="2022-11-15">
+                  <td class="mono">21_060-MR</td>
+                  <td><span class="cat-icon" aria-hidden="true">📦</span>Peach</td>
+                  <td>Thessaloniki → Guayaquil</td>
+                  <td class="num">2</td>
+                  <td class="num">US$ 143,010</td>
+                  <td class="num">15 nov 2022</td>
+                  <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
+                </tr>
+                <tr data-valor="128603" data-fin="2022-09-22">
+                  <td class="mono">CA22/021</td>
+                  <td><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn</td>
+                  <td>Bangkok → Guayaquil</td>
+                  <td class="num">6</td>
+                  <td class="num">US$ 128,603</td>
+                  <td class="num">22 sep 2022</td>
+                  <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
+                </tr>
+                <tr data-valor="35442" data-fin="2022-06-12">
+                  <td class="mono">CA21/116</td>
+                  <td><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn</td>
+                  <td>Bangkok → Guayaquil</td>
+                  <td class="num">2</td>
+                  <td class="num">US$ 35,442</td>
+                  <td class="num">12 jun 2022</td>
+                  <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
+                </tr>
+                <tr data-valor="214706" data-fin="2021-06-22">
+                  <td class="mono">CA 20/106</td>
+                  <td><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn</td>
+                  <td>Bangkok → Guayaquil</td>
+                  <td class="num">8</td>
+                  <td class="num">US$ 214,706</td>
+                  <td class="num">22 jun 2021</td>
+                  <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
+                </tr>
+                <tr data-valor="17542" data-fin="2021-06-10">
+                  <td class="mono">CA20/102</td>
+                  <td><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn</td>
+                  <td>Bangkok → Guayaquil</td>
+                  <td class="num">1</td>
+                  <td class="num">US$ 17,542</td>
+                  <td class="num">10 jun 2021</td>
+                  <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
+                </tr>
+                <tr data-valor="18592.5" data-fin="2021-05-08">
+                  <td class="mono">CA20/089</td>
+                  <td><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn</td>
+                  <td>Bangkok → Guayaquil</td>
+                  <td class="num">1</td>
+                  <td class="num">US$ 18,593</td>
+                  <td class="num">08 may 2021</td>
+                  <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
+                </tr>
+                <tr data-valor="24075" data-fin="2021-04-07">
+                  <td class="mono">20-053-MR</td>
+                  <td><span class="cat-icon" aria-hidden="true">📦</span>Peach</td>
+                  <td>Thessaloniki → Guayaquil</td>
+                  <td class="num">1</td>
+                  <td class="num">US$ 24,075</td>
+                  <td class="num">07 abr 2021</td>
+                  <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
+                </tr>
+                <tr data-valor="15355" data-fin="2021-04-06">
+                  <td class="mono">19_012-MR</td>
+                  <td><span class="cat-icon" aria-hidden="true">📦</span>Peach</td>
+                  <td>Thessaloniki → Guayaquil</td>
+                  <td class="num">1</td>
+                  <td class="num">US$ 15,355</td>
+                  <td class="num">06 abr 2021</td>
+                  <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
+                </tr>
+                <tr data-valor="12680.7" data-fin="2021-03-29">
+                  <td class="mono">20_016-MR</td>
+                  <td><span class="cat-icon" aria-hidden="true">📦</span>Peach</td>
+                  <td>Thessaloniki → Guayaquil</td>
+                  <td class="num">1</td>
+                  <td class="num">US$ 12,681</td>
+                  <td class="num">29 mar 2021</td>
+                  <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
+                </tr>
+                <tr data-valor="17273.5" data-fin="2021-03-22">
+                  <td class="mono">CA20/075</td>
+                  <td><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn</td>
+                  <td>Bangkok → Guayaquil</td>
+                  <td class="num">1</td>
+                  <td class="num">US$ 17,274</td>
+                  <td class="num">22 mar 2021</td>
+                  <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
+                </tr>
+                <tr data-valor="35866" data-fin="2021-03-08">
+                  <td class="mono">CA20/065</td>
+                  <td><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn</td>
+                  <td>Bangkok → Guayaquil</td>
+                  <td class="num">1</td>
+                  <td class="num">US$ 35,866</td>
+                  <td class="num">08 mar 2021</td>
+                  <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
+                </tr>
+                <tr data-valor="19260" data-fin="2020-11-29">
+                  <td class="mono">19_107-MR</td>
+                  <td><span class="cat-icon" aria-hidden="true">📦</span>Peach</td>
+                  <td>Thessaloniki → Guayaquil</td>
+                  <td class="num">1</td>
+                  <td class="num">US$ 19,260</td>
+                  <td class="num">29 nov 2020</td>
+                  <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
+                </tr>
+                <tr data-valor="19440" data-fin="2020-10-01">
+                  <td class="mono">19_096-MR</td>
+                  <td><span class="cat-icon" aria-hidden="true">📦</span>Peach</td>
+                  <td>Thessaloniki → Guayaquil</td>
+                  <td class="num">1</td>
+                  <td class="num">US$ 19,440</td>
+                  <td class="num">01 oct 2020</td>
+                  <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
+                </tr>
+                <tr data-valor="18592.5" data-fin="2020-08-12">
+                  <td class="mono">CA20/009</td>
+                  <td><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn</td>
+                  <td>Bangkok → Guayaquil</td>
+                  <td class="num">1</td>
+                  <td class="num">US$ 18,593</td>
+                  <td class="num">12 ago 2020</td>
+                  <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
+                </tr>
+                <tr data-valor="3389.2" data-fin="2020-06-11">
+                  <td class="mono">19_066-MR</td>
+                  <td><span class="cat-icon" aria-hidden="true">📦</span>Peach</td>
+                  <td>Thessaloniki → Guayaquil</td>
+                  <td class="num">1</td>
+                  <td class="num">US$ 3,389</td>
+                  <td class="num">11 jun 2020</td>
+                  <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
+                </tr>
+                <tr data-valor="24160.2" data-fin="2020-06-11">
+                  <td class="mono">19_067-MR</td>
+                  <td><span class="cat-icon" aria-hidden="true">📦</span>Peach</td>
+                  <td>Thessaloniki → Guayaquil</td>
+                  <td class="num">2</td>
+                  <td class="num">US$ 24,160</td>
+                  <td class="num">11 jun 2020</td>
+                  <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
+                </tr>
+                <tr data-valor="17760" data-fin="2020-06-11">
+                  <td class="mono">19_013-MR</td>
+                  <td><span class="cat-icon" aria-hidden="true">📦</span>Peach</td>
+                  <td>Thessaloniki → Guayaquil</td>
+                  <td class="num">2</td>
+                  <td class="num">US$ 17,760</td>
+                  <td class="num">11 jun 2020</td>
+                  <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
+                </tr>
+                <tr data-valor="18786" data-fin="2019-10-03">
+                  <td class="mono">19_094/1</td>
+                  <td><span class="cat-icon" aria-hidden="true">📦</span>Peach</td>
+                  <td>Thessaloniki → Guayaquil</td>
+                  <td class="num">1</td>
+                  <td class="num">US$ 18,786</td>
+                  <td class="num">03 oct 2019</td>
+                  <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
   <footer class="page-foot">
+    <div class="social">
+      <a href="https://www.linkedin.com/company/lumagroup.la/" target="_blank" rel="noopener" aria-label="LinkedIn de Luma" title="LinkedIn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM2.4 21h5.16V9.5H2.4V21zM9.5 9.5H14v1.57h.07c.63-1.13 2.17-2.32 4.46-2.32 4.77 0 5.65 3.02 5.65 6.95V21h-5.16v-4.98c0-1.19-.02-2.72-1.75-2.72-1.75 0-2.02 1.3-2.02 2.64V21H9.5V9.5z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/lumagroupla/" target="_blank" rel="noopener" aria-label="Instagram de Luma" title="Instagram">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="https://lumagroup.la" target="_blank" rel="noopener" aria-label="Sitio web de Luma" title="lumagroup.la">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20 15.3 15.3 0 0 1 0-20z"/></svg>
+      </a>
+    </div>
     Luma Foods · Panel actualizado automáticamente. Ante cualquier duda sobre un embarque, escribinos a <a href="mailto:francys@lumagroup.la">francys@lumagroup.la</a> o <a href="mailto:support02@lumagroup.la">support02@lumagroup.la</a>
   </footer>
 
 </div>
+
+<div class="side-alert" id="sideAlert" hidden>
+  <button class="side-tab" id="sideTab" type="button">⚠ Puntos abiertos</button>
+  <div class="side-body" id="sideBody" hidden>
+    <button class="side-close" id="sideClose" type="button" aria-label="Cerrar">×</button>
+    <h3>Puntos abiertos</h3>
+    <p class="sub">Documentación y pagos de tus embarques ya cargados.</p>
+    <div class="alert-list" id="sideList"></div>
+  </div>
+</div>
+
+<script id="exportData" type="application/json">{"cliente":"SIPIA","actualizado":"17 sep 2026, 17:10 hs","embarques":[{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"4/7","Factura":"","Estado":"En curso","Buque":"","Contenedor":"","BL":"","ETD original":"2026-07-07","ETD actualizado":"2026-09-28","ETA":"","Atraso (dias)":83,"Delayed Shipping":"Si","Aprobado":"No","Fecha aprobacion":"","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":"","Fecha de pago":""},{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"1/7","Factura":"CE260589","Estado":"Cargado","Buque":"Palawan","Contenedor":"CSNU1437124","BL":"BKKS005878","ETD original":"2026-03-03","ETD actualizado":"2026-03-03","ETA":"2026-05-26","Atraso (dias)":0,"Delayed Shipping":"No","Aprobado":"Si","Fecha aprobacion":"2026-04-20","Deliver":"Si","Fecha entrega":"2026-05-22","Factura pagada":"Si","Monto":17721,"Fecha de pago":"2026-05-20"},{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"2/7","Factura":"CE260990","Estado":"Cargado","Buque":"WAN HAI 272 V.N229","Contenedor":"WHSU2410931","BL":"GOSZX26081186","ETD original":"2026-05-05","ETD actualizado":"2026-08-23","ETA":"2026-10-13","Atraso (dias)":110,"Delayed Shipping":"Si","Aprobado":"Si","Fecha aprobacion":"2026-08-25","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":17721,"Fecha de pago":""},{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"3/7","Factura":"CE261566","Estado":"Cargado","Buque":"WAN HAI 177 V.N062","Contenedor":"WHSU2792710","BL":"GOSZX26081325","ETD original":"2026-06-02","ETD actualizado":"2026-09-03","ETA":"2026-10-27","Atraso (dias)":93,"Delayed Shipping":"Si","Aprobado":"Si","Fecha aprobacion":"2026-09-07","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":17721,"Fecha de pago":""},{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"5/7","Factura":"","Estado":"En curso","Buque":"","Contenedor":"","BL":"","ETD original":"2026-07-07","ETD actualizado":"2026-09-28","ETA":"","Atraso (dias)":83,"Delayed Shipping":"Si","Aprobado":"No","Fecha aprobacion":"","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":"","Fecha de pago":""},{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"6/7","Factura":"","Estado":"En curso","Buque":"","Contenedor":"","BL":"","ETD original":"2026-10-01","ETD actualizado":"2026-11-02","ETA":"","Atraso (dias)":32,"Delayed Shipping":"Si","Aprobado":"No","Fecha aprobacion":"","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":"","Fecha de pago":""},{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"7/7","Factura":"","Estado":"En curso","Buque":"","Contenedor":"","BL":"","ETD original":"","ETD actualizado":"2027-02-02","ETA":"","Atraso (dias)":"","Delayed Shipping":"No","Aprobado":"No","Fecha aprobacion":"","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":"","Fecha de pago":""},{"Proforma":"FZ26/001","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"1/3","Factura":"AZ260023","Estado":"Cargado","Buque":"TS XIAMEN voy. 2609N","Contenedor":"OTPU6764413","BL":"7621EC318424","ETD original":"2026-04-15","ETD actualizado":"2026-04-15","ETA":"2026-07-01","Atraso (dias)":0,"Delayed Shipping":"No","Aprobado":"Si","Fecha aprobacion":"2026-05-19","Deliver":"Si","Fecha entrega":"2026-06-25","Factura pagada":"Si","Monto":26986,"Fecha de pago":"2026-06-19"},{"Proforma":"FZ26/001","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"2/3","Factura":"AZ260042","Estado":"Cargado","Buque":"WAN HAI 177 V.N062","Contenedor":"FBIU5120265","BL":"THEF2609002A","ETD original":"2026-07-01","ETD actualizado":"2026-09-02","ETA":"2026-10-28","Atraso (dias)":63,"Delayed Shipping":"Si","Aprobado":"Si","Fecha aprobacion":"2026-09-07","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":26986,"Fecha de pago":""},{"Proforma":"FZ26/001","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"3/3","Factura":"","Estado":"En curso","Buque":"","Contenedor":"","BL":"","ETD original":"2026-10-01","ETD actualizado":"2026-11-09","ETA":"","Atraso (dias)":39,"Delayed Shipping":"Si","Aprobado":"No","Fecha aprobacion":"","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":"","Fecha de pago":""},{"Proforma":"RM26/001","Ruta":"Chennai - Guayaquil","Incoterm":"FOB","Embarque":"1/1","Factura":"","Estado":"Por definir","Buque":"","Contenedor":"","BL":"","ETD original":"","ETD actualizado":"2026-10-01","ETA":"","Atraso (dias)":"","Delayed Shipping":"No","Aprobado":"No","Fecha aprobacion":"","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":"","Fecha de pago":""}],"productos":[{"Proforma":"CA25/126","Producto":"Sweet Corn Kernel 15 oz Standard Brine Easy Open Lid — Tins (425/260g)","Familia":"Sweet Corn","Precio unitario":9.9,"Unidades":10740,"Cargado":5370,"Pendiente de cargar":5370,"Subtotal":106326},{"Proforma":"CA25/126","Producto":"Sweet Corn Kernel 12 oz Standard In Vacuum Easy Open Lid — Tins (340/285g)","Familia":"Sweet Corn","Precio unitario":10.4,"Unidades":1850,"Cargado":0,"Pendiente de cargar":1850,"Subtotal":19240},{"Proforma":"FZ26/001","Producto":"Frozen Sweet Corn 20 kg — Bags (20 kg)","Familia":"Frozen Sweet Corn","Precio unitario":20.6,"Unidades":3930,"Cargado":2620,"Pendiente de cargar":1310,"Subtotal":80958},{"Proforma":"RM26/001","Producto":"Baby Gherkins in Acetic acid-D: 1.2-2.0 cm/ L: 3.0-5.5 cm — Drums (270 kg/190kg)","Familia":"Baby Gherkins","Precio unitario":176.7,"Unidades":60,"Cargado":0,"Pendiente de cargar":60,"Subtotal":10602},{"Proforma":"RM26/001","Producto":"Baby Gherkins in Acetic acid -D: 2.1-2.6 cm/ L: 5.6-7.0 cm — Drums (270 kg/190kg)","Familia":"Baby Gherkins","Precio unitario":115.9,"Unidades":20,"Cargado":0,"Pendiente de cargar":20,"Subtotal":2318}],"historico":[{"Proforma":"CA25/121","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":18644.4,"Inicio":"2025-12-12","Cierre":"2026-05-11"},{"Proforma":"CA25/112","Estado":"Cargado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":17721,"Inicio":"2025-12-01","Cierre":"2026-03-31"},{"Proforma":"FZ25/004","Estado":"Completado","Producto":"Frozen Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":28820,"Inicio":"2025-09-30","Cierre":"2026-01-29"},{"Proforma":"CA25/090","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":18644.4,"Inicio":"2025-10-17","Cierre":"2025-12-16"},{"Proforma":"CA25/019","Estado":"Cargado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":5,"Valor FOB":108474,"Inicio":"2025-03-05","Cierre":"2025-12-04"},{"Proforma":"FZ25/002","Estado":"Completado","Producto":"Frozen Sweet Corn","Ruta":"Bangkok - ","Embarques":2,"Valor FOB":57640,"Inicio":"2025-04-09","Cierre":"2025-10-08"},{"Proforma":"00009510","Estado":"Completado","Producto":"Inserto Vertedor","Ruta":"Buenos Aires - Guayaquil","Embarques":2,"Valor FOB":4600,"Inicio":"2024-12-26","Cierre":"2025-02-25"},{"Proforma":"FZ25/001","Estado":"Completado","Producto":"Frozen Sweet Corn","Ruta":"Bangkok - ","Embarques":1,"Valor FOB":28820,"Inicio":"2025-01-07","Cierre":"2025-02-06"},{"Proforma":"CA23/120","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":2,"Valor FOB":41070,"Inicio":"2023-12-20","Cierre":"2024-12-19"},{"Proforma":"CA23/121","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":6,"Valor FOB":158952,"Inicio":"2023-12-20","Cierre":"2024-12-19"},{"Proforma":"FZ23/001","Estado":"Completado","Producto":"Frozen Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":35370,"Inicio":"2023-08-15","Cierre":"2024-02-14"},{"Proforma":"23_025-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":34650,"Inicio":"2023-08-01","Cierre":"2024-01-31"},{"Proforma":"CA23/010","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":4,"Valor FOB":84488,"Inicio":"2023-02-07","Cierre":"2023-12-06"},{"Proforma":"CA23/009","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":2,"Valor FOB":43660,"Inicio":"2023-02-06","Cierre":"2023-09-05"},{"Proforma":"21_060-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":2,"Valor FOB":143010,"Inicio":"2022-05-16","Cierre":"2022-11-15"},{"Proforma":"CA22/021","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":6,"Valor FOB":128603,"Inicio":"2022-03-23","Cierre":"2022-09-22"},{"Proforma":"CA21/116","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":2,"Valor FOB":35442,"Inicio":"2021-12-13","Cierre":"2022-06-12"},{"Proforma":"CA 20/106","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":8,"Valor FOB":214706,"Inicio":"2020-12-23","Cierre":"2021-06-22"},{"Proforma":"CA20/102","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":17542,"Inicio":"2020-12-11","Cierre":"2021-06-10"},{"Proforma":"CA20/089","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":18592.5,"Inicio":"2020-11-09","Cierre":"2021-05-08"},{"Proforma":"20-053-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":24075,"Inicio":"2020-10-08","Cierre":"2021-04-07"},{"Proforma":"19_012-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":15355,"Inicio":"2020-10-07","Cierre":"2021-04-06"},{"Proforma":"20_016-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":12680.7,"Inicio":"2020-09-30","Cierre":"2021-03-29"},{"Proforma":"CA20/075","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":17273.5,"Inicio":"2020-09-23","Cierre":"2021-03-22"},{"Proforma":"CA20/065","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":35866,"Inicio":"2020-09-09","Cierre":"2021-03-08"},{"Proforma":"19_107-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":19260,"Inicio":"2020-05-30","Cierre":"2020-11-29"},{"Proforma":"19_096-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":19440,"Inicio":"2020-04-02","Cierre":"2020-10-01"},{"Proforma":"CA20/009","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":18592.5,"Inicio":"2020-02-13","Cierre":"2020-08-12"},{"Proforma":"19_066-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":3389.2,"Inicio":"2019-12-12","Cierre":"2020-06-11"},{"Proforma":"19_067-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":2,"Valor FOB":24160.2,"Inicio":"2019-12-12","Cierre":"2020-06-11"},{"Proforma":"19_013-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":2,"Valor FOB":17760,"Inicio":"2019-12-12","Cierre":"2020-06-11"},{"Proforma":"19_094/1","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":18786,"Inicio":"2019-04-04","Cierre":"2019-10-03"}]}</script>
 
 <script>
   const chips = document.querySelectorAll('.chip');
@@ -1379,19 +2069,116 @@
     row.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
+  // El modal no desaparece al aceptar: se repliega en la solapa lateral, siempre accesible.
   const alertOverlay = document.getElementById('alertOverlay');
-  if (alertOverlay) {
-    const closeAlert = () => { alertOverlay.hidden = true; };
-    document.getElementById('alertDismiss')?.addEventListener('click', closeAlert);
-    alertOverlay.addEventListener('click', (e) => { if (e.target === alertOverlay) closeAlert(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAlert(); });
-    document.querySelectorAll('.alert-item[data-jump]').forEach(item => {
+  const sideAlert = document.getElementById('sideAlert');
+  const sideBody = document.getElementById('sideBody');
+
+  function wireJumps(scope) {
+    scope.querySelectorAll('.alert-item[data-jump]').forEach(item => {
       item.addEventListener('click', () => {
-        closeAlert();
+        if (alertOverlay) alertOverlay.hidden = true;
+        if (sideBody) sideBody.hidden = true;
         openShipDocs(item.dataset.jump);
       });
     });
   }
+
+  if (alertOverlay && sideAlert) {
+    // Clonar el contenido del modal dentro del panel lateral
+    const list = alertOverlay.querySelector('.alert-list');
+    const sideList = document.getElementById('sideList');
+    if (list && sideList) sideList.innerHTML = list.innerHTML;
+
+    const replegar = () => {
+      alertOverlay.hidden = true;
+      sideAlert.hidden = false;   // queda la solapa a la vista
+      sideBody.hidden = true;
+    };
+    document.getElementById('alertDismiss')?.addEventListener('click', replegar);
+    alertOverlay.addEventListener('click', (e) => { if (e.target === alertOverlay) replegar(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !alertOverlay.hidden) replegar(); });
+
+    document.getElementById('sideTab')?.addEventListener('click', () => {
+      sideBody.hidden = !sideBody.hidden;
+    });
+    document.getElementById('sideClose')?.addEventListener('click', () => { sideBody.hidden = true; });
+
+    wireJumps(alertOverlay);
+    wireJumps(sideAlert);
+  }
+
+  // Pestañas: activos / histórico
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      document.querySelectorAll('.tab-panel').forEach(p => { p.hidden = true; });
+      document.getElementById('panel-' + tab.dataset.tab).hidden = false;
+    });
+  });
+
+  // Materiales de empaque: desplegable por contrato
+  document.querySelectorAll('.pack-toggle').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const panel = btn.nextElementSibling;
+      const abierto = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!abierto));
+      panel.classList.toggle('open', !abierto);
+    });
+  });
+
+  // Ordenar el histórico por valor o fecha de cierre
+  document.querySelectorAll('.hist-table th.sortable').forEach(th => {
+    th.addEventListener('click', () => {
+      const tbody = document.querySelector('#histTable tbody');
+      const key = th.dataset.hsort;
+      const desc = th.dataset.dir !== 'desc';
+      th.dataset.dir = desc ? 'desc' : 'asc';
+      const filas = Array.from(tbody.querySelectorAll('tr')).filter(r => r.dataset[key] !== undefined);
+      filas.sort((a, b) => {
+        const va = a.dataset[key], vb = b.dataset[key];
+        const na = parseFloat(va), nb = parseFloat(vb);
+        const cmp = (!isNaN(na) && !isNaN(nb)) ? na - nb : String(va).localeCompare(String(vb));
+        return desc ? -cmp : cmp;
+      });
+      filas.forEach(f => tbody.appendChild(f));
+    });
+  });
+
+  // Descarga en PDF: usa el dialogo de impresion del navegador (hay CSS de impresion preparado)
+  document.getElementById('btnPdf')?.addEventListener('click', () => window.print());
+
+  // Descarga en Excel: arma el .xlsx en el navegador con SheetJS
+  document.getElementById('btnExcel')?.addEventListener('click', async () => {
+    const btn = document.getElementById('btnExcel');
+    const textoOriginal = btn.innerHTML;
+    btn.disabled = true;
+    btn.textContent = 'Generando…';
+    try {
+      if (!window.XLSX) {
+        await new Promise((ok, fail) => {
+          const s = document.createElement('script');
+          s.src = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+          s.onload = ok;
+          s.onerror = fail;
+          document.head.appendChild(s);
+        });
+      }
+      const datos = JSON.parse(document.getElementById('exportData').textContent);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(datos.embarques), 'Embarques');
+      XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(datos.productos), 'Productos');
+      XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(datos.historico), 'Historico');
+      XLSX.writeFile(wb, 'Embarques_' + datos.cliente + '.xlsx');
+    } catch (err) {
+      alert('No se pudo generar el Excel. Revisá tu conexión e intentá de nuevo.');
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = textoOriginal;
+    }
+  });
 
   // Sortable product tables: click "Subtotal" or "Cargado" to reorder rows
   document.querySelectorAll('.products-table th.sortable').forEach(th => {
