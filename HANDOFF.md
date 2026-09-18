@@ -16,7 +16,7 @@ Cuando alguien abre el link, el navegador no le pregunta nada a Salesforce. Todo
 Salesforce  →  script Node (consulta + calcula todo)  →  HTML estático  →  se sube a GitHub  →  GitHub Pages lo sirve
 ```
 
-Una Tarea de Windows en la PC de operaciones de Comex corre este ciclo completo **cada 2 horas**, automáticamente. Por eso "en vivo" en la práctica significa "actualizado hace como máximo 2 horas", no al segundo.
+Una Tarea de Windows en la PC de operaciones de Comex corre este ciclo completo **todos los días a las 10:00**, automáticamente. Por eso "en vivo" en la práctica significa "actualizado en la última corrida diaria", no al segundo.
 
 ## 3. Estructura del repo
 
@@ -58,7 +58,7 @@ Solo se muestran contratos con `Status` en: `In Approval Process` ("On Going"), 
 
 ## 5. La automatización (Tarea de Windows)
 
-- **Nombre de la tarea:** `Luma Foods - Dashboard SIPIA`, corre cada 2 horas.
+- **Nombre de la tarea:** `Luma Foods - Dashboard SIPIA`, corre todos los días a las 10:00.
 - **Script que ejecuta:** `run_sipia_dashboard.bat` (vive en `CLAUDE - LAteamFoods\`, **fuera** del repo — es el único archivo de la automatización que no está en git, porque es específico de esta PC).
 - **Qué hace el .bat, en orden:**
   1. `git pull origin main` — así, si vos (Ari) subiste un cambio al script o la plantilla, esta corrida ya lo usa.
@@ -87,7 +87,7 @@ Abrí `sipia/index.html` en el navegador para ver el resultado antes de subir na
 
 - **Cambios de diseño** (colores, layout, textos fijos, agregar una sección nueva): editá `tools/sipia_dashboard_template.html`. Es HTML/CSS/JS común — el sistema de diseño usa fuentes Archivo/Public Sans/IBM Plex Mono y una paleta salmón/charcoal (identidad de marca de Luma).
 - **Cambios de lógica** (qué cuenta como atraso, cómo se arma cada fila, qué dispara una alerta, qué campos de Salesforce se traen): editá `tools/generar_sipia_dashboard.js`.
-- Cuando estés conforme, `git add`, `commit`, `push` normal. La tarea programada en la PC de operaciones baja tus cambios solos en la próxima corrida (máximo 2 horas después).
+- Cuando estés conforme, `git add`, `commit`, `push` normal. La tarea programada en la PC de operaciones baja tus cambios solos en la próxima corrida diaria (10:00).
 
 ## 7. Pendientes / limitaciones conocidas
 

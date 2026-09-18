@@ -819,9 +819,33 @@
   .hist-table td { padding: 10px; border-bottom: 1px solid var(--border); }
   .hist-table th.num, .hist-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
   .hist-table td.mono { font: 600 12.5px "IBM Plex Mono", monospace; color: var(--ink); white-space: nowrap; }
-  .hist-table tbody tr:hover { background: var(--surface-2); }
+  .hist-table tbody tr.hist-row { cursor: pointer; }
+  .hist-table tbody tr.hist-row:hover { background: var(--surface-2); }
   .hist-table th.sortable { cursor: pointer; user-select: none; }
   .hist-table th.sortable:hover { color: var(--ink); }
+  .hist-caret {
+    display: inline-block;
+    width: 14px;
+    color: var(--ink-faint);
+    transition: transform .15s;
+  }
+  .hist-row.open .hist-caret { transform: rotate(90deg); color: var(--accent); }
+  .hist-detail > td { background: var(--surface-2); padding: 4px 10px 14px 34px; }
+  .hist-sub { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  .hist-sub th {
+    text-align: left;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: var(--ink-faint);
+    font-weight: 600;
+    padding: 6px 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .hist-sub th.num, .hist-sub td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .hist-sub td { padding: 6px 8px; color: var(--ink-muted); border-bottom: 1px solid var(--border); }
+  .hist-sub tr:last-child td { border-bottom: none; }
+  .hist-sub td.mono { font: 500 12px "IBM Plex Mono", monospace; color: var(--ink); }
 
   /* ---------- Descargas ---------- */
   .dl-group { display: flex; gap: 8px; }
@@ -1183,9 +1207,12 @@
     const sideList = document.getElementById('sideList');
     if (list && sideList) sideList.innerHTML = list.innerHTML;
 
+    // La solapa de pendientes esta visible desde el arranque y no se puede ocultar:
+    // el cliente siempre tiene los puntos abiertos a un click.
+    sideAlert.hidden = false;
+
     const replegar = () => {
       alertOverlay.hidden = true;
-      sideAlert.hidden = false;   // queda la solapa a la vista
       sideBody.hidden = true;
     };
     document.getElementById('alertDismiss')?.addEventListener('click', replegar);
@@ -1222,21 +1249,37 @@
     });
   });
 
-  // Ordenar el histórico por valor o fecha de cierre
+  // Histórico: desplegar cada contrato para ver sus embarques
+  document.querySelectorAll('.hist-row').forEach(row => {
+    row.addEventListener('click', () => {
+      const det = document.querySelector('.hist-detail[data-detail="' + row.dataset.row + '"]');
+      if (!det) return;
+      det.hidden = !det.hidden;
+      row.classList.toggle('open', !det.hidden);
+    });
+  });
+
+  // Ordenar el histórico por valor o fecha de cierre (la fila de detalle viaja con su contrato)
   document.querySelectorAll('.hist-table th.sortable').forEach(th => {
     th.addEventListener('click', () => {
       const tbody = document.querySelector('#histTable tbody');
       const key = th.dataset.hsort;
       const desc = th.dataset.dir !== 'desc';
       th.dataset.dir = desc ? 'desc' : 'asc';
-      const filas = Array.from(tbody.querySelectorAll('tr')).filter(r => r.dataset[key] !== undefined);
-      filas.sort((a, b) => {
-        const va = a.dataset[key], vb = b.dataset[key];
+      const pares = Array.from(tbody.querySelectorAll('tr.hist-row')).map(r => ({
+        fila: r,
+        detalle: tbody.querySelector('.hist-detail[data-detail="' + r.dataset.row + '"]'),
+      }));
+      pares.sort((a, b) => {
+        const va = a.fila.dataset[key], vb = b.fila.dataset[key];
         const na = parseFloat(va), nb = parseFloat(vb);
         const cmp = (!isNaN(na) && !isNaN(nb)) ? na - nb : String(va).localeCompare(String(vb));
         return desc ? -cmp : cmp;
       });
-      filas.forEach(f => tbody.appendChild(f));
+      pares.forEach(p => {
+        tbody.appendChild(p.fila);
+        if (p.detalle) tbody.appendChild(p.detalle);
+      });
     });
   });
 

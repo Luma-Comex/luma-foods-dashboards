@@ -63,7 +63,7 @@ function fetchHistoricos() {
     SELECT ContractNumber, Nro_Proforma__c, Status, StartDate, EndDate, Incoterm__c,
      Puerto_origen__c, Puerto_Destino__c, Total_Value__c,
      (SELECT Principal_Product__c, Quantity__c, Loaded__c FROM Contratct_Products__r),
-     (SELECT Name, ETD_Updated__c FROM Shippings__r)
+     (SELECT Name, ETD_Updated__c, ETA__c, Barco__c, Container_N__c, Status__c FROM Shippings__r)
     FROM Contract
     WHERE Account.Id = '${ACCOUNT_ID}' AND Status IN (${ESTADOS_HISTORICOS})
     ORDER BY EndDate DESC NULLS LAST
@@ -486,12 +486,12 @@ function renderContract(c, idx) {
             </table>
           </div>
         </div>
+${renderPackingPanel(c)}
         <div>
           <p class="section-label">Embarques (${total})</p>
           <div class="shipments">${shipmentsHtml}
           </div>
         </div>
-${renderPackingPanel(c)}
       </div>
     </article>`,
     totalValue: c.Total_Value__c,
@@ -565,24 +565,54 @@ const updatedStr = `${String(AHORA.getDate()).padStart(2, '0')} ${MESES[AHORA.ge
 
 const historicos = fetchHistoricos();
 
-const HIST_LABEL = { 'Completed': 'Completado', 'Loaded': 'Cargado' };
+// En el historico todo se muestra como "Completado" (pedido del usuario), sin importar
+// si en Salesforce figura como Completed o Loaded.
+const HIST_LABEL = { 'Completed': 'Completado', 'Loaded': 'Completado' };
 
-const historicoRows = historicos.map(c => {
+const historicoRows = historicos.map((c, i) => {
   const prods = c.Contratct_Products__r ? c.Contratct_Products__r.records : [];
-  const nEmb = c.Shippings__r ? c.Shippings__r.records.length : 0;
+  const ships = c.Shippings__r ? c.Shippings__r.records.slice() : [];
+  const nEmb = ships.length;
   const productos = [...new Set(prods.map(p => p.Principal_Product__c).filter(Boolean))];
   const icono = productIcon(productos[0] || '');
+  const rowId = 'h' + i;
+
+  ships.sort((a, b) => {
+    const da = a.ETD_Updated__c || '9999-12-31', db = b.ETD_Updated__c || '9999-12-31';
+    return da < db ? -1 : da > db ? 1 : 0;
+  });
+
+  const detalle = nEmb ? `
+                    <table class="hist-sub">
+                      <thead><tr><th>#</th><th>Factura</th><th>Buque</th><th>Contenedor</th><th class="num">ETD</th><th class="num">ETA</th></tr></thead>
+                      <tbody>
+${ships.map((s, k) => `                        <tr>
+                          <td class="mono">${k + 1}/${nEmb}</td>
+                          <td class="mono">${/^S\d+\/\d+\/\d+/.test(s.Name) ? '—' : esc(s.Name)}</td>
+                          <td>${s.Barco__c ? esc(toTitleCase(s.Barco__c)) : '—'}</td>
+                          <td class="mono">${s.Container_N__c ? esc(s.Container_N__c) : '—'}</td>
+                          <td class="num">${s.ETD_Updated__c ? fmtDateFull(s.ETD_Updated__c) : '—'}</td>
+                          <td class="num">${s.ETA__c ? fmtDateFull(s.ETA__c) : '—'}</td>
+                        </tr>`).join('\n')}
+                      </tbody>
+                    </table>`
+    : '<p class="pm-vacio">Este contrato no tiene embarques cargados.</p>';
+
   return {
     valor: c.Total_Value__c || 0,
     fin: c.EndDate || '',
-    html: `                <tr data-valor="${c.Total_Value__c || 0}" data-fin="${c.EndDate || ''}">
-                  <td class="mono">${esc(c.Nro_Proforma__c || c.ContractNumber)}</td>
+    html: `                <tr class="hist-row" data-row="${rowId}" data-valor="${c.Total_Value__c || 0}" data-fin="${c.EndDate || ''}">
+                  <td class="mono"><span class="hist-caret">▸</span>${esc(c.Nro_Proforma__c || c.ContractNumber)}</td>
                   <td><span class="cat-icon" aria-hidden="true">${icono}</span>${esc(productos.join(', ') || '—')}</td>
                   <td>${esc(toTitleCase(c.Puerto_origen__c || '—'))} → ${esc(toTitleCase(c.Puerto_Destino__c || '—'))}</td>
-                  <td class="num">${nEmb}</td>
+                  <td class="num"><b>${nEmb}</b></td>
                   <td class="num">${money(c.Total_Value__c || 0)}</td>
                   <td class="num">${c.EndDate ? fmtDateFull(c.EndDate) : '—'}</td>
-                  <td><span class="status-pill ${c.Status === 'Completed' ? 'st-good' : 'st-info'}"><span class="dot"></span>${HIST_LABEL[c.Status] || c.Status}</span></td>
+                  <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
+                </tr>
+                <tr class="hist-detail" data-detail="${rowId}" hidden>
+                  <td colspan="7">${detalle}
+                  </td>
                 </tr>`,
   };
 });
@@ -648,7 +678,7 @@ contracts.forEach(c => {
 
 const exportHistorico = historicos.map(c => ({
   Proforma: c.Nro_Proforma__c || c.ContractNumber,
-  Estado: HIST_LABEL[c.Status] || c.Status,
+  Estado: 'Completado',
   Producto: [...new Set((c.Contratct_Products__r ? c.Contratct_Products__r.records : []).map(p => p.Principal_Product__c).filter(Boolean))].join(', '),
   Ruta: `${toTitleCase(c.Puerto_origen__c || '')} - ${toTitleCase(c.Puerto_Destino__c || '')}`,
   Embarques: c.Shippings__r ? c.Shippings__r.records.length : 0,

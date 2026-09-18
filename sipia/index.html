@@ -819,9 +819,33 @@
   .hist-table td { padding: 10px; border-bottom: 1px solid var(--border); }
   .hist-table th.num, .hist-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
   .hist-table td.mono { font: 600 12.5px "IBM Plex Mono", monospace; color: var(--ink); white-space: nowrap; }
-  .hist-table tbody tr:hover { background: var(--surface-2); }
+  .hist-table tbody tr.hist-row { cursor: pointer; }
+  .hist-table tbody tr.hist-row:hover { background: var(--surface-2); }
   .hist-table th.sortable { cursor: pointer; user-select: none; }
   .hist-table th.sortable:hover { color: var(--ink); }
+  .hist-caret {
+    display: inline-block;
+    width: 14px;
+    color: var(--ink-faint);
+    transition: transform .15s;
+  }
+  .hist-row.open .hist-caret { transform: rotate(90deg); color: var(--accent); }
+  .hist-detail > td { background: var(--surface-2); padding: 4px 10px 14px 34px; }
+  .hist-sub { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  .hist-sub th {
+    text-align: left;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: var(--ink-faint);
+    font-weight: 600;
+    padding: 6px 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .hist-sub th.num, .hist-sub td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .hist-sub td { padding: 6px 8px; color: var(--ink-muted); border-bottom: 1px solid var(--border); }
+  .hist-sub tr:last-child td { border-bottom: none; }
+  .hist-sub td.mono { font: 500 12px "IBM Plex Mono", monospace; color: var(--ink); }
 
   /* ---------- Descargas ---------- */
   .dl-group { display: flex; gap: 8px; }
@@ -973,7 +997,7 @@
       <p class="client-full">Servicio Integral para la Industria Alimenticia — contratos y embarques activos</p>
     </div>
     <div class="top-meta">
-      Actualizado <strong>18 sep 2026, 14:50 hs</strong><br>
+      Actualizado <strong>18 sep 2026, 16:11 hs</strong><br>
       Los datos se actualizan solos varias veces al día
     </div>
   </header>
@@ -1106,6 +1130,45 @@
                   <td class="num">
                     <div class="prod-progress"><div class="track"><div class="fill" style="width:0%"></div></div><span class="pct">0%</span></div>
                   </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="docs-toggle-wrap">
+          <button class="pack-toggle" type="button" aria-expanded="false">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+            <span>Materiales de empaque</span>
+            <span class="pack-resumen">Todos confirmados · 4 de 4</span>
+          </button>
+          <div class="pack-panel">
+            <table class="pack-table">
+              <thead><tr><th>Material</th><th>Estado</th><th class="num">Draft enviado</th><th class="num">Aprobado</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>Carton Snob Sweet Corn 15 oz</td>
+                  <td><span class="pm-estado ok">✓ Confirmado</span></td>
+                  <td class="num">16 feb</td>
+                  <td class="num">19 feb</td>
+                </tr>
+                <tr>
+                  <td>Label Snob Sweet Corn 15 oz</td>
+                  <td><span class="pm-estado ok">✓ Confirmado</span></td>
+                  <td class="num">09 feb</td>
+                  <td class="num">09 feb</td>
+                </tr>
+                <tr>
+                  <td>Carton Snob Sweet Corn 12 oz</td>
+                  <td><span class="pm-estado ok">✓ Confirmado</span></td>
+                  <td class="num">26 may</td>
+                  <td class="num">27 may</td>
+                </tr>
+                <tr>
+                  <td>Label Snob Sweet Corn 12 oz</td>
+                  <td><span class="pm-estado ok">✓ Confirmado</span></td>
+                  <td class="num">26 may</td>
+                  <td class="num">27 may</td>
                 </tr>
               </tbody>
             </table>
@@ -1298,45 +1361,6 @@
             </div>
           </div>
         </div>
-
-        <div class="docs-toggle-wrap">
-          <button class="pack-toggle" type="button" aria-expanded="false">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
-            <span>Materiales de empaque</span>
-            <span class="pack-resumen">Todos confirmados · 4 de 4</span>
-          </button>
-          <div class="pack-panel">
-            <table class="pack-table">
-              <thead><tr><th>Material</th><th>Estado</th><th class="num">Draft enviado</th><th class="num">Aprobado</th></tr></thead>
-              <tbody>
-                <tr>
-                  <td>Carton Snob Sweet Corn 15 oz</td>
-                  <td><span class="pm-estado ok">✓ Confirmado</span></td>
-                  <td class="num">16 feb</td>
-                  <td class="num">19 feb</td>
-                </tr>
-                <tr>
-                  <td>Label Snob Sweet Corn 15 oz</td>
-                  <td><span class="pm-estado ok">✓ Confirmado</span></td>
-                  <td class="num">09 feb</td>
-                  <td class="num">09 feb</td>
-                </tr>
-                <tr>
-                  <td>Carton Snob Sweet Corn 12 oz</td>
-                  <td><span class="pm-estado ok">✓ Confirmado</span></td>
-                  <td class="num">26 may</td>
-                  <td class="num">27 may</td>
-                </tr>
-                <tr>
-                  <td>Label Snob Sweet Corn 12 oz</td>
-                  <td><span class="pm-estado ok">✓ Confirmado</span></td>
-                  <td class="num">26 may</td>
-                  <td class="num">27 may</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
       </div>
     </article>
 
@@ -1391,6 +1415,27 @@
                   <td class="num">
                     <div class="prod-progress"><div class="track"><div class="fill" style="width:67%"></div></div><span class="pct">67%</span></div>
                   </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="docs-toggle-wrap">
+          <button class="pack-toggle" type="button" aria-expanded="false">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+            <span>Materiales de empaque</span>
+            <span class="pack-resumen">Todos confirmados · 1 de 1</span>
+          </button>
+          <div class="pack-panel">
+            <table class="pack-table">
+              <thead><tr><th>Material</th><th>Estado</th><th class="num">Draft enviado</th><th class="num">Aprobado</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>Carton Unlabelled Frozen Sweet Corn 20 kg</td>
+                  <td><span class="pm-estado ok">✓ Confirmado</span></td>
+                  <td class="num">09 mar</td>
+                  <td class="num">10 mar</td>
                 </tr>
               </tbody>
             </table>
@@ -1482,27 +1527,6 @@
             </div>
           </div>
         </div>
-
-        <div class="docs-toggle-wrap">
-          <button class="pack-toggle" type="button" aria-expanded="false">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
-            <span>Materiales de empaque</span>
-            <span class="pack-resumen">Todos confirmados · 1 de 1</span>
-          </button>
-          <div class="pack-panel">
-            <table class="pack-table">
-              <thead><tr><th>Material</th><th>Estado</th><th class="num">Draft enviado</th><th class="num">Aprobado</th></tr></thead>
-              <tbody>
-                <tr>
-                  <td>Carton Unlabelled Frozen Sweet Corn 20 kg</td>
-                  <td><span class="pm-estado ok">✓ Confirmado</span></td>
-                  <td class="num">09 mar</td>
-                  <td class="num">10 mar</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
       </div>
     </article>
 
@@ -1571,34 +1595,6 @@
             </table>
           </div>
         </div>
-        <div>
-          <p class="section-label">Embarques (1)</p>
-          <div class="shipments">
-            <div class="shipment-row" data-status="tbi">
-              <div class="ship-id-block">
-                <span class="ship-id"><span class="seq-badge" title="Embarque 1 de 1 del contrato">1/1</span>Embarque sin booking</span>
-                <span class="ship-note">Baby Gherkins · Sujeto a muestras</span>
-              </div>
-              <div class="ship-vessel"><span class="v-none">Buque aún sin asignar</span></div>
-              <span class="status-pill st-neutral"><span class="dot"></span>Por definir</span>
-              <div class="ship-fechas"><div class="ship-dates">
-                <div class="fecha-linea"><span class="fecha-tag">ETD</span><span class="fecha-val">01 oct</span></div>
-                <div class="fecha-linea"><span class="fecha-tag">ETA</span><span class="fecha-val pendiente">por confirmar</span></div>
-                
-              </div></div>
-              <span class="track-muted">Sin booking aún</span>
-              <button class="ship-docs-toggle" type="button" aria-expanded="false" aria-label="Documentación y pagos" title="Documentación y pagos"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
-            </div>
-            <div class="ship-docs-panel">
-              <div class="ship-docs-panel-inner">
-                <span class="docs-label">Documentos de embarque</span>
-                <span class="pay-line">Aprobado: <b class="pay-pending">No</b></span>
-                <span class="pay-line">Deliver: <b class="pay-pending">No</b></span>
-                <span class="pay-line">Factura pagada: <b class="pay-pending">No</b> (sin emitir aún)</span>
-              </div>
-            </div>
-          </div>
-        </div>
 
         <div class="docs-toggle-wrap">
           <button class="pack-toggle pendiente" type="button" aria-expanded="false">
@@ -1638,6 +1634,34 @@
             </table>
           </div>
         </div>
+        <div>
+          <p class="section-label">Embarques (1)</p>
+          <div class="shipments">
+            <div class="shipment-row" data-status="tbi">
+              <div class="ship-id-block">
+                <span class="ship-id"><span class="seq-badge" title="Embarque 1 de 1 del contrato">1/1</span>Embarque sin booking</span>
+                <span class="ship-note">Baby Gherkins · Sujeto a muestras</span>
+              </div>
+              <div class="ship-vessel"><span class="v-none">Buque aún sin asignar</span></div>
+              <span class="status-pill st-neutral"><span class="dot"></span>Por definir</span>
+              <div class="ship-fechas"><div class="ship-dates">
+                <div class="fecha-linea"><span class="fecha-tag">ETD</span><span class="fecha-val">01 oct</span></div>
+                <div class="fecha-linea"><span class="fecha-tag">ETA</span><span class="fecha-val pendiente">por confirmar</span></div>
+                
+              </div></div>
+              <span class="track-muted">Sin booking aún</span>
+              <button class="ship-docs-toggle" type="button" aria-expanded="false" aria-label="Documentación y pagos" title="Documentación y pagos"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+            </div>
+            <div class="ship-docs-panel">
+              <div class="ship-docs-panel-inner">
+                <span class="docs-label">Documentos de embarque</span>
+                <span class="pay-line">Aprobado: <b class="pay-pending">No</b></span>
+                <span class="pay-line">Deliver: <b class="pay-pending">No</b></span>
+                <span class="pay-line">Factura pagada: <b class="pay-pending">No</b> (sin emitir aún)</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </article>
     </section>
@@ -1664,293 +1688,1093 @@
           </tr>
         </thead>
         <tbody>
-                <tr data-valor="18644.4" data-fin="2026-05-11">
-                  <td class="mono">CA25/121</td>
+                <tr class="hist-row" data-row="h0" data-valor="18644.4" data-fin="2026-05-11">
+                  <td class="mono"><span class="hist-caret">▸</span>CA25/121</td>
                   <td><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn</td>
                   <td>Bangkok → Guayaquil</td>
-                  <td class="num">1</td>
+                  <td class="num"><b>1</b></td>
                   <td class="num">US$ 18,644</td>
                   <td class="num">11 may 2026</td>
                   <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
                 </tr>
-                <tr data-valor="17721" data-fin="2026-03-31">
-                  <td class="mono">CA25/112</td>
+                <tr class="hist-detail" data-detail="h0" hidden>
+                  <td colspan="7">
+                    <table class="hist-sub">
+                      <thead><tr><th>#</th><th>Factura</th><th>Buque</th><th>Contenedor</th><th class="num">ETD</th><th class="num">ETA</th></tr></thead>
+                      <tbody>
+                        <tr>
+                          <td class="mono">1/1</td>
+                          <td class="mono">CE260789</td>
+                          <td>Wan Hai 271 V.n264</td>
+                          <td class="mono">TIIU2581784</td>
+                          <td class="num">18 may 2026</td>
+                          <td class="num">21 jul 2026</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="hist-row" data-row="h1" data-valor="17721" data-fin="2026-03-31">
+                  <td class="mono"><span class="hist-caret">▸</span>CA25/112</td>
                   <td><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn</td>
                   <td>Bangkok → Guayaquil</td>
-                  <td class="num">1</td>
+                  <td class="num"><b>1</b></td>
                   <td class="num">US$ 17,721</td>
                   <td class="num">31 mar 2026</td>
-                  <td><span class="status-pill st-info"><span class="dot"></span>Cargado</span></td>
+                  <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
                 </tr>
-                <tr data-valor="28820" data-fin="2026-01-29">
-                  <td class="mono">FZ25/004</td>
+                <tr class="hist-detail" data-detail="h1" hidden>
+                  <td colspan="7">
+                    <table class="hist-sub">
+                      <thead><tr><th>#</th><th>Factura</th><th>Buque</th><th>Contenedor</th><th class="num">ETD</th><th class="num">ETA</th></tr></thead>
+                      <tbody>
+                        <tr>
+                          <td class="mono">1/1</td>
+                          <td class="mono">CE260296</td>
+                          <td>Marina One V.0047n</td>
+                          <td class="mono">NYKU3845802</td>
+                          <td class="num">—</td>
+                          <td class="num">18 may 2026</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="hist-row" data-row="h2" data-valor="28820" data-fin="2026-01-29">
+                  <td class="mono"><span class="hist-caret">▸</span>FZ25/004</td>
                   <td><span class="cat-icon" aria-hidden="true">🌽</span>Frozen Sweet Corn</td>
                   <td>Bangkok → Guayaquil</td>
-                  <td class="num">1</td>
+                  <td class="num"><b>1</b></td>
                   <td class="num">US$ 28,820</td>
                   <td class="num">29 ene 2026</td>
                   <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
                 </tr>
-                <tr data-valor="18644.4" data-fin="2025-12-16">
-                  <td class="mono">CA25/090</td>
+                <tr class="hist-detail" data-detail="h2" hidden>
+                  <td colspan="7">
+                    <table class="hist-sub">
+                      <thead><tr><th>#</th><th>Factura</th><th>Buque</th><th>Contenedor</th><th class="num">ETD</th><th class="num">ETA</th></tr></thead>
+                      <tbody>
+                        <tr>
+                          <td class="mono">1/1</td>
+                          <td class="mono">AZ260006</td>
+                          <td>Wan Hai 1714</td>
+                          <td class="mono">OTPU6801630</td>
+                          <td class="num">18 feb 2026</td>
+                          <td class="num">—</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="hist-row" data-row="h3" data-valor="18644.4" data-fin="2025-12-16">
+                  <td class="mono"><span class="hist-caret">▸</span>CA25/090</td>
                   <td><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn</td>
                   <td>Bangkok → Guayaquil</td>
-                  <td class="num">1</td>
+                  <td class="num"><b>1</b></td>
                   <td class="num">US$ 18,644</td>
                   <td class="num">16 dic 2025</td>
                   <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
                 </tr>
-                <tr data-valor="108474" data-fin="2025-12-04">
-                  <td class="mono">CA25/019</td>
+                <tr class="hist-detail" data-detail="h3" hidden>
+                  <td colspan="7">
+                    <table class="hist-sub">
+                      <thead><tr><th>#</th><th>Factura</th><th>Buque</th><th>Contenedor</th><th class="num">ETD</th><th class="num">ETA</th></tr></thead>
+                      <tbody>
+                        <tr>
+                          <td class="mono">1/1</td>
+                          <td class="mono">CE251749</td>
+                          <td>Kanway Fortune V.74n</td>
+                          <td class="mono">JXJU3275660</td>
+                          <td class="num">—</td>
+                          <td class="num">23 feb 2026</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="hist-row" data-row="h4" data-valor="108474" data-fin="2025-12-04">
+                  <td class="mono"><span class="hist-caret">▸</span>CA25/019</td>
                   <td><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn</td>
                   <td>Bangkok → Guayaquil</td>
-                  <td class="num">5</td>
+                  <td class="num"><b>5</b></td>
                   <td class="num">US$ 108,474</td>
                   <td class="num">04 dic 2025</td>
-                  <td><span class="status-pill st-info"><span class="dot"></span>Cargado</span></td>
+                  <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
                 </tr>
-                <tr data-valor="57640" data-fin="2025-10-08">
-                  <td class="mono">FZ25/002</td>
+                <tr class="hist-detail" data-detail="h4" hidden>
+                  <td colspan="7">
+                    <table class="hist-sub">
+                      <thead><tr><th>#</th><th>Factura</th><th>Buque</th><th>Contenedor</th><th class="num">ETD</th><th class="num">ETA</th></tr></thead>
+                      <tbody>
+                        <tr>
+                          <td class="mono">1/5</td>
+                          <td class="mono">CE250580</td>
+                          <td>Ca Saigon</td>
+                          <td class="mono">ZIMU3045707</td>
+                          <td class="num">—</td>
+                          <td class="num">15 may 2025</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">2/5</td>
+                          <td class="mono">CE250926</td>
+                          <td>Kanway Fortune</td>
+                          <td class="mono">TIIU2346229</td>
+                          <td class="num">—</td>
+                          <td class="num">02 ago 2025</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">3/5</td>
+                          <td class="mono">CE251183</td>
+                          <td>Mild Jasmine V.2531n</td>
+                          <td class="mono">PCIU1500171</td>
+                          <td class="num">—</td>
+                          <td class="num">14 oct 2025</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">4/5</td>
+                          <td class="mono">CE251434</td>
+                          <td>Mild Jasmine</td>
+                          <td class="mono">PCIU0073080</td>
+                          <td class="num">—</td>
+                          <td class="num">29 nov 2025</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">5/5</td>
+                          <td class="mono">CE251572</td>
+                          <td>Navios Devotion</td>
+                          <td class="mono">ZIMU3091050,SEGU2097141</td>
+                          <td class="num">—</td>
+                          <td class="num">12 dic 2025</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="hist-row" data-row="h5" data-valor="57640" data-fin="2025-10-08">
+                  <td class="mono"><span class="hist-caret">▸</span>FZ25/002</td>
                   <td><span class="cat-icon" aria-hidden="true">🌽</span>Frozen Sweet Corn</td>
                   <td>Bangkok → —</td>
-                  <td class="num">2</td>
+                  <td class="num"><b>2</b></td>
                   <td class="num">US$ 57,640</td>
                   <td class="num">08 oct 2025</td>
                   <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
                 </tr>
-                <tr data-valor="4600" data-fin="2025-02-25">
-                  <td class="mono">00009510</td>
+                <tr class="hist-detail" data-detail="h5" hidden>
+                  <td colspan="7">
+                    <table class="hist-sub">
+                      <thead><tr><th>#</th><th>Factura</th><th>Buque</th><th>Contenedor</th><th class="num">ETD</th><th class="num">ETA</th></tr></thead>
+                      <tbody>
+                        <tr>
+                          <td class="mono">1/2</td>
+                          <td class="mono">FZ2500044</td>
+                          <td>Millenium Bright</td>
+                          <td class="mono">FBIU5042368</td>
+                          <td class="num">—</td>
+                          <td class="num">19 ago 2025</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">2/2</td>
+                          <td class="mono">AZ250020</td>
+                          <td>Wan Hai</td>
+                          <td class="mono">SEKU9184860</td>
+                          <td class="num">—</td>
+                          <td class="num">09 dic 2025</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="hist-row" data-row="h6" data-valor="4600" data-fin="2025-02-25">
+                  <td class="mono"><span class="hist-caret">▸</span>00009510</td>
                   <td><span class="cat-icon" aria-hidden="true">📦</span>Inserto Vertedor</td>
                   <td>Buenos Aires → Guayaquil</td>
-                  <td class="num">2</td>
+                  <td class="num"><b>2</b></td>
                   <td class="num">US$ 4,600</td>
                   <td class="num">25 feb 2025</td>
                   <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
                 </tr>
-                <tr data-valor="28820" data-fin="2025-02-06">
-                  <td class="mono">FZ25/001</td>
+                <tr class="hist-detail" data-detail="h6" hidden>
+                  <td colspan="7">
+                    <table class="hist-sub">
+                      <thead><tr><th>#</th><th>Factura</th><th>Buque</th><th>Contenedor</th><th class="num">ETD</th><th class="num">ETA</th></tr></thead>
+                      <tbody>
+                        <tr>
+                          <td class="mono">1/2</td>
+                          <td class="mono">E1-9510</td>
+                          <td>Fedex International Priority</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">13 ene 2025</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">2/2</td>
+                          <td class="mono">000016 PI9510</td>
+                          <td>Fedex International Priority</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">13 ene 2025</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="hist-row" data-row="h7" data-valor="28820" data-fin="2025-02-06">
+                  <td class="mono"><span class="hist-caret">▸</span>FZ25/001</td>
                   <td><span class="cat-icon" aria-hidden="true">🌽</span>Frozen Sweet Corn</td>
                   <td>Bangkok → —</td>
-                  <td class="num">1</td>
+                  <td class="num"><b>1</b></td>
                   <td class="num">US$ 28,820</td>
                   <td class="num">06 feb 2025</td>
                   <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
                 </tr>
-                <tr data-valor="41070" data-fin="2024-12-19">
-                  <td class="mono">CA23/120</td>
+                <tr class="hist-detail" data-detail="h7" hidden>
+                  <td colspan="7">
+                    <table class="hist-sub">
+                      <thead><tr><th>#</th><th>Factura</th><th>Buque</th><th>Contenedor</th><th class="num">ETD</th><th class="num">ETA</th></tr></thead>
+                      <tbody>
+                        <tr>
+                          <td class="mono">1/1</td>
+                          <td class="mono">FZ2500011</td>
+                          <td>R Ea Chara V.010e</td>
+                          <td class="mono">OERU4028047</td>
+                          <td class="num">—</td>
+                          <td class="num">22 abr 2025</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="hist-row" data-row="h8" data-valor="41070" data-fin="2024-12-19">
+                  <td class="mono"><span class="hist-caret">▸</span>CA23/120</td>
                   <td><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn</td>
                   <td>Bangkok → Guayaquil</td>
-                  <td class="num">2</td>
+                  <td class="num"><b>2</b></td>
                   <td class="num">US$ 41,070</td>
                   <td class="num">19 dic 2024</td>
                   <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
                 </tr>
-                <tr data-valor="158952" data-fin="2024-12-19">
-                  <td class="mono">CA23/121</td>
+                <tr class="hist-detail" data-detail="h8" hidden>
+                  <td colspan="7">
+                    <table class="hist-sub">
+                      <thead><tr><th>#</th><th>Factura</th><th>Buque</th><th>Contenedor</th><th class="num">ETD</th><th class="num">ETA</th></tr></thead>
+                      <tbody>
+                        <tr>
+                          <td class="mono">1/2</td>
+                          <td class="mono">CE240592</td>
+                          <td>Wan Hai</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">29 jun 2024</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">2/2</td>
+                          <td class="mono">CE241195</td>
+                          <td>Navios Devotion V.22e</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">27 sep 2024</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="hist-row" data-row="h9" data-valor="158952" data-fin="2024-12-19">
+                  <td class="mono"><span class="hist-caret">▸</span>CA23/121</td>
                   <td><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn</td>
                   <td>Bangkok → Guayaquil</td>
-                  <td class="num">6</td>
+                  <td class="num"><b>6</b></td>
                   <td class="num">US$ 158,952</td>
                   <td class="num">19 dic 2024</td>
                   <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
                 </tr>
-                <tr data-valor="35370" data-fin="2024-02-14">
-                  <td class="mono">FZ23/001</td>
+                <tr class="hist-detail" data-detail="h9" hidden>
+                  <td colspan="7">
+                    <table class="hist-sub">
+                      <thead><tr><th>#</th><th>Factura</th><th>Buque</th><th>Contenedor</th><th class="num">ETD</th><th class="num">ETA</th></tr></thead>
+                      <tbody>
+                        <tr>
+                          <td class="mono">1/6</td>
+                          <td class="mono">CE240287</td>
+                          <td>Msc Loreto V.fl351e</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">16 abr 2024</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">2/6</td>
+                          <td class="mono">CE240493</td>
+                          <td>Zhong Gu Di Zhong Hai V.2412n</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">22 may 2024</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">3/6</td>
+                          <td class="mono">CE241052</td>
+                          <td>Wan Hai 272 V.n200</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">12 sep 2024</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">4/6</td>
+                          <td class="mono">CE241196</td>
+                          <td>Sea Of Luck V.284n</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">04 oct 2024</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">5/6</td>
+                          <td class="mono">CE240799</td>
+                          <td>Wan Hai 627 V.n015</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">19 ago 2024</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">6/6</td>
+                          <td class="mono">CE241008</td>
+                          <td>Wan Hai 172v.n385</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">10 sep 2024</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="hist-row" data-row="h10" data-valor="35370" data-fin="2024-02-14">
+                  <td class="mono"><span class="hist-caret">▸</span>FZ23/001</td>
                   <td><span class="cat-icon" aria-hidden="true">🌽</span>Frozen Sweet Corn</td>
                   <td>Bangkok → Guayaquil</td>
-                  <td class="num">1</td>
+                  <td class="num"><b>1</b></td>
                   <td class="num">US$ 35,370</td>
                   <td class="num">14 feb 2024</td>
                   <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
                 </tr>
-                <tr data-valor="34650" data-fin="2024-01-31">
-                  <td class="mono">23_025-MR</td>
+                <tr class="hist-detail" data-detail="h10" hidden>
+                  <td colspan="7">
+                    <table class="hist-sub">
+                      <thead><tr><th>#</th><th>Factura</th><th>Buque</th><th>Contenedor</th><th class="num">ETD</th><th class="num">ETA</th></tr></thead>
+                      <tbody>
+                        <tr>
+                          <td class="mono">1/1</td>
+                          <td class="mono">CFF23/0109</td>
+                          <td>Adamastos V.001n</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">26 dic 2023</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="hist-row" data-row="h11" data-valor="34650" data-fin="2024-01-31">
+                  <td class="mono"><span class="hist-caret">▸</span>23_025-MR</td>
                   <td><span class="cat-icon" aria-hidden="true">📦</span>Peach</td>
                   <td>Thessaloniki → Guayaquil</td>
-                  <td class="num">1</td>
+                  <td class="num"><b>1</b></td>
                   <td class="num">US$ 34,650</td>
                   <td class="num">31 ene 2024</td>
                   <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
                 </tr>
-                <tr data-valor="84488" data-fin="2023-12-06">
-                  <td class="mono">CA23/010</td>
+                <tr class="hist-detail" data-detail="h11" hidden>
+                  <td colspan="7">
+                    <table class="hist-sub">
+                      <thead><tr><th>#</th><th>Factura</th><th>Buque</th><th>Contenedor</th><th class="num">ETD</th><th class="num">ETA</th></tr></thead>
+                      <tbody>
+                        <tr>
+                          <td class="mono">1/1</td>
+                          <td class="mono">90210</td>
+                          <td>Leda Maersk</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">17 nov 2023</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="hist-row" data-row="h12" data-valor="84488" data-fin="2023-12-06">
+                  <td class="mono"><span class="hist-caret">▸</span>CA23/010</td>
                   <td><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn</td>
                   <td>Bangkok → Guayaquil</td>
-                  <td class="num">4</td>
+                  <td class="num"><b>4</b></td>
                   <td class="num">US$ 84,488</td>
                   <td class="num">06 dic 2023</td>
                   <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
                 </tr>
-                <tr data-valor="43660" data-fin="2023-09-05">
-                  <td class="mono">CA23/009</td>
+                <tr class="hist-detail" data-detail="h12" hidden>
+                  <td colspan="7">
+                    <table class="hist-sub">
+                      <thead><tr><th>#</th><th>Factura</th><th>Buque</th><th>Contenedor</th><th class="num">ETD</th><th class="num">ETA</th></tr></thead>
+                      <tbody>
+                        <tr>
+                          <td class="mono">1/4</td>
+                          <td class="mono">CE31647</td>
+                          <td>Wanhai 278 V.n015</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">17 oct 2023</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">2/4</td>
+                          <td class="mono">CE31967</td>
+                          <td>Msc Mirja V.fl336e</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">05 dic 2023</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">3/4</td>
+                          <td class="mono">CE32077</td>
+                          <td>Bridge V.289s</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">14 dic 2023</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">4/4</td>
+                          <td class="mono">CE31751</td>
+                          <td>Wan Hai 272 V.n188</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">24 oct 2023</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="hist-row" data-row="h13" data-valor="43660" data-fin="2023-09-05">
+                  <td class="mono"><span class="hist-caret">▸</span>CA23/009</td>
                   <td><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn</td>
                   <td>Bangkok → Guayaquil</td>
-                  <td class="num">2</td>
+                  <td class="num"><b>2</b></td>
                   <td class="num">US$ 43,660</td>
                   <td class="num">05 sep 2023</td>
                   <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
                 </tr>
-                <tr data-valor="143010" data-fin="2022-11-15">
-                  <td class="mono">21_060-MR</td>
+                <tr class="hist-detail" data-detail="h13" hidden>
+                  <td colspan="7">
+                    <table class="hist-sub">
+                      <thead><tr><th>#</th><th>Factura</th><th>Buque</th><th>Contenedor</th><th class="num">ETD</th><th class="num">ETA</th></tr></thead>
+                      <tbody>
+                        <tr>
+                          <td class="mono">1/2</td>
+                          <td class="mono">CE31846</td>
+                          <td>Wan Hai 172 V.n374</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">14 nov 2023</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">2/2</td>
+                          <td class="mono">CE31416</td>
+                          <td>Nordmaas V.330n</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">12 sep 2023</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="hist-row" data-row="h14" data-valor="143010" data-fin="2022-11-15">
+                  <td class="mono"><span class="hist-caret">▸</span>21_060-MR</td>
                   <td><span class="cat-icon" aria-hidden="true">📦</span>Peach</td>
                   <td>Thessaloniki → Guayaquil</td>
-                  <td class="num">2</td>
+                  <td class="num"><b>2</b></td>
                   <td class="num">US$ 143,010</td>
                   <td class="num">15 nov 2022</td>
                   <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
                 </tr>
-                <tr data-valor="128603" data-fin="2022-09-22">
-                  <td class="mono">CA22/021</td>
+                <tr class="hist-detail" data-detail="h14" hidden>
+                  <td colspan="7">
+                    <table class="hist-sub">
+                      <thead><tr><th>#</th><th>Factura</th><th>Buque</th><th>Contenedor</th><th class="num">ETD</th><th class="num">ETA</th></tr></thead>
+                      <tbody>
+                        <tr>
+                          <td class="mono">1/2</td>
+                          <td class="mono">90208</td>
+                          <td>Libertas H</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">21 ago 2022</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">2/2</td>
+                          <td class="mono">90209</td>
+                          <td>Wec Majorelle 233s</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">09 oct 2022</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="hist-row" data-row="h15" data-valor="128603" data-fin="2022-09-22">
+                  <td class="mono"><span class="hist-caret">▸</span>CA22/021</td>
                   <td><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn</td>
                   <td>Bangkok → Guayaquil</td>
-                  <td class="num">6</td>
+                  <td class="num"><b>6</b></td>
                   <td class="num">US$ 128,603</td>
                   <td class="num">22 sep 2022</td>
                   <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
                 </tr>
-                <tr data-valor="35442" data-fin="2022-06-12">
-                  <td class="mono">CA21/116</td>
+                <tr class="hist-detail" data-detail="h15" hidden>
+                  <td colspan="7">
+                    <table class="hist-sub">
+                      <thead><tr><th>#</th><th>Factura</th><th>Buque</th><th>Contenedor</th><th class="num">ETD</th><th class="num">ETA</th></tr></thead>
+                      <tbody>
+                        <tr>
+                          <td class="mono">1/6</td>
+                          <td class="mono">CE30485</td>
+                          <td>Bfad Southern V.313w</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">24 may 2023</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">2/6</td>
+                          <td class="mono">CE21255</td>
+                          <td>Ratana Thida V.226e</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">14 sep 2022</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">3/6</td>
+                          <td class="mono">CE21773</td>
+                          <td>Msc Antonella V.fz244a</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">—</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">4/6</td>
+                          <td class="mono">CE30177</td>
+                          <td>Bfad Southern V.306w</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">07 abr 2023</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">5/6</td>
+                          <td class="mono">CE30751</td>
+                          <td>Nordmaas V.318n</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">20 jun 2023</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">6/6</td>
+                          <td class="mono">CE30895</td>
+                          <td>Hyundai Saturn V.0037e</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">30 jul 2023</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="hist-row" data-row="h16" data-valor="35442" data-fin="2022-06-12">
+                  <td class="mono"><span class="hist-caret">▸</span>CA21/116</td>
                   <td><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn</td>
                   <td>Bangkok → Guayaquil</td>
-                  <td class="num">2</td>
+                  <td class="num"><b>2</b></td>
                   <td class="num">US$ 35,442</td>
                   <td class="num">12 jun 2022</td>
                   <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
                 </tr>
-                <tr data-valor="214706" data-fin="2021-06-22">
-                  <td class="mono">CA 20/106</td>
+                <tr class="hist-detail" data-detail="h16" hidden>
+                  <td colspan="7">
+                    <table class="hist-sub">
+                      <thead><tr><th>#</th><th>Factura</th><th>Buque</th><th>Contenedor</th><th class="num">ETD</th><th class="num">ETA</th></tr></thead>
+                      <tbody>
+                        <tr>
+                          <td class="mono">1/2</td>
+                          <td class="mono">CE20156</td>
+                          <td>Feeder 1 V</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">19 abr 2022</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">2/2</td>
+                          <td class="mono">CE20173</td>
+                          <td>Interasia Pursuit</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">08 may 2022</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="hist-row" data-row="h17" data-valor="214706" data-fin="2021-06-22">
+                  <td class="mono"><span class="hist-caret">▸</span>CA 20/106</td>
                   <td><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn</td>
                   <td>Bangkok → Guayaquil</td>
-                  <td class="num">8</td>
+                  <td class="num"><b>8</b></td>
                   <td class="num">US$ 214,706</td>
                   <td class="num">22 jun 2021</td>
                   <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
                 </tr>
-                <tr data-valor="17542" data-fin="2021-06-10">
-                  <td class="mono">CA20/102</td>
+                <tr class="hist-detail" data-detail="h17" hidden>
+                  <td colspan="7">
+                    <table class="hist-sub">
+                      <thead><tr><th>#</th><th>Factura</th><th>Buque</th><th>Contenedor</th><th class="num">ETD</th><th class="num">ETA</th></tr></thead>
+                      <tbody>
+                        <tr>
+                          <td class="mono">1/8</td>
+                          <td class="mono">CE10657</td>
+                          <td>Phoenix Belawan</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">30 jun 2021</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">2/8</td>
+                          <td class="mono">CE11390</td>
+                          <td>Zhong Gu Dong Hai</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">17 ago 2021</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">3/8</td>
+                          <td class="mono">CE11507</td>
+                          <td>Horai Bridge</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">05 oct 2021</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">4/8</td>
+                          <td class="mono">CE10539</td>
+                          <td>Phoenix Belawan</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">25 may 2021</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">5/8</td>
+                          <td class="mono">CE10656</td>
+                          <td>Box Endurance</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">15 jun 2021</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">6/8</td>
+                          <td class="mono">CE11736</td>
+                          <td>Wan Hai 171</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">04 dic 2021</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">7/8</td>
+                          <td class="mono">CE11106</td>
+                          <td>Wan Hai 272</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">20 jul 2021</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">8/8</td>
+                          <td class="mono">CE11508</td>
+                          <td>Wan Hai 171</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">05 oct 2021</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="hist-row" data-row="h18" data-valor="17542" data-fin="2021-06-10">
+                  <td class="mono"><span class="hist-caret">▸</span>CA20/102</td>
                   <td><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn</td>
                   <td>Bangkok → Guayaquil</td>
-                  <td class="num">1</td>
+                  <td class="num"><b>1</b></td>
                   <td class="num">US$ 17,542</td>
                   <td class="num">10 jun 2021</td>
                   <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
                 </tr>
-                <tr data-valor="18592.5" data-fin="2021-05-08">
-                  <td class="mono">CA20/089</td>
+                <tr class="hist-detail" data-detail="h18" hidden>
+                  <td colspan="7">
+                    <table class="hist-sub">
+                      <thead><tr><th>#</th><th>Factura</th><th>Buque</th><th>Contenedor</th><th class="num">ETD</th><th class="num">ETA</th></tr></thead>
+                      <tbody>
+                        <tr>
+                          <td class="mono">1/1</td>
+                          <td class="mono">CE10277</td>
+                          <td>Kota Cepat</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">30 mar 2021</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="hist-row" data-row="h19" data-valor="18592.5" data-fin="2021-05-08">
+                  <td class="mono"><span class="hist-caret">▸</span>CA20/089</td>
                   <td><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn</td>
                   <td>Bangkok → Guayaquil</td>
-                  <td class="num">1</td>
+                  <td class="num"><b>1</b></td>
                   <td class="num">US$ 18,593</td>
                   <td class="num">08 may 2021</td>
                   <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
                 </tr>
-                <tr data-valor="24075" data-fin="2021-04-07">
-                  <td class="mono">20-053-MR</td>
+                <tr class="hist-detail" data-detail="h19" hidden>
+                  <td colspan="7">
+                    <table class="hist-sub">
+                      <thead><tr><th>#</th><th>Factura</th><th>Buque</th><th>Contenedor</th><th class="num">ETD</th><th class="num">ETA</th></tr></thead>
+                      <tbody>
+                        <tr>
+                          <td class="mono">1/1</td>
+                          <td class="mono">CE01979</td>
+                          <td>Ever Elire</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">09 feb 2021</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="hist-row" data-row="h20" data-valor="24075" data-fin="2021-04-07">
+                  <td class="mono"><span class="hist-caret">▸</span>20-053-MR</td>
                   <td><span class="cat-icon" aria-hidden="true">📦</span>Peach</td>
                   <td>Thessaloniki → Guayaquil</td>
-                  <td class="num">1</td>
+                  <td class="num"><b>1</b></td>
                   <td class="num">US$ 24,075</td>
                   <td class="num">07 abr 2021</td>
                   <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
                 </tr>
-                <tr data-valor="15355" data-fin="2021-04-06">
-                  <td class="mono">19_012-MR</td>
+                <tr class="hist-detail" data-detail="h20" hidden>
+                  <td colspan="7">
+                    <table class="hist-sub">
+                      <thead><tr><th>#</th><th>Factura</th><th>Buque</th><th>Contenedor</th><th class="num">ETD</th><th class="num">ETA</th></tr></thead>
+                      <tbody>
+                        <tr>
+                          <td class="mono">1/1</td>
+                          <td class="mono">90207</td>
+                          <td>Msc Sarah</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">23 dic 2020</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="hist-row" data-row="h21" data-valor="15355" data-fin="2021-04-06">
+                  <td class="mono"><span class="hist-caret">▸</span>19_012-MR</td>
                   <td><span class="cat-icon" aria-hidden="true">📦</span>Peach</td>
                   <td>Thessaloniki → Guayaquil</td>
-                  <td class="num">1</td>
+                  <td class="num"><b>1</b></td>
                   <td class="num">US$ 15,355</td>
                   <td class="num">06 abr 2021</td>
                   <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
                 </tr>
-                <tr data-valor="12680.7" data-fin="2021-03-29">
-                  <td class="mono">20_016-MR</td>
+                <tr class="hist-detail" data-detail="h21" hidden>
+                  <td colspan="7">
+                    <table class="hist-sub">
+                      <thead><tr><th>#</th><th>Factura</th><th>Buque</th><th>Contenedor</th><th class="num">ETD</th><th class="num">ETA</th></tr></thead>
+                      <tbody>
+                        <tr>
+                          <td class="mono">1/1</td>
+                          <td class="mono">90201-Vis</td>
+                          <td>—</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">12 dic 2019</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="hist-row" data-row="h22" data-valor="12680.7" data-fin="2021-03-29">
+                  <td class="mono"><span class="hist-caret">▸</span>20_016-MR</td>
                   <td><span class="cat-icon" aria-hidden="true">📦</span>Peach</td>
                   <td>Thessaloniki → Guayaquil</td>
-                  <td class="num">1</td>
+                  <td class="num"><b>1</b></td>
                   <td class="num">US$ 12,681</td>
                   <td class="num">29 mar 2021</td>
                   <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
                 </tr>
-                <tr data-valor="17273.5" data-fin="2021-03-22">
-                  <td class="mono">CA20/075</td>
+                <tr class="hist-detail" data-detail="h22" hidden>
+                  <td colspan="7">
+                    <table class="hist-sub">
+                      <thead><tr><th>#</th><th>Factura</th><th>Buque</th><th>Contenedor</th><th class="num">ETD</th><th class="num">ETA</th></tr></thead>
+                      <tbody>
+                        <tr>
+                          <td class="mono">1/1</td>
+                          <td class="mono">90206</td>
+                          <td>Maersk Vera</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">23 oct 2020</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="hist-row" data-row="h23" data-valor="17273.5" data-fin="2021-03-22">
+                  <td class="mono"><span class="hist-caret">▸</span>CA20/075</td>
                   <td><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn</td>
                   <td>Bangkok → Guayaquil</td>
-                  <td class="num">1</td>
+                  <td class="num"><b>1</b></td>
                   <td class="num">US$ 17,274</td>
                   <td class="num">22 mar 2021</td>
                   <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
                 </tr>
-                <tr data-valor="35866" data-fin="2021-03-08">
-                  <td class="mono">CA20/065</td>
+                <tr class="hist-detail" data-detail="h23" hidden>
+                  <td colspan="7">
+                    <table class="hist-sub">
+                      <thead><tr><th>#</th><th>Factura</th><th>Buque</th><th>Contenedor</th><th class="num">ETD</th><th class="num">ETA</th></tr></thead>
+                      <tbody>
+                        <tr>
+                          <td class="mono">1/1</td>
+                          <td class="mono">CE01691</td>
+                          <td>Wan Hai, Kota Cantic</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">08 dic 2020</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="hist-row" data-row="h24" data-valor="35866" data-fin="2021-03-08">
+                  <td class="mono"><span class="hist-caret">▸</span>CA20/065</td>
                   <td><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn</td>
                   <td>Bangkok → Guayaquil</td>
-                  <td class="num">1</td>
+                  <td class="num"><b>1</b></td>
                   <td class="num">US$ 35,866</td>
                   <td class="num">08 mar 2021</td>
                   <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
                 </tr>
-                <tr data-valor="19260" data-fin="2020-11-29">
-                  <td class="mono">19_107-MR</td>
+                <tr class="hist-detail" data-detail="h24" hidden>
+                  <td colspan="7">
+                    <table class="hist-sub">
+                      <thead><tr><th>#</th><th>Factura</th><th>Buque</th><th>Contenedor</th><th class="num">ETD</th><th class="num">ETA</th></tr></thead>
+                      <tbody>
+                        <tr>
+                          <td class="mono">1/1</td>
+                          <td class="mono">CE01586</td>
+                          <td>Phoenix E. Cosco</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">24 nov 2020</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="hist-row" data-row="h25" data-valor="19260" data-fin="2020-11-29">
+                  <td class="mono"><span class="hist-caret">▸</span>19_107-MR</td>
                   <td><span class="cat-icon" aria-hidden="true">📦</span>Peach</td>
                   <td>Thessaloniki → Guayaquil</td>
-                  <td class="num">1</td>
+                  <td class="num"><b>1</b></td>
                   <td class="num">US$ 19,260</td>
                   <td class="num">29 nov 2020</td>
                   <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
                 </tr>
-                <tr data-valor="19440" data-fin="2020-10-01">
-                  <td class="mono">19_096-MR</td>
+                <tr class="hist-detail" data-detail="h25" hidden>
+                  <td colspan="7">
+                    <table class="hist-sub">
+                      <thead><tr><th>#</th><th>Factura</th><th>Buque</th><th>Contenedor</th><th class="num">ETD</th><th class="num">ETA</th></tr></thead>
+                      <tbody>
+                        <tr>
+                          <td class="mono">1/1</td>
+                          <td class="mono">90205</td>
+                          <td>Msc Eleni</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">12 ago 2020</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="hist-row" data-row="h26" data-valor="19440" data-fin="2020-10-01">
+                  <td class="mono"><span class="hist-caret">▸</span>19_096-MR</td>
                   <td><span class="cat-icon" aria-hidden="true">📦</span>Peach</td>
                   <td>Thessaloniki → Guayaquil</td>
-                  <td class="num">1</td>
+                  <td class="num"><b>1</b></td>
                   <td class="num">US$ 19,440</td>
                   <td class="num">01 oct 2020</td>
                   <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
                 </tr>
-                <tr data-valor="18592.5" data-fin="2020-08-12">
-                  <td class="mono">CA20/009</td>
+                <tr class="hist-detail" data-detail="h26" hidden>
+                  <td colspan="7">
+                    <table class="hist-sub">
+                      <thead><tr><th>#</th><th>Factura</th><th>Buque</th><th>Contenedor</th><th class="num">ETD</th><th class="num">ETA</th></tr></thead>
+                      <tbody>
+                        <tr>
+                          <td class="mono">1/1</td>
+                          <td class="mono">90204</td>
+                          <td>Msc Ingrid</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">22 jul 2020</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="hist-row" data-row="h27" data-valor="18592.5" data-fin="2020-08-12">
+                  <td class="mono"><span class="hist-caret">▸</span>CA20/009</td>
                   <td><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn</td>
                   <td>Bangkok → Guayaquil</td>
-                  <td class="num">1</td>
+                  <td class="num"><b>1</b></td>
                   <td class="num">US$ 18,593</td>
                   <td class="num">12 ago 2020</td>
                   <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
                 </tr>
-                <tr data-valor="3389.2" data-fin="2020-06-11">
-                  <td class="mono">19_066-MR</td>
+                <tr class="hist-detail" data-detail="h27" hidden>
+                  <td colspan="7">
+                    <table class="hist-sub">
+                      <thead><tr><th>#</th><th>Factura</th><th>Buque</th><th>Contenedor</th><th class="num">ETD</th><th class="num">ETA</th></tr></thead>
+                      <tbody>
+                        <tr>
+                          <td class="mono">1/1</td>
+                          <td class="mono">CE00862</td>
+                          <td>Lbt V.e004 Wan Hai</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">07 jul 2020</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="hist-row" data-row="h28" data-valor="3389.2" data-fin="2020-06-11">
+                  <td class="mono"><span class="hist-caret">▸</span>19_066-MR</td>
                   <td><span class="cat-icon" aria-hidden="true">📦</span>Peach</td>
                   <td>Thessaloniki → Guayaquil</td>
-                  <td class="num">1</td>
+                  <td class="num"><b>1</b></td>
                   <td class="num">US$ 3,389</td>
                   <td class="num">11 jun 2020</td>
                   <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
                 </tr>
-                <tr data-valor="24160.2" data-fin="2020-06-11">
-                  <td class="mono">19_067-MR</td>
+                <tr class="hist-detail" data-detail="h28" hidden>
+                  <td colspan="7">
+                    <table class="hist-sub">
+                      <thead><tr><th>#</th><th>Factura</th><th>Buque</th><th>Contenedor</th><th class="num">ETD</th><th class="num">ETA</th></tr></thead>
+                      <tbody>
+                        <tr>
+                          <td class="mono">1/1</td>
+                          <td class="mono">90202</td>
+                          <td>Msc Sarah</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">11 mar 2020</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="hist-row" data-row="h29" data-valor="24160.2" data-fin="2020-06-11">
+                  <td class="mono"><span class="hist-caret">▸</span>19_067-MR</td>
                   <td><span class="cat-icon" aria-hidden="true">📦</span>Peach</td>
                   <td>Thessaloniki → Guayaquil</td>
-                  <td class="num">2</td>
+                  <td class="num"><b>2</b></td>
                   <td class="num">US$ 24,160</td>
                   <td class="num">11 jun 2020</td>
                   <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
                 </tr>
-                <tr data-valor="17760" data-fin="2020-06-11">
-                  <td class="mono">19_013-MR</td>
+                <tr class="hist-detail" data-detail="h29" hidden>
+                  <td colspan="7">
+                    <table class="hist-sub">
+                      <thead><tr><th>#</th><th>Factura</th><th>Buque</th><th>Contenedor</th><th class="num">ETD</th><th class="num">ETA</th></tr></thead>
+                      <tbody>
+                        <tr>
+                          <td class="mono">1/2</td>
+                          <td class="mono">90202</td>
+                          <td>Msc Sarah</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">11 mar 2020</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">2/2</td>
+                          <td class="mono">90206-Vis</td>
+                          <td>Maersk Vera</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">23 oct 2020</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="hist-row" data-row="h30" data-valor="17760" data-fin="2020-06-11">
+                  <td class="mono"><span class="hist-caret">▸</span>19_013-MR</td>
                   <td><span class="cat-icon" aria-hidden="true">📦</span>Peach</td>
                   <td>Thessaloniki → Guayaquil</td>
-                  <td class="num">2</td>
+                  <td class="num"><b>2</b></td>
                   <td class="num">US$ 17,760</td>
                   <td class="num">11 jun 2020</td>
                   <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
                 </tr>
-                <tr data-valor="18786" data-fin="2019-10-03">
-                  <td class="mono">19_094/1</td>
+                <tr class="hist-detail" data-detail="h30" hidden>
+                  <td colspan="7">
+                    <table class="hist-sub">
+                      <thead><tr><th>#</th><th>Factura</th><th>Buque</th><th>Contenedor</th><th class="num">ETD</th><th class="num">ETA</th></tr></thead>
+                      <tbody>
+                        <tr>
+                          <td class="mono">1/2</td>
+                          <td class="mono">90201</td>
+                          <td>—</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">12 dic 2019</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">2/2</td>
+                          <td class="mono">90202</td>
+                          <td>Msc Sarah</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">11 mar 2020</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="hist-row" data-row="h31" data-valor="18786" data-fin="2019-10-03">
+                  <td class="mono"><span class="hist-caret">▸</span>19_094/1</td>
                   <td><span class="cat-icon" aria-hidden="true">📦</span>Peach</td>
                   <td>Thessaloniki → Guayaquil</td>
-                  <td class="num">1</td>
+                  <td class="num"><b>1</b></td>
                   <td class="num">US$ 18,786</td>
                   <td class="num">03 oct 2019</td>
                   <td><span class="status-pill st-good"><span class="dot"></span>Completado</span></td>
+                </tr>
+                <tr class="hist-detail" data-detail="h31" hidden>
+                  <td colspan="7">
+                    <table class="hist-sub">
+                      <thead><tr><th>#</th><th>Factura</th><th>Buque</th><th>Contenedor</th><th class="num">ETD</th><th class="num">ETA</th></tr></thead>
+                      <tbody>
+                        <tr>
+                          <td class="mono">1/1</td>
+                          <td class="mono">90203</td>
+                          <td>Mscmirella V Nc017r</td>
+                          <td class="mono">—</td>
+                          <td class="num">—</td>
+                          <td class="num">11 jun 2020</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
                 </tr>
         </tbody>
       </table>
@@ -1984,7 +2808,7 @@
   </div>
 </div>
 
-<script id="exportData" type="application/json">{"cliente":"SIPIA","actualizado":"18 sep 2026, 14:50 hs","embarques":[{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"4/7","Factura":"","Estado":"En curso","Buque":"","Contenedor":"","BL":"","ETD original":"2026-07-07","ETD actualizado":"2026-09-28","ETA":"","Atraso (dias)":83,"Delayed Shipping":"Si","Aprobado":"No","Fecha aprobacion":"","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":"","Fecha de pago":""},{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"1/7","Factura":"CE260589","Estado":"Cargado","Buque":"Palawan","Contenedor":"CSNU1437124","BL":"BKKS005878","ETD original":"2026-03-03","ETD actualizado":"2026-03-03","ETA":"2026-05-26","Atraso (dias)":0,"Delayed Shipping":"No","Aprobado":"Si","Fecha aprobacion":"2026-04-20","Deliver":"Si","Fecha entrega":"2026-05-22","Factura pagada":"Si","Monto":17721,"Fecha de pago":"2026-05-20"},{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"2/7","Factura":"CE260990","Estado":"Cargado","Buque":"WAN HAI 272 V.N229","Contenedor":"WHSU2410931","BL":"GOSZX26081186","ETD original":"2026-05-05","ETD actualizado":"2026-08-23","ETA":"2026-10-13","Atraso (dias)":110,"Delayed Shipping":"Si","Aprobado":"Si","Fecha aprobacion":"2026-08-25","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":17721,"Fecha de pago":""},{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"3/7","Factura":"CE261566","Estado":"Cargado","Buque":"WAN HAI 177 V.N062","Contenedor":"WHSU2792710","BL":"GOSZX26081325","ETD original":"2026-06-02","ETD actualizado":"2026-09-03","ETA":"2026-10-27","Atraso (dias)":93,"Delayed Shipping":"Si","Aprobado":"Si","Fecha aprobacion":"2026-09-07","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":17721,"Fecha de pago":""},{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"5/7","Factura":"","Estado":"En curso","Buque":"","Contenedor":"","BL":"","ETD original":"2026-07-07","ETD actualizado":"2026-09-28","ETA":"","Atraso (dias)":83,"Delayed Shipping":"Si","Aprobado":"No","Fecha aprobacion":"","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":"","Fecha de pago":""},{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"6/7","Factura":"","Estado":"En curso","Buque":"","Contenedor":"","BL":"","ETD original":"2026-10-01","ETD actualizado":"2026-11-02","ETA":"","Atraso (dias)":32,"Delayed Shipping":"Si","Aprobado":"No","Fecha aprobacion":"","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":"","Fecha de pago":""},{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"7/7","Factura":"","Estado":"En curso","Buque":"","Contenedor":"","BL":"","ETD original":"","ETD actualizado":"2027-02-02","ETA":"","Atraso (dias)":"","Delayed Shipping":"No","Aprobado":"No","Fecha aprobacion":"","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":"","Fecha de pago":""},{"Proforma":"FZ26/001","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"1/3","Factura":"AZ260023","Estado":"Cargado","Buque":"TS XIAMEN voy. 2609N","Contenedor":"OTPU6764413","BL":"7621EC318424","ETD original":"2026-04-15","ETD actualizado":"2026-04-15","ETA":"2026-07-01","Atraso (dias)":0,"Delayed Shipping":"No","Aprobado":"Si","Fecha aprobacion":"2026-05-19","Deliver":"Si","Fecha entrega":"2026-06-25","Factura pagada":"Si","Monto":26986,"Fecha de pago":"2026-06-19"},{"Proforma":"FZ26/001","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"2/3","Factura":"AZ260042","Estado":"Cargado","Buque":"WAN HAI 177 V.N062","Contenedor":"FBIU5120265","BL":"THEF2609002A","ETD original":"2026-07-01","ETD actualizado":"2026-09-02","ETA":"2026-10-28","Atraso (dias)":63,"Delayed Shipping":"Si","Aprobado":"Si","Fecha aprobacion":"2026-09-07","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":26986,"Fecha de pago":""},{"Proforma":"FZ26/001","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"3/3","Factura":"","Estado":"En curso","Buque":"","Contenedor":"","BL":"","ETD original":"2026-10-01","ETD actualizado":"2026-11-09","ETA":"","Atraso (dias)":39,"Delayed Shipping":"Si","Aprobado":"No","Fecha aprobacion":"","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":"","Fecha de pago":""},{"Proforma":"RM26/001","Ruta":"Chennai - Guayaquil","Incoterm":"FOB","Embarque":"1/1","Factura":"","Estado":"Por definir","Buque":"","Contenedor":"","BL":"","ETD original":"","ETD actualizado":"2026-10-01","ETA":"","Atraso (dias)":"","Delayed Shipping":"No","Aprobado":"No","Fecha aprobacion":"","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":"","Fecha de pago":""}],"productos":[{"Proforma":"CA25/126","Producto":"Sweet Corn Kernel 15 oz Standard Brine Easy Open Lid — Tins (425/260g)","Familia":"Sweet Corn","Precio unitario":9.9,"Unidades":10740,"Cargado":5370,"Pendiente de cargar":5370,"Subtotal":106326},{"Proforma":"CA25/126","Producto":"Sweet Corn Kernel 12 oz Standard In Vacuum Easy Open Lid — Tins (340/285g)","Familia":"Sweet Corn","Precio unitario":10.4,"Unidades":1850,"Cargado":0,"Pendiente de cargar":1850,"Subtotal":19240},{"Proforma":"FZ26/001","Producto":"Frozen Sweet Corn 20 kg — Bags (20 kg)","Familia":"Frozen Sweet Corn","Precio unitario":20.6,"Unidades":3930,"Cargado":2620,"Pendiente de cargar":1310,"Subtotal":80958},{"Proforma":"RM26/001","Producto":"Baby Gherkins in Acetic acid-D: 1.2-2.0 cm/ L: 3.0-5.5 cm — Drums (270 kg/190kg)","Familia":"Baby Gherkins","Precio unitario":176.7,"Unidades":60,"Cargado":0,"Pendiente de cargar":60,"Subtotal":10602},{"Proforma":"RM26/001","Producto":"Baby Gherkins in Acetic acid -D: 2.1-2.6 cm/ L: 5.6-7.0 cm — Drums (270 kg/190kg)","Familia":"Baby Gherkins","Precio unitario":115.9,"Unidades":20,"Cargado":0,"Pendiente de cargar":20,"Subtotal":2318}],"historico":[{"Proforma":"CA25/121","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":18644.4,"Inicio":"2025-12-12","Cierre":"2026-05-11"},{"Proforma":"CA25/112","Estado":"Cargado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":17721,"Inicio":"2025-12-01","Cierre":"2026-03-31"},{"Proforma":"FZ25/004","Estado":"Completado","Producto":"Frozen Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":28820,"Inicio":"2025-09-30","Cierre":"2026-01-29"},{"Proforma":"CA25/090","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":18644.4,"Inicio":"2025-10-17","Cierre":"2025-12-16"},{"Proforma":"CA25/019","Estado":"Cargado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":5,"Valor FOB":108474,"Inicio":"2025-03-05","Cierre":"2025-12-04"},{"Proforma":"FZ25/002","Estado":"Completado","Producto":"Frozen Sweet Corn","Ruta":"Bangkok - ","Embarques":2,"Valor FOB":57640,"Inicio":"2025-04-09","Cierre":"2025-10-08"},{"Proforma":"00009510","Estado":"Completado","Producto":"Inserto Vertedor","Ruta":"Buenos Aires - Guayaquil","Embarques":2,"Valor FOB":4600,"Inicio":"2024-12-26","Cierre":"2025-02-25"},{"Proforma":"FZ25/001","Estado":"Completado","Producto":"Frozen Sweet Corn","Ruta":"Bangkok - ","Embarques":1,"Valor FOB":28820,"Inicio":"2025-01-07","Cierre":"2025-02-06"},{"Proforma":"CA23/120","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":2,"Valor FOB":41070,"Inicio":"2023-12-20","Cierre":"2024-12-19"},{"Proforma":"CA23/121","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":6,"Valor FOB":158952,"Inicio":"2023-12-20","Cierre":"2024-12-19"},{"Proforma":"FZ23/001","Estado":"Completado","Producto":"Frozen Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":35370,"Inicio":"2023-08-15","Cierre":"2024-02-14"},{"Proforma":"23_025-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":34650,"Inicio":"2023-08-01","Cierre":"2024-01-31"},{"Proforma":"CA23/010","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":4,"Valor FOB":84488,"Inicio":"2023-02-07","Cierre":"2023-12-06"},{"Proforma":"CA23/009","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":2,"Valor FOB":43660,"Inicio":"2023-02-06","Cierre":"2023-09-05"},{"Proforma":"21_060-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":2,"Valor FOB":143010,"Inicio":"2022-05-16","Cierre":"2022-11-15"},{"Proforma":"CA22/021","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":6,"Valor FOB":128603,"Inicio":"2022-03-23","Cierre":"2022-09-22"},{"Proforma":"CA21/116","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":2,"Valor FOB":35442,"Inicio":"2021-12-13","Cierre":"2022-06-12"},{"Proforma":"CA 20/106","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":8,"Valor FOB":214706,"Inicio":"2020-12-23","Cierre":"2021-06-22"},{"Proforma":"CA20/102","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":17542,"Inicio":"2020-12-11","Cierre":"2021-06-10"},{"Proforma":"CA20/089","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":18592.5,"Inicio":"2020-11-09","Cierre":"2021-05-08"},{"Proforma":"20-053-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":24075,"Inicio":"2020-10-08","Cierre":"2021-04-07"},{"Proforma":"19_012-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":15355,"Inicio":"2020-10-07","Cierre":"2021-04-06"},{"Proforma":"20_016-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":12680.7,"Inicio":"2020-09-30","Cierre":"2021-03-29"},{"Proforma":"CA20/075","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":17273.5,"Inicio":"2020-09-23","Cierre":"2021-03-22"},{"Proforma":"CA20/065","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":35866,"Inicio":"2020-09-09","Cierre":"2021-03-08"},{"Proforma":"19_107-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":19260,"Inicio":"2020-05-30","Cierre":"2020-11-29"},{"Proforma":"19_096-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":19440,"Inicio":"2020-04-02","Cierre":"2020-10-01"},{"Proforma":"CA20/009","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":18592.5,"Inicio":"2020-02-13","Cierre":"2020-08-12"},{"Proforma":"19_066-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":3389.2,"Inicio":"2019-12-12","Cierre":"2020-06-11"},{"Proforma":"19_067-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":2,"Valor FOB":24160.2,"Inicio":"2019-12-12","Cierre":"2020-06-11"},{"Proforma":"19_013-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":2,"Valor FOB":17760,"Inicio":"2019-12-12","Cierre":"2020-06-11"},{"Proforma":"19_094/1","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":18786,"Inicio":"2019-04-04","Cierre":"2019-10-03"}]}</script>
+<script id="exportData" type="application/json">{"cliente":"SIPIA","actualizado":"18 sep 2026, 16:11 hs","embarques":[{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"4/7","Factura":"","Estado":"En curso","Buque":"","Contenedor":"","BL":"","ETD original":"2026-07-07","ETD actualizado":"2026-09-28","ETA":"","Atraso (dias)":83,"Delayed Shipping":"Si","Aprobado":"No","Fecha aprobacion":"","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":"","Fecha de pago":""},{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"1/7","Factura":"CE260589","Estado":"Cargado","Buque":"Palawan","Contenedor":"CSNU1437124","BL":"BKKS005878","ETD original":"2026-03-03","ETD actualizado":"2026-03-03","ETA":"2026-05-26","Atraso (dias)":0,"Delayed Shipping":"No","Aprobado":"Si","Fecha aprobacion":"2026-04-20","Deliver":"Si","Fecha entrega":"2026-05-22","Factura pagada":"Si","Monto":17721,"Fecha de pago":"2026-05-20"},{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"2/7","Factura":"CE260990","Estado":"Cargado","Buque":"WAN HAI 272 V.N229","Contenedor":"WHSU2410931","BL":"GOSZX26081186","ETD original":"2026-05-05","ETD actualizado":"2026-08-23","ETA":"2026-10-13","Atraso (dias)":110,"Delayed Shipping":"Si","Aprobado":"Si","Fecha aprobacion":"2026-08-25","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":17721,"Fecha de pago":""},{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"3/7","Factura":"CE261566","Estado":"Cargado","Buque":"WAN HAI 177 V.N062","Contenedor":"WHSU2792710","BL":"GOSZX26081325","ETD original":"2026-06-02","ETD actualizado":"2026-09-03","ETA":"2026-10-27","Atraso (dias)":93,"Delayed Shipping":"Si","Aprobado":"Si","Fecha aprobacion":"2026-09-07","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":17721,"Fecha de pago":""},{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"5/7","Factura":"","Estado":"En curso","Buque":"","Contenedor":"","BL":"","ETD original":"2026-07-07","ETD actualizado":"2026-09-28","ETA":"","Atraso (dias)":83,"Delayed Shipping":"Si","Aprobado":"No","Fecha aprobacion":"","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":"","Fecha de pago":""},{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"6/7","Factura":"","Estado":"En curso","Buque":"","Contenedor":"","BL":"","ETD original":"2026-10-01","ETD actualizado":"2026-11-02","ETA":"","Atraso (dias)":32,"Delayed Shipping":"Si","Aprobado":"No","Fecha aprobacion":"","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":"","Fecha de pago":""},{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"7/7","Factura":"","Estado":"En curso","Buque":"","Contenedor":"","BL":"","ETD original":"","ETD actualizado":"2027-02-02","ETA":"","Atraso (dias)":"","Delayed Shipping":"No","Aprobado":"No","Fecha aprobacion":"","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":"","Fecha de pago":""},{"Proforma":"FZ26/001","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"1/3","Factura":"AZ260023","Estado":"Cargado","Buque":"TS XIAMEN voy. 2609N","Contenedor":"OTPU6764413","BL":"7621EC318424","ETD original":"2026-04-15","ETD actualizado":"2026-04-15","ETA":"2026-07-01","Atraso (dias)":0,"Delayed Shipping":"No","Aprobado":"Si","Fecha aprobacion":"2026-05-19","Deliver":"Si","Fecha entrega":"2026-06-25","Factura pagada":"Si","Monto":26986,"Fecha de pago":"2026-06-19"},{"Proforma":"FZ26/001","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"2/3","Factura":"AZ260042","Estado":"Cargado","Buque":"WAN HAI 177 V.N062","Contenedor":"FBIU5120265","BL":"THEF2609002A","ETD original":"2026-07-01","ETD actualizado":"2026-09-02","ETA":"2026-10-28","Atraso (dias)":63,"Delayed Shipping":"Si","Aprobado":"Si","Fecha aprobacion":"2026-09-07","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":26986,"Fecha de pago":""},{"Proforma":"FZ26/001","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"3/3","Factura":"","Estado":"En curso","Buque":"","Contenedor":"","BL":"","ETD original":"2026-10-01","ETD actualizado":"2026-11-09","ETA":"","Atraso (dias)":39,"Delayed Shipping":"Si","Aprobado":"No","Fecha aprobacion":"","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":"","Fecha de pago":""},{"Proforma":"RM26/001","Ruta":"Chennai - Guayaquil","Incoterm":"FOB","Embarque":"1/1","Factura":"","Estado":"Por definir","Buque":"","Contenedor":"","BL":"","ETD original":"","ETD actualizado":"2026-10-01","ETA":"","Atraso (dias)":"","Delayed Shipping":"No","Aprobado":"No","Fecha aprobacion":"","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":"","Fecha de pago":""}],"productos":[{"Proforma":"CA25/126","Producto":"Sweet Corn Kernel 15 oz Standard Brine Easy Open Lid — Tins (425/260g)","Familia":"Sweet Corn","Precio unitario":9.9,"Unidades":10740,"Cargado":5370,"Pendiente de cargar":5370,"Subtotal":106326},{"Proforma":"CA25/126","Producto":"Sweet Corn Kernel 12 oz Standard In Vacuum Easy Open Lid — Tins (340/285g)","Familia":"Sweet Corn","Precio unitario":10.4,"Unidades":1850,"Cargado":0,"Pendiente de cargar":1850,"Subtotal":19240},{"Proforma":"FZ26/001","Producto":"Frozen Sweet Corn 20 kg — Bags (20 kg)","Familia":"Frozen Sweet Corn","Precio unitario":20.6,"Unidades":3930,"Cargado":2620,"Pendiente de cargar":1310,"Subtotal":80958},{"Proforma":"RM26/001","Producto":"Baby Gherkins in Acetic acid-D: 1.2-2.0 cm/ L: 3.0-5.5 cm — Drums (270 kg/190kg)","Familia":"Baby Gherkins","Precio unitario":176.7,"Unidades":60,"Cargado":0,"Pendiente de cargar":60,"Subtotal":10602},{"Proforma":"RM26/001","Producto":"Baby Gherkins in Acetic acid -D: 2.1-2.6 cm/ L: 5.6-7.0 cm — Drums (270 kg/190kg)","Familia":"Baby Gherkins","Precio unitario":115.9,"Unidades":20,"Cargado":0,"Pendiente de cargar":20,"Subtotal":2318}],"historico":[{"Proforma":"CA25/121","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":18644.4,"Inicio":"2025-12-12","Cierre":"2026-05-11"},{"Proforma":"CA25/112","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":17721,"Inicio":"2025-12-01","Cierre":"2026-03-31"},{"Proforma":"FZ25/004","Estado":"Completado","Producto":"Frozen Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":28820,"Inicio":"2025-09-30","Cierre":"2026-01-29"},{"Proforma":"CA25/090","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":18644.4,"Inicio":"2025-10-17","Cierre":"2025-12-16"},{"Proforma":"CA25/019","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":5,"Valor FOB":108474,"Inicio":"2025-03-05","Cierre":"2025-12-04"},{"Proforma":"FZ25/002","Estado":"Completado","Producto":"Frozen Sweet Corn","Ruta":"Bangkok - ","Embarques":2,"Valor FOB":57640,"Inicio":"2025-04-09","Cierre":"2025-10-08"},{"Proforma":"00009510","Estado":"Completado","Producto":"Inserto Vertedor","Ruta":"Buenos Aires - Guayaquil","Embarques":2,"Valor FOB":4600,"Inicio":"2024-12-26","Cierre":"2025-02-25"},{"Proforma":"FZ25/001","Estado":"Completado","Producto":"Frozen Sweet Corn","Ruta":"Bangkok - ","Embarques":1,"Valor FOB":28820,"Inicio":"2025-01-07","Cierre":"2025-02-06"},{"Proforma":"CA23/120","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":2,"Valor FOB":41070,"Inicio":"2023-12-20","Cierre":"2024-12-19"},{"Proforma":"CA23/121","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":6,"Valor FOB":158952,"Inicio":"2023-12-20","Cierre":"2024-12-19"},{"Proforma":"FZ23/001","Estado":"Completado","Producto":"Frozen Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":35370,"Inicio":"2023-08-15","Cierre":"2024-02-14"},{"Proforma":"23_025-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":34650,"Inicio":"2023-08-01","Cierre":"2024-01-31"},{"Proforma":"CA23/010","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":4,"Valor FOB":84488,"Inicio":"2023-02-07","Cierre":"2023-12-06"},{"Proforma":"CA23/009","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":2,"Valor FOB":43660,"Inicio":"2023-02-06","Cierre":"2023-09-05"},{"Proforma":"21_060-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":2,"Valor FOB":143010,"Inicio":"2022-05-16","Cierre":"2022-11-15"},{"Proforma":"CA22/021","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":6,"Valor FOB":128603,"Inicio":"2022-03-23","Cierre":"2022-09-22"},{"Proforma":"CA21/116","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":2,"Valor FOB":35442,"Inicio":"2021-12-13","Cierre":"2022-06-12"},{"Proforma":"CA 20/106","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":8,"Valor FOB":214706,"Inicio":"2020-12-23","Cierre":"2021-06-22"},{"Proforma":"CA20/102","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":17542,"Inicio":"2020-12-11","Cierre":"2021-06-10"},{"Proforma":"CA20/089","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":18592.5,"Inicio":"2020-11-09","Cierre":"2021-05-08"},{"Proforma":"20-053-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":24075,"Inicio":"2020-10-08","Cierre":"2021-04-07"},{"Proforma":"19_012-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":15355,"Inicio":"2020-10-07","Cierre":"2021-04-06"},{"Proforma":"20_016-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":12680.7,"Inicio":"2020-09-30","Cierre":"2021-03-29"},{"Proforma":"CA20/075","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":17273.5,"Inicio":"2020-09-23","Cierre":"2021-03-22"},{"Proforma":"CA20/065","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":35866,"Inicio":"2020-09-09","Cierre":"2021-03-08"},{"Proforma":"19_107-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":19260,"Inicio":"2020-05-30","Cierre":"2020-11-29"},{"Proforma":"19_096-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":19440,"Inicio":"2020-04-02","Cierre":"2020-10-01"},{"Proforma":"CA20/009","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":18592.5,"Inicio":"2020-02-13","Cierre":"2020-08-12"},{"Proforma":"19_066-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":3389.2,"Inicio":"2019-12-12","Cierre":"2020-06-11"},{"Proforma":"19_067-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":2,"Valor FOB":24160.2,"Inicio":"2019-12-12","Cierre":"2020-06-11"},{"Proforma":"19_013-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":2,"Valor FOB":17760,"Inicio":"2019-12-12","Cierre":"2020-06-11"},{"Proforma":"19_094/1","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":18786,"Inicio":"2019-04-04","Cierre":"2019-10-03"}]}</script>
 
 <script>
   const chips = document.querySelectorAll('.chip');
@@ -2090,9 +2914,12 @@
     const sideList = document.getElementById('sideList');
     if (list && sideList) sideList.innerHTML = list.innerHTML;
 
+    // La solapa de pendientes esta visible desde el arranque y no se puede ocultar:
+    // el cliente siempre tiene los puntos abiertos a un click.
+    sideAlert.hidden = false;
+
     const replegar = () => {
       alertOverlay.hidden = true;
-      sideAlert.hidden = false;   // queda la solapa a la vista
       sideBody.hidden = true;
     };
     document.getElementById('alertDismiss')?.addEventListener('click', replegar);
@@ -2129,21 +2956,37 @@
     });
   });
 
-  // Ordenar el histórico por valor o fecha de cierre
+  // Histórico: desplegar cada contrato para ver sus embarques
+  document.querySelectorAll('.hist-row').forEach(row => {
+    row.addEventListener('click', () => {
+      const det = document.querySelector('.hist-detail[data-detail="' + row.dataset.row + '"]');
+      if (!det) return;
+      det.hidden = !det.hidden;
+      row.classList.toggle('open', !det.hidden);
+    });
+  });
+
+  // Ordenar el histórico por valor o fecha de cierre (la fila de detalle viaja con su contrato)
   document.querySelectorAll('.hist-table th.sortable').forEach(th => {
     th.addEventListener('click', () => {
       const tbody = document.querySelector('#histTable tbody');
       const key = th.dataset.hsort;
       const desc = th.dataset.dir !== 'desc';
       th.dataset.dir = desc ? 'desc' : 'asc';
-      const filas = Array.from(tbody.querySelectorAll('tr')).filter(r => r.dataset[key] !== undefined);
-      filas.sort((a, b) => {
-        const va = a.dataset[key], vb = b.dataset[key];
+      const pares = Array.from(tbody.querySelectorAll('tr.hist-row')).map(r => ({
+        fila: r,
+        detalle: tbody.querySelector('.hist-detail[data-detail="' + r.dataset.row + '"]'),
+      }));
+      pares.sort((a, b) => {
+        const va = a.fila.dataset[key], vb = b.fila.dataset[key];
         const na = parseFloat(va), nb = parseFloat(vb);
         const cmp = (!isNaN(na) && !isNaN(nb)) ? na - nb : String(va).localeCompare(String(vb));
         return desc ? -cmp : cmp;
       });
-      filas.forEach(f => tbody.appendChild(f));
+      pares.forEach(p => {
+        tbody.appendChild(p.fila);
+        if (p.detalle) tbody.appendChild(p.detalle);
+      });
     });
   });
 

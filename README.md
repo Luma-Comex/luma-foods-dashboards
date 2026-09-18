@@ -7,7 +7,7 @@ Cada carpeta (`sipia/`, etc.) es el dashboard de un cliente. El HTML publicado *
 ## Cómo funciona
 
 - `tools/generar_sipia_dashboard.js` — consulta Salesforce (Contract + Contratct_Products__c + Shippings__c) y regenera `sipia/index.html` a partir de la plantilla `tools/sipia_dashboard_template.html`.
-- Una Tarea de Windows en la PC de operaciones de Comex corre este script cada 2 horas y publica el resultado automáticamente (`git add` + `commit` + `push`).
+- Una Tarea de Windows en la PC de operaciones de Comex corre este script todos los días a las 10:00 y publica el resultado automáticamente (`git add` + `commit` + `push`).
 
 ## Para modificar el diseño o la lógica
 
