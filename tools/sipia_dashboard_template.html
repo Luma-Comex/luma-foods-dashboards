@@ -888,8 +888,13 @@
     box-shadow: 0 6px 20px -6px rgba(0,0,0,.35);
   }
   .side-tab:hover { filter: brightness(1.1); }
+  /* Con el panel abierto, corremos el contenido para que no quede tapado.
+     En pantallas muy anchas el panel entra solo en el margen y no hace falta. */
+  @media (min-width: 761px) and (max-width: 1560px) {
+    body.side-open .shell { margin-left: auto; margin-right: 330px; }
+  }
   .side-body {
-    width: 320px;
+    width: 300px;
     max-width: 78vw;
     max-height: 70vh;
     overflow-y: auto;
@@ -1194,8 +1199,7 @@
   function wireJumps(scope) {
     scope.querySelectorAll('.alert-item[data-jump]').forEach(item => {
       item.addEventListener('click', () => {
-        if (alertOverlay) alertOverlay.hidden = true;
-        if (sideBody) sideBody.hidden = true;
+        if (alertOverlay) alertOverlay.hidden = true;  // el panel lateral queda abierto
         openShipDocs(item.dataset.jump);
       });
     });
@@ -1207,13 +1211,19 @@
     const sideList = document.getElementById('sideList');
     if (list && sideList) sideList.innerHTML = list.innerHTML;
 
-    // La solapa de pendientes esta visible desde el arranque y no se puede ocultar:
-    // el cliente siempre tiene los puntos abiertos a un click.
+    // Los puntos abiertos quedan SIEMPRE desplegados en el costado.
+    // En celular arranca replegado, porque un panel fijo taparia toda la pantalla.
+    const esMovil = window.matchMedia('(max-width: 760px)').matches;
     sideAlert.hidden = false;
+    sideBody.hidden = esMovil;
+    document.body.classList.toggle('side-open', !esMovil);
+
+    const sincronizarLayout = () => {
+      document.body.classList.toggle('side-open', !sideBody.hidden);
+    };
 
     const replegar = () => {
-      alertOverlay.hidden = true;
-      sideBody.hidden = true;
+      alertOverlay.hidden = true;   // solo cierra el modal; el panel lateral sigue desplegado
     };
     document.getElementById('alertDismiss')?.addEventListener('click', replegar);
     alertOverlay.addEventListener('click', (e) => { if (e.target === alertOverlay) replegar(); });
@@ -1221,8 +1231,12 @@
 
     document.getElementById('sideTab')?.addEventListener('click', () => {
       sideBody.hidden = !sideBody.hidden;
+      sincronizarLayout();
     });
-    document.getElementById('sideClose')?.addEventListener('click', () => { sideBody.hidden = true; });
+    document.getElementById('sideClose')?.addEventListener('click', () => {
+      sideBody.hidden = true;
+      sincronizarLayout();
+    });
 
     wireJumps(alertOverlay);
     wireJumps(sideAlert);
