@@ -971,8 +971,16 @@
     <h2 id="alertTitle">Puntos abiertos</h2>
     <p class="lead">Este es el estado de la documentación y los pagos de tus embarques ya cargados. Tocá cualquier ítem para ir directo a su detalle.</p>
     <div class="alert-list">
-
-      <p class="alert-group-title">Facturas pendientes de pago (3) · US$ 62,428</p>
+      <p class="alert-group-title">Documentos pendientes de confirmación (1)</p>
+      <button class="alert-item" data-jump="ship-CE261937">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"/></svg>
+        <span class="t">Embarque <b>CE261937</b> · Wan Hai 176 · Voy. N113</span>
+      </button>
+      <p class="alert-group-title">Facturas pendientes de pago (4) · US$ 99,389</p>
+      <button class="alert-item" data-jump="ship-CE261937">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        <span class="t">Factura <b>CE261937</b> — <b>US$ 36,961</b></span>
+      </button>
       <button class="alert-item" data-jump="ship-CE260990">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
         <span class="t">Factura <b>CE260990</b> — <b>US$ 17,721</b></span>
@@ -1002,7 +1010,7 @@
       <p class="client-full">Servicio Integral para la Industria Alimenticia — contratos y embarques activos</p>
     </div>
     <div class="top-meta">
-      Actualizado <strong>14 oct 2026, 10:00 hs</strong><br>
+      Actualizado <strong>16 oct 2026, 10:00 hs</strong><br>
       Los datos se actualizan solos varias veces al día
     </div>
   </header>
@@ -1017,15 +1025,15 @@
     <div class="stat-tile" style="--tile-color: var(--good); --tile-soft: var(--good-soft);">
       <div class="stat-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></svg></div>
       <span class="stat-label">Embarques</span>
-      <span class="stat-value">11</span>
+      <span class="stat-value">10</span>
       <div class="stat-bar-track">
-        <div class="stat-bar-fill" style="width:45.5%; background: var(--good);"></div>
-        <div class="stat-bar-fill" style="width:45.5%; background: var(--warning);"></div>
-        <div class="stat-bar-fill" style="width:9.1%; background: var(--neutral);"></div>
+        <div class="stat-bar-fill" style="width:60.0%; background: var(--good);"></div>
+        <div class="stat-bar-fill" style="width:30.0%; background: var(--warning);"></div>
+        <div class="stat-bar-fill" style="width:10.0%; background: var(--neutral);"></div>
       </div>
       <div class="stat-legend">
-        <span><i style="background: var(--good)"></i>5 cargados</span>
-        <span><i style="background: var(--warning)"></i>5 en curso</span>
+        <span><i style="background: var(--good)"></i>6 cargados</span>
+        <span><i style="background: var(--warning)"></i>3 en curso</span>
         <span><i style="background: var(--neutral)"></i>1 por definir</span>
       </div>
     </div>
@@ -1038,8 +1046,8 @@
     <div class="stat-tile" style="--tile-color: var(--critical); --tile-soft: var(--critical-soft);">
       <div class="stat-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div>
       <span class="stat-label">Delayed Shipping</span>
-      <span class="stat-value" style="color: var(--critical);">7 de 11</span>
-      <span class="stat-sub">Con más de 15 días entre ETD requerido y actualizado · promedio +77 días</span>
+      <span class="stat-value" style="color: var(--critical);">6 de 10</span>
+      <span class="stat-sub">Con más de 15 días entre ETD requerido y actualizado · promedio +73 días</span>
     </div>
   </section>
 
@@ -1098,8 +1106,8 @@
             <div class="label">Valor total</div>
           </div>
           <div class="contract-progress" title="Avance de carga del contrato">
-            <div class="track"><div class="fill" style="width:43%"></div></div>
-            <span class="pct">43%</span>
+            <div class="track"><div class="fill" style="width:72%"></div></div>
+            <span class="pct">72%</span>
           </div>
         </div>
       </div>
@@ -1118,22 +1126,22 @@
                 </tr>
               </thead>
               <tbody>
-                <tr data-subtotal="106326" data-pct="50">
+                <tr data-subtotal="106326" data-pct="67">
                   <td class="product-name"><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn Kernel 15 oz Standard Brine Easy Open Lid — Tins (425/260g) <span class="principal">Sweet Corn</span></td>
                   <td class="num">US$ 9.90</td>
                   <td class="num">10,740</td>
                   <td class="num">US$ 106,326</td>
                   <td class="num">
-                    <div class="prod-progress"><div class="track"><div class="fill" style="width:50%"></div></div><span class="pct">50%</span></div>
+                    <div class="prod-progress"><div class="track"><div class="fill" style="width:67%"></div></div><span class="pct">67%</span></div>
                   </td>
                 </tr>
-                <tr data-subtotal="19240" data-pct="0">
+                <tr data-subtotal="19240" data-pct="100">
                   <td class="product-name"><span class="cat-icon" aria-hidden="true">🌽</span>Sweet Corn Kernel 12 oz Standard In Vacuum Easy Open Lid — Tins (340/285g) <span class="principal">Sweet Corn</span></td>
                   <td class="num">US$ 10.40</td>
                   <td class="num">1,850</td>
                   <td class="num">US$ 19,240</td>
                   <td class="num">
-                    <div class="prod-progress"><div class="track"><div class="fill" style="width:0%"></div></div><span class="pct">0%</span></div>
+                    <div class="prod-progress"><div class="track"><div class="fill" style="width:100%"></div></div><span class="pct">100%</span></div>
                   </td>
                 </tr>
               </tbody>
@@ -1180,59 +1188,11 @@
           </div>
         </div>
         <div>
-          <p class="section-label">Embarques (7)</p>
+          <p class="section-label">Embarques (6)</p>
           <div class="shipments">
             <div class="shipment-row" data-status="ongoing">
               <div class="ship-id-block">
-                <span class="ship-id"><span class="seq-badge" title="Embarque 4 de 7 del contrato">4/7</span>Embarque sin booking</span>
-                <span class="ship-note">Producción 2026 · 12 oz</span>
-              </div>
-              <div class="ship-vessel"><span class="v-none">Buque aún sin asignar</span></div>
-              <span class="status-pill st-warning"><span class="dot"></span>En curso</span>
-              <div class="ship-fechas"><div class="ship-dates">
-                <div class="fecha-linea"><span class="fecha-tag">ETD</span><span class="fecha-val">16 oct</span></div>
-                <div class="fecha-linea"><span class="fecha-tag">ETA</span><span class="fecha-val pendiente">por confirmar</span></div>
-                <div class="etd-required">ETD original 07 jul</div><span class="delay-flag">⚠ Delayed Shipping · +101 días</span>
-              </div></div>
-              <span class="track-muted">Sin booking aún</span>
-              <button class="ship-docs-toggle" type="button" aria-expanded="false" aria-label="Documentación y pagos" title="Documentación y pagos"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
-            </div>
-            <div class="ship-docs-panel">
-              <div class="ship-docs-panel-inner">
-                <span class="docs-label">Documentos de embarque</span>
-                <span class="pay-line">Aprobado: <b class="pay-pending">No</b></span>
-                <span class="pay-line">Deliver: <b class="pay-pending">No</b></span>
-                <span class="pay-line">Factura pagada: <b class="pay-pending">No</b> (sin emitir aún)</span>
-              </div>
-            </div>
-
-            <div class="shipment-row" data-status="ongoing">
-              <div class="ship-id-block">
-                <span class="ship-id"><span class="seq-badge" title="Embarque 5 de 7 del contrato">5/7</span>Embarque sin booking</span>
-                <span class="ship-note">Producción 2026 · 15 oz</span>
-              </div>
-              <div class="ship-vessel"><span class="v-none">Buque aún sin asignar</span></div>
-              <span class="status-pill st-warning"><span class="dot"></span>En curso</span>
-              <div class="ship-fechas"><div class="ship-dates">
-                <div class="fecha-linea"><span class="fecha-tag">ETD</span><span class="fecha-val">16 oct</span></div>
-                <div class="fecha-linea"><span class="fecha-tag">ETA</span><span class="fecha-val pendiente">por confirmar</span></div>
-                <div class="etd-required">ETD original 07 jul</div><span class="delay-flag">⚠ Delayed Shipping · +101 días</span>
-              </div></div>
-              <span class="track-muted">Sin booking aún</span>
-              <button class="ship-docs-toggle" type="button" aria-expanded="false" aria-label="Documentación y pagos" title="Documentación y pagos"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
-            </div>
-            <div class="ship-docs-panel">
-              <div class="ship-docs-panel-inner">
-                <span class="docs-label">Documentos de embarque</span>
-                <span class="pay-line">Aprobado: <b class="pay-pending">No</b></span>
-                <span class="pay-line">Deliver: <b class="pay-pending">No</b></span>
-                <span class="pay-line">Factura pagada: <b class="pay-pending">No</b> (sin emitir aún)</span>
-              </div>
-            </div>
-
-            <div class="shipment-row" data-status="ongoing">
-              <div class="ship-id-block">
-                <span class="ship-id"><span class="seq-badge" title="Embarque 6 de 7 del contrato">6/7</span>Embarque sin booking</span>
+                <span class="ship-id"><span class="seq-badge" title="Embarque 5 de 6 del contrato">5/6</span>Embarque sin booking</span>
                 <span class="ship-note">Producción 2026 · 15 oz · / Caja OK</span>
               </div>
               <div class="ship-vessel"><span class="v-none">Buque aún sin asignar</span></div>
@@ -1256,7 +1216,7 @@
 
             <div class="shipment-row" data-status="ongoing">
               <div class="ship-id-block">
-                <span class="ship-id"><span class="seq-badge" title="Embarque 7 de 7 del contrato">7/7</span>Embarque sin booking</span>
+                <span class="ship-id"><span class="seq-badge" title="Embarque 6 de 6 del contrato">6/6</span>Embarque sin booking</span>
                 <span class="ship-note">Producción 2026 · 15 oz</span>
               </div>
               <div class="ship-vessel"><span class="v-none">Buque aún sin asignar</span></div>
@@ -1278,9 +1238,39 @@
               </div>
             </div>
 
+            <div class="shipment-row" data-status="loaded" id="ship-CE261937">
+              <div class="ship-id-block">
+                <span class="ship-id"><span class="seq-badge" title="Embarque 4 de 6 del contrato">4/6</span>CE261937</span>
+                <span class="ship-note">BL ICBBKK-2610028 · Cont. WHSU2560844
+WHSU2522839</span>
+              </div>
+              <div class="ship-vessel"><span class="v-name">Wan Hai 176</span><span class="ship-note">Voy. N113</span></div>
+              <span class="status-pill st-good"><span class="dot"></span>Cargado</span>
+              <div class="ship-fechas"><div class="ship-dates">
+                <div class="fecha-linea"><span class="fecha-tag">ETD</span><span class="fecha-val">16 oct</span></div>
+                <div class="fecha-linea"><span class="fecha-tag">ETA</span><span class="fecha-val">08 dic</span></div>
+                <div class="etd-required">ETD original 07 jul</div><span class="delay-flag">⚠ Delayed Shipping · +101 días</span>
+              </div>
+              <div class="route-progress in-transit" style="--p:0%">
+                <div class="ports"><span class="reached">Bangkok</span><span>Guayaquil</span></div>
+                <div class="track"><div class="fill"></div><span class="ship">🚢</span></div>
+                <div class="caption">En tránsito · <b>~0% del trayecto</b> (estimado)</div>
+              </div></div>
+              <a class="track-btn" href="https://www.wanhai.com/views/cargo_track_v2/tracking_query.xhtml" target="_blank" rel="noopener">Ver tracking en vivo ↗</a>
+              <button class="ship-docs-toggle has-alert" type="button" aria-expanded="false" aria-label="Documentación y pagos — atención" title="Documentación y pagos — atención"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+            </div>
+            <div class="ship-docs-panel">
+              <div class="ship-docs-panel-inner">
+                <span class="docs-label">Documentos de embarque</span>
+                <span class="pay-line">Aprobado: <b class="pay-pending">No</b></span>
+                <span class="pay-line">Deliver: <b class="pay-pending">No</b></span>
+                <span class="pay-line">Factura pagada: <b class="pay-pending">No</b> · US$ 36,961 pendiente</span>
+              </div>
+            </div>
+
             <div class="shipment-row" data-status="loaded" id="ship-CE260589">
               <div class="ship-id-block">
-                <span class="ship-id"><span class="seq-badge" title="Embarque 1 de 7 del contrato">1/7</span>CE260589</span>
+                <span class="ship-id"><span class="seq-badge" title="Embarque 1 de 6 del contrato">1/6</span>CE260589</span>
                 <span class="ship-note">BL BKKS005878 · Cont. CSNU1437124</span>
               </div>
               <div class="ship-vessel"><span class="v-name">Palawan</span></div>
@@ -1293,7 +1283,7 @@
               <div class="route-progress" style="--p:100%">
                 <div class="ports"><span class="reached">Bangkok</span><span class="reached">Guayaquil</span></div>
                 <div class="track"><div class="fill"></div><span class="ship">🚢</span></div>
-                <div class="caption">Arribó <b>hace 141 días</b></div>
+                <div class="caption">Arribó <b>hace 143 días</b></div>
               </div></div>
               <a class="track-btn" href="https://elines.coscoshipping.com/ebusiness/cargotracking" target="_blank" rel="noopener">Ver tracking en vivo ↗</a>
               <button class="ship-docs-toggle" type="button" aria-expanded="false" aria-label="Documentación y pagos" title="Documentación y pagos"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
@@ -1309,7 +1299,7 @@
 
             <div class="shipment-row" data-status="loaded" id="ship-CE260990">
               <div class="ship-id-block">
-                <span class="ship-id"><span class="seq-badge" title="Embarque 2 de 7 del contrato">2/7</span>CE260990</span>
+                <span class="ship-id"><span class="seq-badge" title="Embarque 2 de 6 del contrato">2/6</span>CE260990</span>
                 <span class="ship-note">BL GOSZX26081186 · Cont. WHSU2410931</span>
               </div>
               <div class="ship-vessel"><span class="v-name">Wan Hai 272</span><span class="ship-note">Voy. N229</span></div>
@@ -1319,10 +1309,10 @@
                 <div class="fecha-linea"><span class="fecha-tag">ETA</span><span class="fecha-val">28 oct</span></div>
                 <div class="etd-required">ETD original 05 may</div><span class="delay-flag">⚠ Delayed Shipping · +110 días</span>
               </div>
-              <div class="route-progress in-transit" style="--p:79%">
+              <div class="route-progress in-transit" style="--p:82%">
                 <div class="ports"><span class="reached">Bangkok</span><span>Guayaquil</span></div>
                 <div class="track"><div class="fill"></div><span class="ship">🚢</span></div>
-                <div class="caption">En tránsito · <b>~79% del trayecto</b> (estimado)</div>
+                <div class="caption">En tránsito · <b>~82% del trayecto</b> (estimado)</div>
               </div></div>
               <a class="track-btn" href="https://th.wanhai.com/views/cargo_track_v2/tracking_query.xhtml?file_num=65580&amp;parent_id=64738&amp;top_file_num=64735" target="_blank" rel="noopener">Ver tracking en vivo ↗</a>
               <button class="ship-docs-toggle has-alert" type="button" aria-expanded="false" aria-label="Documentación y pagos — atención" title="Documentación y pagos — atención"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
@@ -1338,7 +1328,7 @@
 
             <div class="shipment-row" data-status="loaded" id="ship-CE261566">
               <div class="ship-id-block">
-                <span class="ship-id"><span class="seq-badge" title="Embarque 3 de 7 del contrato">3/7</span>CE261566</span>
+                <span class="ship-id"><span class="seq-badge" title="Embarque 3 de 6 del contrato">3/6</span>CE261566</span>
                 <span class="ship-note">BL GOSZX26081325 · Cont. WHSU2792710</span>
               </div>
               <div class="ship-vessel"><span class="v-name">Wan Hai 177</span><span class="ship-note">Voy. N062</span></div>
@@ -1348,10 +1338,10 @@
                 <div class="fecha-linea"><span class="fecha-tag">ETA</span><span class="fecha-val">27 oct</span></div>
                 <div class="etd-required">ETD original 02 jun</div><span class="delay-flag">⚠ Delayed Shipping · +93 días</span>
               </div>
-              <div class="route-progress in-transit" style="--p:76%">
+              <div class="route-progress in-transit" style="--p:80%">
                 <div class="ports"><span class="reached">Bangkok</span><span>Guayaquil</span></div>
                 <div class="track"><div class="fill"></div><span class="ship">🚢</span></div>
-                <div class="caption">En tránsito · <b>~76% del trayecto</b> (estimado)</div>
+                <div class="caption">En tránsito · <b>~80% del trayecto</b> (estimado)</div>
               </div></div>
               <a class="track-btn" href="https://th.wanhai.com/views/cargo_track_v2/tracking_query.xhtml?file_num=65580&amp;parent_id=64738&amp;top_file_num=64735" target="_blank" rel="noopener">Ver tracking en vivo ↗</a>
               <button class="ship-docs-toggle has-alert" type="button" aria-expanded="false" aria-label="Documentación y pagos — atención" title="Documentación y pagos — atención"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
@@ -1488,7 +1478,7 @@
               <div class="route-progress" style="--p:100%">
                 <div class="ports"><span class="reached">Bangkok</span><span class="reached">Guayaquil</span></div>
                 <div class="track"><div class="fill"></div><span class="ship">🚢</span></div>
-                <div class="caption">Arribó <b>hace 105 días</b></div>
+                <div class="caption">Arribó <b>hace 107 días</b></div>
               </div></div>
               <a class="track-btn" href="https://www.pilship.com/digital-solutions/?tab=customer&amp;id=track-trace&amp;label=containerTandT&amp;module=TrackContStatus&amp;refNo=OTPU6764413" target="_blank" rel="noopener">Ver tracking en vivo ↗</a>
               <button class="ship-docs-toggle" type="button" aria-expanded="false" aria-label="Documentación y pagos" title="Documentación y pagos"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
@@ -1514,10 +1504,10 @@
                 <div class="fecha-linea"><span class="fecha-tag">ETA</span><span class="fecha-val">28 oct</span></div>
                 <div class="etd-required">ETD original 01 jul</div><span class="delay-flag">⚠ Delayed Shipping · +63 días</span>
               </div>
-              <div class="route-progress in-transit" style="--p:75%">
+              <div class="route-progress in-transit" style="--p:79%">
                 <div class="ports"><span class="reached">Bangkok</span><span>Guayaquil</span></div>
                 <div class="track"><div class="fill"></div><span class="ship">🚢</span></div>
-                <div class="caption">En tránsito · <b>~75% del trayecto</b> (estimado)</div>
+                <div class="caption">En tránsito · <b>~79% del trayecto</b> (estimado)</div>
               </div></div>
               <a class="track-btn" href="https://th.wanhai.com/views/cargo_track_v2/tracking_query.xhtml?file_num=65580&amp;parent_id=64738&amp;top_file_num=64735" target="_blank" rel="noopener">Ver tracking en vivo ↗</a>
               <button class="ship-docs-toggle has-alert" type="button" aria-expanded="false" aria-label="Documentación y pagos — atención" title="Documentación y pagos — atención"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
@@ -2813,7 +2803,7 @@
   </div>
 </div>
 
-<script id="exportData" type="application/json">{"cliente":"SIPIA","actualizado":"14 oct 2026, 10:00 hs","embarques":[{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"4/7","Factura":"","Estado":"En curso","Buque":"","Contenedor":"","BL":"","ETD original":"2026-07-07","ETD actualizado":"2026-10-16","ETA":"","Atraso (dias)":101,"Delayed Shipping":"Si","Aprobado":"No","Fecha aprobacion":"","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":"","Fecha de pago":""},{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"1/7","Factura":"CE260589","Estado":"Cargado","Buque":"Palawan","Contenedor":"CSNU1437124","BL":"BKKS005878","ETD original":"2026-03-03","ETD actualizado":"2026-03-03","ETA":"2026-05-26","Atraso (dias)":0,"Delayed Shipping":"No","Aprobado":"Si","Fecha aprobacion":"2026-04-20","Deliver":"Si","Fecha entrega":"2026-05-22","Factura pagada":"Si","Monto":17721,"Fecha de pago":"2026-05-20"},{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"2/7","Factura":"CE260990","Estado":"Cargado","Buque":"WAN HAI 272 V.N229","Contenedor":"WHSU2410931","BL":"GOSZX26081186","ETD original":"2026-05-05","ETD actualizado":"2026-08-23","ETA":"2026-10-28","Atraso (dias)":110,"Delayed Shipping":"Si","Aprobado":"Si","Fecha aprobacion":"2026-08-25","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":17721,"Fecha de pago":""},{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"3/7","Factura":"CE261566","Estado":"Cargado","Buque":"WAN HAI 177 V.N062","Contenedor":"WHSU2792710","BL":"GOSZX26081325","ETD original":"2026-06-02","ETD actualizado":"2026-09-03","ETA":"2026-10-27","Atraso (dias)":93,"Delayed Shipping":"Si","Aprobado":"Si","Fecha aprobacion":"2026-09-07","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":17721,"Fecha de pago":""},{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"5/7","Factura":"","Estado":"En curso","Buque":"","Contenedor":"","BL":"","ETD original":"2026-07-07","ETD actualizado":"2026-10-16","ETA":"","Atraso (dias)":101,"Delayed Shipping":"Si","Aprobado":"No","Fecha aprobacion":"","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":"","Fecha de pago":""},{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"6/7","Factura":"","Estado":"En curso","Buque":"","Contenedor":"","BL":"","ETD original":"2026-10-01","ETD actualizado":"2026-11-02","ETA":"","Atraso (dias)":32,"Delayed Shipping":"Si","Aprobado":"No","Fecha aprobacion":"","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":"","Fecha de pago":""},{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"7/7","Factura":"","Estado":"En curso","Buque":"","Contenedor":"","BL":"","ETD original":"","ETD actualizado":"2027-02-02","ETA":"","Atraso (dias)":"","Delayed Shipping":"No","Aprobado":"No","Fecha aprobacion":"","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":"","Fecha de pago":""},{"Proforma":"FZ26/001","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"1/3","Factura":"AZ260023","Estado":"Cargado","Buque":"TS XIAMEN voy. 2609N","Contenedor":"OTPU6764413","BL":"7621EC318424","ETD original":"2026-04-15","ETD actualizado":"2026-04-15","ETA":"2026-07-01","Atraso (dias)":0,"Delayed Shipping":"No","Aprobado":"Si","Fecha aprobacion":"2026-05-19","Deliver":"Si","Fecha entrega":"2026-06-25","Factura pagada":"Si","Monto":26986,"Fecha de pago":"2026-06-19"},{"Proforma":"FZ26/001","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"2/3","Factura":"AZ260042","Estado":"Cargado","Buque":"WAN HAI 177 V.N062","Contenedor":"FBIU5120265","BL":"THEF2609002A","ETD original":"2026-07-01","ETD actualizado":"2026-09-02","ETA":"2026-10-28","Atraso (dias)":63,"Delayed Shipping":"Si","Aprobado":"Si","Fecha aprobacion":"2026-09-07","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":26986,"Fecha de pago":""},{"Proforma":"FZ26/001","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"3/3","Factura":"","Estado":"En curso","Buque":"","Contenedor":"","BL":"","ETD original":"2026-10-01","ETD actualizado":"2026-11-09","ETA":"","Atraso (dias)":39,"Delayed Shipping":"Si","Aprobado":"No","Fecha aprobacion":"","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":"","Fecha de pago":""},{"Proforma":"RM26/001","Ruta":"Chennai - Guayaquil","Incoterm":"FOB","Embarque":"1/1","Factura":"","Estado":"Por definir","Buque":"","Contenedor":"","BL":"","ETD original":"","ETD actualizado":"2026-10-01","ETA":"","Atraso (dias)":"","Delayed Shipping":"No","Aprobado":"No","Fecha aprobacion":"","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":"","Fecha de pago":""}],"productos":[{"Proforma":"CA25/126","Producto":"Sweet Corn Kernel 15 oz Standard Brine Easy Open Lid — Tins (425/260g)","Familia":"Sweet Corn","Precio unitario":9.9,"Unidades":10740,"Cargado":5370,"Pendiente de cargar":5370,"Subtotal":106326},{"Proforma":"CA25/126","Producto":"Sweet Corn Kernel 12 oz Standard In Vacuum Easy Open Lid — Tins (340/285g)","Familia":"Sweet Corn","Precio unitario":10.4,"Unidades":1850,"Cargado":0,"Pendiente de cargar":1850,"Subtotal":19240},{"Proforma":"FZ26/001","Producto":"Frozen Sweet Corn 20 kg — Bags (20 kg)","Familia":"Frozen Sweet Corn","Precio unitario":20.6,"Unidades":3930,"Cargado":2620,"Pendiente de cargar":1310,"Subtotal":80958},{"Proforma":"RM26/001","Producto":"Baby Gherkins in Acetic acid-D: 1.2-2.0 cm/ L: 3.0-5.5 cm — Drums (270 kg/190kg)","Familia":"Baby Gherkins","Precio unitario":176.7,"Unidades":60,"Cargado":0,"Pendiente de cargar":60,"Subtotal":10602},{"Proforma":"RM26/001","Producto":"Baby Gherkins in Acetic acid -D: 2.1-2.6 cm/ L: 5.6-7.0 cm — Drums (270 kg/190kg)","Familia":"Baby Gherkins","Precio unitario":115.9,"Unidades":20,"Cargado":0,"Pendiente de cargar":20,"Subtotal":2318}],"historico":[{"Proforma":"CA25/121","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":18644.4,"Inicio":"2025-12-12","Cierre":"2026-05-11"},{"Proforma":"CA25/112","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":17721,"Inicio":"2025-12-01","Cierre":"2026-03-31"},{"Proforma":"FZ25/004","Estado":"Completado","Producto":"Frozen Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":28820,"Inicio":"2025-09-30","Cierre":"2026-01-29"},{"Proforma":"CA25/090","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":18644.4,"Inicio":"2025-10-17","Cierre":"2025-12-16"},{"Proforma":"CA25/019","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":5,"Valor FOB":108474,"Inicio":"2025-03-05","Cierre":"2025-12-04"},{"Proforma":"FZ25/002","Estado":"Completado","Producto":"Frozen Sweet Corn","Ruta":"Bangkok - ","Embarques":2,"Valor FOB":57640,"Inicio":"2025-04-09","Cierre":"2025-10-08"},{"Proforma":"00009510","Estado":"Completado","Producto":"Inserto Vertedor","Ruta":"Buenos Aires - Guayaquil","Embarques":2,"Valor FOB":4600,"Inicio":"2024-12-26","Cierre":"2025-02-25"},{"Proforma":"FZ25/001","Estado":"Completado","Producto":"Frozen Sweet Corn","Ruta":"Bangkok - ","Embarques":1,"Valor FOB":28820,"Inicio":"2025-01-07","Cierre":"2025-02-06"},{"Proforma":"CA23/120","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":2,"Valor FOB":41070,"Inicio":"2023-12-20","Cierre":"2024-12-19"},{"Proforma":"CA23/121","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":6,"Valor FOB":158952,"Inicio":"2023-12-20","Cierre":"2024-12-19"},{"Proforma":"FZ23/001","Estado":"Completado","Producto":"Frozen Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":35370,"Inicio":"2023-08-15","Cierre":"2024-02-14"},{"Proforma":"23_025-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":34650,"Inicio":"2023-08-01","Cierre":"2024-01-31"},{"Proforma":"CA23/010","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":4,"Valor FOB":84488,"Inicio":"2023-02-07","Cierre":"2023-12-06"},{"Proforma":"CA23/009","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":2,"Valor FOB":43660,"Inicio":"2023-02-06","Cierre":"2023-09-05"},{"Proforma":"21_060-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":2,"Valor FOB":143010,"Inicio":"2022-05-16","Cierre":"2022-11-15"},{"Proforma":"CA22/021","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":6,"Valor FOB":128603,"Inicio":"2022-03-23","Cierre":"2022-09-22"},{"Proforma":"CA21/116","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":2,"Valor FOB":35442,"Inicio":"2021-12-13","Cierre":"2022-06-12"},{"Proforma":"CA 20/106","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":8,"Valor FOB":214706,"Inicio":"2020-12-23","Cierre":"2021-06-22"},{"Proforma":"CA20/102","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":17542,"Inicio":"2020-12-11","Cierre":"2021-06-10"},{"Proforma":"CA20/089","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":18592.5,"Inicio":"2020-11-09","Cierre":"2021-05-08"},{"Proforma":"20-053-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":24075,"Inicio":"2020-10-08","Cierre":"2021-04-07"},{"Proforma":"19_012-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":15355,"Inicio":"2020-10-07","Cierre":"2021-04-06"},{"Proforma":"20_016-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":12680.7,"Inicio":"2020-09-30","Cierre":"2021-03-29"},{"Proforma":"CA20/075","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":17273.5,"Inicio":"2020-09-23","Cierre":"2021-03-22"},{"Proforma":"CA20/065","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":35866,"Inicio":"2020-09-09","Cierre":"2021-03-08"},{"Proforma":"19_107-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":19260,"Inicio":"2020-05-30","Cierre":"2020-11-29"},{"Proforma":"19_096-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":19440,"Inicio":"2020-04-02","Cierre":"2020-10-01"},{"Proforma":"CA20/009","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":18592.5,"Inicio":"2020-02-13","Cierre":"2020-08-12"},{"Proforma":"19_066-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":3389.2,"Inicio":"2019-12-12","Cierre":"2020-06-11"},{"Proforma":"19_067-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":2,"Valor FOB":24160.2,"Inicio":"2019-12-12","Cierre":"2020-06-11"},{"Proforma":"19_013-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":2,"Valor FOB":17760,"Inicio":"2019-12-12","Cierre":"2020-06-11"},{"Proforma":"19_094/1","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":18786,"Inicio":"2019-04-04","Cierre":"2019-10-03"}]}</script>
+<script id="exportData" type="application/json">{"cliente":"SIPIA","actualizado":"16 oct 2026, 10:00 hs","embarques":[{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"4/6","Factura":"CE261937","Estado":"Cargado","Buque":"WAN HAI 176 V.N113","Contenedor":"WHSU2560844\nWHSU2522839","BL":"ICBBKK-2610028","ETD original":"2026-07-07","ETD actualizado":"2026-10-16","ETA":"2026-12-08","Atraso (dias)":101,"Delayed Shipping":"Si","Aprobado":"No","Fecha aprobacion":"","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":36961,"Fecha de pago":""},{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"1/6","Factura":"CE260589","Estado":"Cargado","Buque":"Palawan","Contenedor":"CSNU1437124","BL":"BKKS005878","ETD original":"2026-03-03","ETD actualizado":"2026-03-03","ETA":"2026-05-26","Atraso (dias)":0,"Delayed Shipping":"No","Aprobado":"Si","Fecha aprobacion":"2026-04-20","Deliver":"Si","Fecha entrega":"2026-05-22","Factura pagada":"Si","Monto":17721,"Fecha de pago":"2026-05-20"},{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"2/6","Factura":"CE260990","Estado":"Cargado","Buque":"WAN HAI 272 V.N229","Contenedor":"WHSU2410931","BL":"GOSZX26081186","ETD original":"2026-05-05","ETD actualizado":"2026-08-23","ETA":"2026-10-28","Atraso (dias)":110,"Delayed Shipping":"Si","Aprobado":"Si","Fecha aprobacion":"2026-08-25","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":17721,"Fecha de pago":""},{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"3/6","Factura":"CE261566","Estado":"Cargado","Buque":"WAN HAI 177 V.N062","Contenedor":"WHSU2792710","BL":"GOSZX26081325","ETD original":"2026-06-02","ETD actualizado":"2026-09-03","ETA":"2026-10-27","Atraso (dias)":93,"Delayed Shipping":"Si","Aprobado":"Si","Fecha aprobacion":"2026-09-07","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":17721,"Fecha de pago":""},{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"5/6","Factura":"","Estado":"En curso","Buque":"","Contenedor":"","BL":"","ETD original":"2026-10-01","ETD actualizado":"2026-11-02","ETA":"","Atraso (dias)":32,"Delayed Shipping":"Si","Aprobado":"No","Fecha aprobacion":"","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":"","Fecha de pago":""},{"Proforma":"CA25/126","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"6/6","Factura":"","Estado":"En curso","Buque":"","Contenedor":"","BL":"","ETD original":"","ETD actualizado":"2027-02-02","ETA":"","Atraso (dias)":"","Delayed Shipping":"No","Aprobado":"No","Fecha aprobacion":"","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":"","Fecha de pago":""},{"Proforma":"FZ26/001","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"1/3","Factura":"AZ260023","Estado":"Cargado","Buque":"TS XIAMEN voy. 2609N","Contenedor":"OTPU6764413","BL":"7621EC318424","ETD original":"2026-04-15","ETD actualizado":"2026-04-15","ETA":"2026-07-01","Atraso (dias)":0,"Delayed Shipping":"No","Aprobado":"Si","Fecha aprobacion":"2026-05-19","Deliver":"Si","Fecha entrega":"2026-06-25","Factura pagada":"Si","Monto":26986,"Fecha de pago":"2026-06-19"},{"Proforma":"FZ26/001","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"2/3","Factura":"AZ260042","Estado":"Cargado","Buque":"WAN HAI 177 V.N062","Contenedor":"FBIU5120265","BL":"THEF2609002A","ETD original":"2026-07-01","ETD actualizado":"2026-09-02","ETA":"2026-10-28","Atraso (dias)":63,"Delayed Shipping":"Si","Aprobado":"Si","Fecha aprobacion":"2026-09-07","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":26986,"Fecha de pago":""},{"Proforma":"FZ26/001","Ruta":"Bangkok - Guayaquil","Incoterm":"FOB","Embarque":"3/3","Factura":"","Estado":"En curso","Buque":"","Contenedor":"","BL":"","ETD original":"2026-10-01","ETD actualizado":"2026-11-09","ETA":"","Atraso (dias)":39,"Delayed Shipping":"Si","Aprobado":"No","Fecha aprobacion":"","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":"","Fecha de pago":""},{"Proforma":"RM26/001","Ruta":"Chennai - Guayaquil","Incoterm":"FOB","Embarque":"1/1","Factura":"","Estado":"Por definir","Buque":"","Contenedor":"","BL":"","ETD original":"","ETD actualizado":"2026-10-01","ETA":"","Atraso (dias)":"","Delayed Shipping":"No","Aprobado":"No","Fecha aprobacion":"","Deliver":"No","Fecha entrega":"","Factura pagada":"No","Monto":"","Fecha de pago":""}],"productos":[{"Proforma":"CA25/126","Producto":"Sweet Corn Kernel 15 oz Standard Brine Easy Open Lid — Tins (425/260g)","Familia":"Sweet Corn","Precio unitario":9.9,"Unidades":10740,"Cargado":7160,"Pendiente de cargar":3580,"Subtotal":106326},{"Proforma":"CA25/126","Producto":"Sweet Corn Kernel 12 oz Standard In Vacuum Easy Open Lid — Tins (340/285g)","Familia":"Sweet Corn","Precio unitario":10.4,"Unidades":1850,"Cargado":1850,"Pendiente de cargar":0,"Subtotal":19240},{"Proforma":"FZ26/001","Producto":"Frozen Sweet Corn 20 kg — Bags (20 kg)","Familia":"Frozen Sweet Corn","Precio unitario":20.6,"Unidades":3930,"Cargado":2620,"Pendiente de cargar":1310,"Subtotal":80958},{"Proforma":"RM26/001","Producto":"Baby Gherkins in Acetic acid-D: 1.2-2.0 cm/ L: 3.0-5.5 cm — Drums (270 kg/190kg)","Familia":"Baby Gherkins","Precio unitario":176.7,"Unidades":60,"Cargado":0,"Pendiente de cargar":60,"Subtotal":10602},{"Proforma":"RM26/001","Producto":"Baby Gherkins in Acetic acid -D: 2.1-2.6 cm/ L: 5.6-7.0 cm — Drums (270 kg/190kg)","Familia":"Baby Gherkins","Precio unitario":115.9,"Unidades":20,"Cargado":0,"Pendiente de cargar":20,"Subtotal":2318}],"historico":[{"Proforma":"CA25/121","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":18644.4,"Inicio":"2025-12-12","Cierre":"2026-05-11"},{"Proforma":"CA25/112","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":17721,"Inicio":"2025-12-01","Cierre":"2026-03-31"},{"Proforma":"FZ25/004","Estado":"Completado","Producto":"Frozen Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":28820,"Inicio":"2025-09-30","Cierre":"2026-01-29"},{"Proforma":"CA25/090","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":18644.4,"Inicio":"2025-10-17","Cierre":"2025-12-16"},{"Proforma":"CA25/019","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":5,"Valor FOB":108474,"Inicio":"2025-03-05","Cierre":"2025-12-04"},{"Proforma":"FZ25/002","Estado":"Completado","Producto":"Frozen Sweet Corn","Ruta":"Bangkok - ","Embarques":2,"Valor FOB":57640,"Inicio":"2025-04-09","Cierre":"2025-10-08"},{"Proforma":"00009510","Estado":"Completado","Producto":"Inserto Vertedor","Ruta":"Buenos Aires - Guayaquil","Embarques":2,"Valor FOB":4600,"Inicio":"2024-12-26","Cierre":"2025-02-25"},{"Proforma":"FZ25/001","Estado":"Completado","Producto":"Frozen Sweet Corn","Ruta":"Bangkok - ","Embarques":1,"Valor FOB":28820,"Inicio":"2025-01-07","Cierre":"2025-02-06"},{"Proforma":"CA23/120","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":2,"Valor FOB":41070,"Inicio":"2023-12-20","Cierre":"2024-12-19"},{"Proforma":"CA23/121","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":6,"Valor FOB":158952,"Inicio":"2023-12-20","Cierre":"2024-12-19"},{"Proforma":"FZ23/001","Estado":"Completado","Producto":"Frozen Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":35370,"Inicio":"2023-08-15","Cierre":"2024-02-14"},{"Proforma":"23_025-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":34650,"Inicio":"2023-08-01","Cierre":"2024-01-31"},{"Proforma":"CA23/010","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":4,"Valor FOB":84488,"Inicio":"2023-02-07","Cierre":"2023-12-06"},{"Proforma":"CA23/009","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":2,"Valor FOB":43660,"Inicio":"2023-02-06","Cierre":"2023-09-05"},{"Proforma":"21_060-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":2,"Valor FOB":143010,"Inicio":"2022-05-16","Cierre":"2022-11-15"},{"Proforma":"CA22/021","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":6,"Valor FOB":128603,"Inicio":"2022-03-23","Cierre":"2022-09-22"},{"Proforma":"CA21/116","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":2,"Valor FOB":35442,"Inicio":"2021-12-13","Cierre":"2022-06-12"},{"Proforma":"CA 20/106","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":8,"Valor FOB":214706,"Inicio":"2020-12-23","Cierre":"2021-06-22"},{"Proforma":"CA20/102","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":17542,"Inicio":"2020-12-11","Cierre":"2021-06-10"},{"Proforma":"CA20/089","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":18592.5,"Inicio":"2020-11-09","Cierre":"2021-05-08"},{"Proforma":"20-053-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":24075,"Inicio":"2020-10-08","Cierre":"2021-04-07"},{"Proforma":"19_012-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":15355,"Inicio":"2020-10-07","Cierre":"2021-04-06"},{"Proforma":"20_016-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":12680.7,"Inicio":"2020-09-30","Cierre":"2021-03-29"},{"Proforma":"CA20/075","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":17273.5,"Inicio":"2020-09-23","Cierre":"2021-03-22"},{"Proforma":"CA20/065","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":35866,"Inicio":"2020-09-09","Cierre":"2021-03-08"},{"Proforma":"19_107-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":19260,"Inicio":"2020-05-30","Cierre":"2020-11-29"},{"Proforma":"19_096-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":19440,"Inicio":"2020-04-02","Cierre":"2020-10-01"},{"Proforma":"CA20/009","Estado":"Completado","Producto":"Sweet Corn","Ruta":"Bangkok - Guayaquil","Embarques":1,"Valor FOB":18592.5,"Inicio":"2020-02-13","Cierre":"2020-08-12"},{"Proforma":"19_066-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":3389.2,"Inicio":"2019-12-12","Cierre":"2020-06-11"},{"Proforma":"19_067-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":2,"Valor FOB":24160.2,"Inicio":"2019-12-12","Cierre":"2020-06-11"},{"Proforma":"19_013-MR","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":2,"Valor FOB":17760,"Inicio":"2019-12-12","Cierre":"2020-06-11"},{"Proforma":"19_094/1","Estado":"Completado","Producto":"Peach","Ruta":"Thessaloniki - Guayaquil","Embarques":1,"Valor FOB":18786,"Inicio":"2019-04-04","Cierre":"2019-10-03"}]}</script>
 
 <script>
   const chips = document.querySelectorAll('.chip');
